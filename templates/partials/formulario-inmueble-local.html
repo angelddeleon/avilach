@@ -1,0 +1,480 @@
+<!-- formulario-inmueble-local.html -->
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Propiedad</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_local') }}">
+                <div class="form-body mt-4">
+                    <!-- Datos del Propietario -->
+
+                    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert-container">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+                    <h5 class="card-title">Datos del Propietario</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
+                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
+                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
+                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
+                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
+                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
+                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
+                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                    </div>
+
+                    <h5 class="card-title mt-4">Detalles de Propiedad</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <!-- Título de la Propiedad -->
+                        <div class="col-md-4">
+                            <label>Título de Propiedad</label>
+                            <input type="text" class="form-control" name="titulo_propiedad" required>
+                        </div>
+
+                 
+                       
+
+                        <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
+                        <div class="col-md-6">
+                            <select class="form-select" name="tipo_negocio" required>
+                                <option value="Venta">Venta</option>
+                                <option value="Alquiler">Alquiler</option>
+                                <option value="Venta y Alquiler">Venta y Alquiler</option>
+                            </select>
+                        </div>
+
+                      
+
+                        <!-- Tipo de Inmueble -->
+                        
+                        <div class="col-md-6">
+                           
+                            <select class="form-select" name="tipo_inmueble" required>
+                                <option value="Local">local</option>
+                                <option value="Oficina">oficina</option>
+                                
+                            </select>
+                        </div>
+
+                      
+                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais"></div>
+                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento"></div>
+                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
+                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
+                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
+
+                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
+                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+
+                   <!-- Datos del Galpón -->
+                    <h5 class="card-title mt-4">Datos del Galpón</h5>
+                    <hr />
+                    <div class="row g-3">
+
+
+                        <!-- Número de Baños Completos -->
+                        <div class="col-md-4">
+                            <label># Baños Completos</label>
+                            <input type="number" class="form-control" name="banos_completos">
+                        </div>
+
+                        <!-- 1/2 Baños -->
+                        <div class="col-md-4">
+                            <label>1/2 Baños</label>
+                            <input type="number" class="form-control" name="medio_bano">
+                        </div>
+
+                        <!-- Baño de Servicio -->
+                        <div class="col-md-4">
+                            <label>Baño de Servicio</label>
+                            <input type="number" class="form-control" name="bano_servicio">
+                        </div>
+
+                        <!-- Área de Descanso -->
+                        <div class="col-md-4">
+                            <label>Área de Descanso</label>
+                            <input type="text" class="form-control" name="area_descanso">
+                        </div>
+
+                        <!-- Puestos de Estacionamiento -->
+                        <div class="col-md-4">
+                            <label>Puestos de Estacionamiento</label>
+                            <input type="number" class="form-control" name="puestos_estacionamiento">
+                        </div>
+
+                        <!-- Cubierto -->
+                        <div class="col-md-4">
+                            <label>Cubierto</label>
+                            <input type="text" class="form-control" name="cubierto">
+                        </div>
+
+                        <!-- Descubierto -->
+                        <div class="col-md-4">
+                            <label>Descubierto</label>
+                            <input type="text" class="form-control" name="descubierto">
+                        </div>
+
+                        <!-- Estacionamiento Visitantes -->
+                        <div class="col-md-4">
+                            <label>Estacionamiento Visitantes</label>
+                            <input type="text" class="form-control" name="estacionamiento_visitantes">
+                        </div>
+
+                        <!-- Amoblado -->
+                        <div class="col-md-4">
+                            <label>Amoblado</label>
+                            <input type="text" class="form-control" name="amoblado">
+                        </div>
+
+                        <!-- Patio de trabajo -->
+                        <div class="col-md-4">
+                            <label>Patio de trabajo</label>
+                            <input type="text" class="form-control" name="patio_trabajo">
+                        </div>
+
+                        <!-- M Frente -->
+                        <div class="col-md-4">
+                            <label>M Frente</label>
+                            <input type="number" class="form-control" name="m_frente">
+                        </div>
+
+                        <!-- Total de Baños -->
+                        <div class="col-md-4">
+                            <label>Total de Baños</label>
+                            <input type="number" class="form-control" name="total_banos">
+                        </div>
+
+                        
+
+                        <!-- Vigilancia -->
+                        <div class="col-md-4">
+                            <label>Vigilancia</label>
+                            <input type="text" class="form-control" name="vigilancia">
+                        </div>
+
+                        <!-- M Fondo -->
+                        <div class="col-md-4">
+                            <label>M Fondo</label>
+                            <input type="number" class="form-control" name="m_fondo">
+                        </div>
+
+
+
+                        
+
+                        <!-- M Altura -->
+                        <div class="col-md-4">
+                            <label>M Altura</label>
+                            <input type="number" class="form-control" name="m_altura">
+                        </div>
+
+
+                        <!-- m2 de Terreno -->
+                        <div class="col-md-4">
+                            <label>m2 de Terreno</label>
+                            <input type="number" class="form-control" name="m2_terreno">
+                        </div>
+
+                        <!-- Años de Construcción -->
+                        <div class="col-md-4">
+                            <label>Años de Construcción</label>
+                            <input type="number" class="form-control" name="anos_construccion">
+                        </div>
+
+                        <!-- Parque Industrial -->
+                        <div class="col-md-4">
+                            <label>Parque Industrial</label>
+                            <input type="text" class="form-control" name="parque_industrial">
+                        </div>
+
+                        <!-- m2 de Construcción -->
+                        <div class="col-md-4">
+                            <label>m2 de Construcción</label>
+                            <input type="number" class="form-control" name="m2_construccion">
+                        </div>
+
+                        <!-- Condominio Aprox -->
+                        <div class="col-md-4">
+                            <label>Condominio Aproximado</label>
+                            <input type="number" class="form-control" name="condominio_aprox">
+                        </div>
+
+                        <!-- Pie de Calle -->
+                        <div class="col-md-4">
+                            <label>Pie de Calle</label>
+                            <select class="form-select" name="pie_de_calle">
+                                <option value="Si">Sí</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+
+                         <div class="col-md-6">
+                             <label>Precio</label>
+                             <input type="number" class="form-control" name="precio" step="0.01" required>
+                         </div>
+                        
+               
+
+                    <!-- Áreas Internas -->
+                    <h5 class="card-title mt-4">Áreas Internas</h5>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v">
+                                <label class="form-check-label">Electricidad 110 v</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v">
+                                <label class="form-check-label">Electricidad 220 v</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v">
+                                <label class="form-check-label">Electricidad 440 v</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica">
+                                <label class="form-check-label">Electricidad Trifásica</label>
+                            </div>
+        
+                            <div class="form-check">
+                                <label>Vigilancia</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia">
+                            </div>
+                        
+                            <!-- Sistema de Ventilación -->
+                            <div class="form-check">
+                                <label>Sistema de Ventilación</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación">
+                            </div>
+                        
+                            
+                
+                        
+                            <!-- Pozo de Agua -->
+                            <div class="form-check">
+                                <label>Pozo de Agua</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua">
+                            </div>
+                        
+                            <!-- Circuito Cerrado -->
+                            <div class="form-check">
+                                <label>Circuito Cerrado</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado">
+                            </div>
+                        
+                            <!-- Tanque de Agua Interno -->
+                            <div class="form-check">
+                                <label>Tanque de Agua Interno</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno">
+                            </div>
+                        
+                        
+                        
+                            <!-- Estación de Visitantes -->
+                            <div class="form-check">
+                                <label>Estación de Visitantes</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes">
+                            </div>
+                        
+                            <!-- Planta Eléctrica -->
+                            <div class="form-check">
+                                <label>Planta Eléctrica</label>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica">
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación">
+                                <label class="form-check-label">Sistema de Ventilación</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico">
+                                <label class="form-check-label">Cerco Eléctrico</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma">
+                                <label class="form-check-label">Alarma</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado">
+                                <label class="form-check-label">Circuito Cerrado</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers">
+                                <label class="form-check-label">Plataforma para Trailers</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comodidades -->
+                    <h5 class="card-title mt-4">Comodidades</h5>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado">
+                                <label class="form-check-label">Aire Acondicionado</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana">
+                                <label class="form-check-label">De ventana</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split">
+                                <label class="form-check-label">Tipo Split</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central">
+                                <label class="form-check-label">Aire central</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Servicios de Telefonía Fija -->
+                    <h5 class="card-title mt-4">Servicio Telefonía Fija</h5>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv">
+                                <label class="form-check-label">Cantv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar">
+                                <label class="form-check-label">Movistar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter">
+                                <label class="form-check-label">Inter</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet">
+                                <label class="form-check-label">Movilnet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel">
+                                <label class="form-check-label">Digitel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros">
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Servicios de Cable y de Internet -->
+                    <h5 class="card-title mt-4">Servicios de Cable y de Internet</h5>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Servicio de Cable Visión</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv">
+                                <label class="form-check-label">Directv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv">
+                                <label class="form-check-label">Movistar Tv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable">
+                                <label class="form-check-label">Intercable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet">
+                                <label class="form-check-label">Movilnet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno">
+                                <label class="form-check-label">Net-Uno</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros">
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <h6>Servicio de Internet</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Aba">
+                                <label class="form-check-label">Aba</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter">
+                                <label class="form-check-label">Inter</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno">
+                                <label class="form-check-label">Net-Uno</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital">
+                                <label class="form-check-label">Inter Satelital</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital">
+                                <label class="form-check-label">Serv. Satelital</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Otros">
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+
+                        <h5 class="card-title mt-4">Documentación</h5>
+                        <hr />
+                        <div class="row g-3">
+                            <!-- Imagen de Cédula -->
+                            <div class="col-md-6">
+                                <label>Imagen de Cédula</label>
+                                <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                            </div>
+
+                            <!-- Documento de Propiedad -->
+                            <div class="col-md-6">
+                                <label>Documento de Propiedad</label>
+                                <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
+                            </div>
+                        </div>
+
+                        <!-- Imágenes del Galpón -->
+                        <div class="row g-3">
+                            <div class="col-md-12">
+                                <label>Arrastra y suelta las imágenes</label>
+
+                                <!-- Cuadro visual para las imágenes -->
+                                <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+                                    <!-- Las imágenes cargadas se mostrarán aquí -->
+                                </div>
+                                
+                                <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
+                                <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Botón -->
+                    <div class="mt-4 text-end">
+                        <button type="submit" class="btn btn-primary">Guardar Local</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

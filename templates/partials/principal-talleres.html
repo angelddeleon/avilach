@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Talleres</h5>
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for taller in talleres %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ taller.titulo }}</td>
+                    <td>{{ taller.ubicacion }}</td>
+                    <td>{{ taller.fecha_hora }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No hay eventos del medio disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

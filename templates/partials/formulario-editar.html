@@ -1,0 +1,89 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Editar Inmueble: {{ inmueble.titulo_inmueble }}</h2>
+
+    <form method="POST">
+        <!-- Título del inmueble -->
+        <div class="mb-3">
+            <label for="titulo_inmueble" class="form-label">Título del Inmueble</label>
+            <input type="text" class="form-control" id="titulo_inmueble" name="titulo_inmueble" value="{{ inmueble.titulo_inmueble }}" required>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" value="{{ inmueble.precio }}" required>
+        </div>
+
+        <!-- Estado de publicación -->
+        <div class="mb-3">
+            <label for="estado_publicacion" class="form-label">Estado de Publicación</label>
+            <select class="form-select" id="estado_publicacion" name="estado_publicacion">
+                <option value="Activo" {% if inmueble.estado_publicacion == 'Activo' %}selected{% endif %}>Activo</option>
+                <option value="Inactivo" {% if inmueble.estado_publicacion == 'Inactivo' %}selected{% endif %}>Inactivo</option>
+            </select>
+        </div>
+
+        <!-- Tipo de negocio -->
+        <div class="mb-3">
+            <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
+            <select class="form-select" id="tipo_negocio" name="tipo_negocio">
+                <option value="Venta" {% if inmueble.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                <option value="Alquiler" {% if inmueble.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                <option value="Venta y Alquiler" {% if inmueble.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
+            </select>
+        </div>
+
+        <!-- Dirección -->
+        <div class="mb-3">
+            <label for="direccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" id="direccion" name="direccion" value="{{ inmueble.direccion }}">
+        </div>
+
+        <!-- Ciudad -->
+        <div class="mb-3">
+            <label for="ciudad" class="form-label">Ciudad</label>
+            <input type="text" class="form-control" id="ciudad" name="ciudad" value="{{ inmueble.ciudad }}">
+        </div>
+
+        <!-- Año de construcción -->
+        <div class="mb-3">
+            <label for="anio_construccion" class="form-label">Año de Construcción</label>
+            <input type="number" class="form-control" id="anio_construccion" name="anio_construccion" value="{{ inmueble.anio_construccion }}">
+        </div>
+
+        <!-- Habitaciones -->
+        <div class="mb-3">
+            <label for="habitaciones" class="form-label">Número de Habitaciones</label>
+            <input type="number" class="form-control" id="habitaciones" name="habitaciones" value="{{ inmueble.habitaciones }}">
+        </div>
+
+        <!-- Baños -->
+        <div class="mb-3">
+            <label for="banos_completos" class="form-label">Número de Baños Completos</label>
+            <input type="number" class="form-control" id="banos_completos" name="banos_completos" value="{{ inmueble.banos_completos }}">
+        </div>
+
+        <!-- Estacionamientos -->
+        <div class="mb-3">
+            <label for="puestos_estacionamiento" class="form-label">Puestos de Estacionamiento</label>
+            <input type="number" class="form-control" id="puestos_estacionamiento" name="puestos_estacionamiento" value="{{ inmueble.puestos_estacionamiento }}">
+        </div>
+
+        <!-- Imagen principal -->
+        <div class="mb-3">
+            <label for="imagen_principal" class="form-label">Imagen Principal</label>
+            <input type="file" class="form-control" id="imagen_principal" name="imagen_principal">
+            {% if inmueble.imagen_principal %}
+                <img src="{{ url_for('static', filename=inmueble.imagen_principal) }}" alt="Imagen actual" class="mt-2" style="width: 200px;">
+            {% endif %}
+        </div>
+
+        <!-- Descripción del inmueble -->
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea class="form-control" id="descripcion" name="descripcion" rows="4">{{ inmueble.descripcion }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+    </form>
+</div>

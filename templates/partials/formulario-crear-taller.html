@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Evento</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Crear Nuevo Taller</h1>
+        
+        <!-- Mostrar mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="alert alert-{{ messages[0][0] }}">
+                    {{ messages[0][1] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <!-- Formulario de creación de eventos -->
+        <form method="POST">
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título del Taller</label>
+                <input type="text" class="form-control" id="titulo" name="titulo" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="Ubicacion" class="form-label">Ubicación del Taller</label>
+                <input type="text" class="form-control" id="ubicacion" name="ubicacion" required>
+            </div>
+            <div class="mb-3">
+                <label for="fecha_hora" class="form-label">Fecha y Hora</label>
+                <input type="datetime-local" class="form-control" id="fecha_hora" name="fecha_hora" required>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Crear Taller</button>
+        </form>
+    </div>
+</body>
+</html>

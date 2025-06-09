@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <h1>Crear Nueva Noticia</h1>
+
+    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-{{ messages[0][0] }}">
+                {{ messages[0][1] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulario de creación de noticia -->
+    <form method="POST">
+        <div class="mb-3">
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="link" class="form-label">Enlace</label>
+            <input type="url" class="form-control" id="link" name="link" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Crear Noticia</button>
+    </form>

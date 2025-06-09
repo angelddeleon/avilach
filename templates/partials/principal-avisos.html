@@ -1,0 +1,27 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Últimas Notificaciones</h5>
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for notificacion in notificaciones %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>  <!-- Muestra el número de la fila -->
+                    <td>{{ notificacion.titulo }}</td>
+                    <td>{{ notificacion.fecha }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="3">No hay notificaciones disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

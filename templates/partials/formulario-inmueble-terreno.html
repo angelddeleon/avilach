@@ -1,0 +1,268 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Propiedad</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_terreno') }}">
+                <div class="form-body mt-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="border border-3 p-4 rounded">
+
+                                <!-- Datos del Propietario -->
+                                <h5 class="card-title">Datos del Propietario</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
+                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
+                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
+                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
+                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
+                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
+                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
+                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                                </div>
+
+                                <!-- Título del Inmueble -->
+                                <h5 class="card-title">Título del Inmueble</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label>Título de Publicación</label>
+                                        <input type="text" class="form-control" name="titulo_publicacion" required>
+                                    </div>
+                                    
+
+                                    <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
+                                    <div class="col-md-6">
+                                        <select class="form-select" name="tipo_negocio" required>
+                                            <option value="Venta">Venta</option>
+                                            <option value="Alquiler">Alquiler</option>
+                                            <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <label>Tipo de Inmueble</label>
+                                        <select class="form-select" name="tipo_inmueble">
+                                            <option value="Terreno">terreno</option>
+                                        </select>
+                                    </div>
+
+                                    <h5 class="card-title mt-4">Datos del Terreno</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-3"><label>Estado</label><input type="text" class="form-control" name="estado" required></div>
+                                    <div class="col-md-3"><label>Municipio</label><input type="text" class="form-control" name="municipio" required></div>
+                                    <div class="col-md-3"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" required></div>
+                                    <div class="col-md-3"><label>Urbanización</label><input type="text" class="form-control" name="urbanizacion"></div>
+                                    
+                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
+                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+            
+                                </div>
+
+
+                                    <div class="col-md-4">
+                                        <label for="m2_terreno">m2 de Terreno</label>
+                                        <input type="number" class="form-control" name="m2_terreno" required>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="m2_construccion">m2 de Construcción</label>
+                                        <input type="number" class="form-control" name="m2_construccion">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="m_frente">Frente</label>
+                                        <input type="number" class="form-control" name="m_frente">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="m_anch">Ancho</label>
+                                        <input type="number" class="form-control" name="m_anch">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="m_largo">Largo</label>
+                                        <input type="number" class="form-control" name="m_largo">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="cerca_perimetral">Cerca Perimetral</label>
+                                        <input type="text" class="form-control" name="cerca_perimetral">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="bienechurias">Bienechurias</label>
+                                        <input type="text" class="form-control" name="bienechurias">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label for="otros">Otros</label>
+                                        <input type="text" class="form-control" name="otros">
+                                    </div>
+            
+                                    <!-- Características adicionales (checkboxes) -->
+                                    <h5 class="card-title mt-4">Materiales del Inmueble</h5>
+                                    <hr />
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <label for="bloques">Bloques</label>
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Bloques">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="alfajol">Alfajol</label>
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Alfajol">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="madera">Madera</label>
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Madera">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <!-- Características -->
+                                <h5 class="card-title mt-4">Características</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label>Vías de Acceso</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Asfalto">
+                                            <label class="form-check-label">Asfalto</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Tierra">
+                                            <label class="form-check-label">Tierra</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Concreto">
+                                            <label class="form-check-label">Concreto</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Arena">
+                                            <label class="form-check-label">Arena</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Ripio">
+                                            <label class="form-check-label">Ripio</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Formas del Terreno</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Regular">
+                                            <label class="form-check-label">Regular</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Irregular">
+                                            <label class="form-check-label">Irregular</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Plano">
+                                            <label class="form-check-label">Plano</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Otros</label>
+                                        <input type="text" class="form-control" name="otros_caracteristicas">
+                                    </div>
+                                </div>
+
+                                <!-- Servicios Básicos -->
+                                <h5 class="card-title mt-4">Servicios Básicos</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Blancas">
+                                            <label class="form-check-label">Aguas Blancas</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Electricidad">
+                                            <label class="form-check-label">Electricidad</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Negras">
+                                            <label class="form-check-label">Aguas Negras</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Alta Tensión">
+                                            <label class="form-check-label">Alta Tensión</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Baja Tensión">
+                                            <label class="form-check-label">Baja Tensión</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Zonificación -->
+                                <h5 class="card-title mt-4">Zonificación</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Residencial">
+                                            <label class="form-check-label">Residencial</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Comercial">
+                                            <label class="form-check-label">Comercial</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Industrial">
+                                            <label class="form-check-label">Industrial</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Educativa">
+                                            <label class="form-check-label">Educativa</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Precio -->
+                                <h5 class="card-title mt-4">Precio y Comisión</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-4"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required></div>
+                                    <div class="col-md-4"><label>Comisión</label><input type="number" step="0.01" class="form-control" name="comision"></div>
+                                </div>
+
+                                <!-- Documentos -->
+                                <h5 class="card-title mt-4">Documentación</h5>
+                                <hr />
+                                <div class="row g-3">
+                                    <div class="col-md-6"><label>Imagen de Cédula</label><input type="file" class="form-control" name="imagen_cedula" accept="image/*"></div>
+                                    <div class="col-md-6"><label>Documento de Propiedad</label><input type="file" class="form-control" name="documento_propiedad" accept=".pdf"></div>
+                                </div>
+
+                                <h5 class="card-title">Imagenes del Inmueble</h5>
+
+                                <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <label>Arrastra y suelta las imágenes</label>
+
+                                        <!-- Cuadro visual para las imágenes -->
+                                        <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+                                            <!-- Las imágenes cargadas se mostrarán aquí -->
+                                        </div>
+                                        
+                                        <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
+                                        <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
+                                    </div>
+                                </div>
+
+                                <!-- Botón -->
+                                <div class="mt-4 text-end">
+                                    <button type="submit" class="btn btn-primary">Guardar Terreno</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

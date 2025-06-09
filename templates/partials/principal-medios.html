@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Eventos del Medio</h5>
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Ubicación</th>
+                    <th scope="col">Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in medios %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ evento.titulo }}</td>
+                    <td>{{ evento.ubicacion }}</td>
+                    <td>{{ evento.fecha_hora }}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No hay eventos del medio disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

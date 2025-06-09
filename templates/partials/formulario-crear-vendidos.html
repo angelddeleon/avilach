@@ -1,0 +1,67 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Inmueble Vendido</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <h5 class="card-title">Detalles del Inmueble Vendido</h5>
+            <hr />
+            <form method="POST" action="{{ url_for('main.crear_vendidos', tipo_inmueble=tipo_inmueble, id=id) }}">
+                <div class="form-body mt-4">
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Comprador -->
+                                <div class="mb-3">
+                                    <label for="comprador" class="form-label">Nombre del Comprador</label>
+                                    <input type="text" class="form-control" id="comprador" name="comprador" placeholder="Nombre del comprador" required>
+                                </div>
+
+                                <!-- Correo del Comprador -->
+                                <div class="mb-3">
+                                    <label for="correo_comprador" class="form-label">Correo Electrónico del Comprador</label>
+                                    <input type="email" class="form-control" id="correo_comprador" name="correo_comprador" placeholder="Correo electrónico del comprador" required>
+                                </div>
+
+                                <!-- Realtor Vendedor -->
+                                <div class="mb-3">
+                                    <label for="realtor_vendedor" class="form-label">Realtor Vendedor</label>
+                                    <input type="text" class="form-control" id="realtor_vendedor" name="realtor_vendedor" placeholder="Nombre del realtor vendedor" required>
+                                </div>
+
+                                <!-- Precio de la Propiedad -->
+                                <div class="mb-3">
+                                    <label for="precio_propiedad" class="form-label">Precio de la Propiedad</label>
+                                    <input type="number" class="form-control" id="precio_propiedad" name="precio_propiedad" placeholder="Precio de la propiedad" required step="0.01">
+                                </div>
+                                <!-- Valor de la Comisión -->
+                                <div class="mb-3">
+                                    <label for="valor_comision" class="form-label">Valor de la Comisión</label>
+                                    <input type="number" class="form-control" id="valor_comision" name="valor_comision" placeholder="Valor de la comisión" required step="0.01">
+                                </div>
+
+                                <!-- Fecha de Venta -->
+                                <div class="mb-3">
+                                    <label for="fecha_venta" class="form-label">Fecha de Venta</label>
+                                    <input type="date" class="form-control" id="fecha_venta" name="fecha_venta" required>
+                                </div>
+
+            
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Botón para guardar -->
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Registrar Venta</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

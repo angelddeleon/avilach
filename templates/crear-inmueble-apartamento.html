@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--favicon-->
+    <link rel="icon" href="{{ url_for('static', filename='assets/images/favicon-32x32.png') }}" type="image/png" />
+    <!--plugins-->
+    <link href="{{ url_for('static', filename='assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/bootstrap-extended.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/app.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/css/icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css') }}" rel="stylesheet">
+    <title>Avilach crear inmueble Apartamento</title>
+    <style>
+        /* Estilos para el cuadro de imagen */
+        #image-preview {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            display: none; /* Oculto inicialmente */
+        }
+
+        /* Círculo de eliminación */
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .image-item {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'partials/sidebar.html' %}
+    <div class="page-wrapper">
+        <div class="page-content">
+            {% include 'partials/formulario-inmueble-apartamento.html' %}
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ url_for('static', filename='assets/js/bootstrap.bundle.min.js') }}"></script>
+    <!--plugins-->
+    <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/app.js') }}"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Asegúrate de que el contenedor del sidebar esté presente
+            var sidebarWrapper = document.querySelector('.sidebar-wrapper');
+            
+            if (sidebarWrapper) {
+                // Inicializa PerfectScrollbar solo si el contenedor existe
+                new PerfectScrollbar(sidebarWrapper);
+            }
+
+            // Inicializa MetisMenu para el comportamiento del menú desplegable
+            $('#sidebarMenu').metisMenu();
+        });
+    </script>
+    
+    <!-- Añadimos los scripts para hacer funcionar SortableJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script>
+        // Inicialización de SortableJS para hacer que el usuario pueda ordenar las imágenes
+        let imagenesCuadro = document.getElementById('imagenes-cuadro');
+        let imagenesInput = document.getElementById('imagenes-input');
+        let uploadBtn = document.getElementById('upload-btn');
+        
+        // Crear un nuevo objeto Sortable para permitir el ordenamiento por arrastre dentro del cuadro
+        new Sortable(imagenesCuadro, {
+            handle: '.drag-handle', // El usuario podrá arrastrar las imágenes usando el handle
+            animation: 150,
+            onEnd(evt) {
+                console.log('Imágenes ordenadas: ', evt.from.children);
+            }
+        });
+
+        // Función para manejar la selección de archivos
+        uploadBtn.addEventListener('click', function() {
+            imagenesInput.click();
+        });
+
+        // Cuando el usuario selecciona imágenes, las mostramos en el cuadro de imágenes
+        imagenesInput.addEventListener('change', function(event) {
+            let files = event.target.files;
+            for (let i = 0; i < files.length; i++) {
+                let file = files[i];
+                let reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Crear un div que contenga la imagen
+                    let div = document.createElement('div');
+                    div.classList.add('image-item');
+                    div.classList.add('border');
+                    div.classList.add('p-2');
+                    div.classList.add('m-2');
+                    div.classList.add('rounded');
+                    div.innerHTML = `
+                        <img src="${e.target.result}" alt="${file.name}" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
+                        <input type="hidden" name="imagenes_ruta[]" value="${e.target.result}">
+                        <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
+                        <div class="delete-btn" onclick="eliminarImagen(this)">X</div> <!-- Círculo de eliminación -->
+                    `;
+                    imagenesCuadro.appendChild(div);
+                };
+
+                // Leer la imagen seleccionada
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Función para eliminar una imagen
+        function eliminarImagen(btn) {
+            var imageItem = btn.closest('.image-item');
+            imageItem.remove(); // Elimina el contenedor de la imagen
+        }
+    </script>
+    
+</body>
+
+</html>

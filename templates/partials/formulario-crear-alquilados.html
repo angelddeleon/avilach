@@ -1,0 +1,59 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Inmueble Alquilado</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <h5 class="card-title">Detalles del Inmueble Alquilado</h5>
+            <hr />
+            <form method="POST" action="{{ url_for('main.crear_alquilados', tipo_inmueble=tipo_inmueble, id=id) }}">
+                <div class="form-body mt-4">
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Arrendatario -->
+                                <div class="mb-3">
+                                    <label for="arrendatario" class="form-label">Nombre del Arrendatario</label>
+                                    <input type="text" class="form-control" id="arrendatario" name="arrendatario" placeholder="Nombre del arrendatario" required>
+                                </div>
+
+                                <!-- Correo del Arrendatario -->
+                                <div class="mb-3">
+                                    <label for="correo_arrendatario" class="form-label">Correo Electrónico del Arrendatario</label>
+                                    <input type="email" class="form-control" id="correo_arrendatario" name="correo_arrendatario" placeholder="Correo electrónico del arrendatario" required>
+                                </div>
+
+                                <!-- Realtor Vendedor -->
+                                <div class="mb-3">
+                                    <label for="realtor_vendedor" class="form-label">Realtor Vendedor</label>
+                                    <input type="text" class="form-control" id="realtor_vendedor" name="realtor_vendedor" placeholder="Nombre del realtor vendedor" required>
+                                </div>
+
+                                <!-- Valor de la Comisión -->
+                                <div class="mb-3">
+                                    <label for="valor_comision" class="form-label">Valor de la Comisión</label>
+                                    <input type="number" class="form-control" id="valor_comision" name="valor_comision" placeholder="Valor de la comisión" required step="0.01">
+                                </div>
+
+                                <!-- Precio del Alquiler -->
+                                <div class="mb-3">
+                                    <label for="precio_alquiler" class="form-label">Precio del Alquiler</label>
+                                    <input type="number" class="form-control" id="precio_alquiler" name="precio_alquiler" placeholder="Precio del alquiler" required step="0.01">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Botón para guardar -->
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Registrar Alquiler</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<form method="POST" action="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}" enctype="multipart/form-data">
+    <!-- Nombre -->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Nombre y Apellido</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="nombre" value="{{ usuario.nombre }}" />
+        </div>
+    </div>
+
+    <!-- Apellidos -->
+<div class="row mb-3">
+    <div class="col-sm-3">
+        <h6 class="mb-0">Apellidos</h6>
+    </div>
+    <div class="col-sm-9 text-secondary">
+        <input type="text" class="form-control" name="apellidos" value="{{ usuario.apellidos }}" />
+    </div>
+</div>
+
+
+    <!-- Email -->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Email</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="email" class="form-control" name="email" value="{{ usuario.correo_usuario }}" />
+        </div>
+    </div>
+
+    <!-- Phone -->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Teléfono</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="telefono" value="{{ usuario.telefono }}" />
+        </div>
+    </div>
+
+    <!-- Address -->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Dirección</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="direccion" value="{{ usuario.direccion }}" />
+        </div>
+    </div>
+
+    <!-- Redes sociales -->
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Facebook</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="facebook" value="{{ usuario.facebook }}" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Instagram</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="instagram" value="{{ usuario.instagram }}" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Telegram</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="telegram" value="{{ usuario.telegram }}" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3">
+            <h6 class="mb-0">Twitter</h6>
+        </div>
+        <div class="col-sm-9 text-secondary">
+            <input type="text" class="form-control" name="twitter" value="{{ usuario.twitter }}" />
+        </div>
+    </div>
+
+    <!-- Imagen de perfil -->
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Imagen del perfil</label>
+        <input class="form-control" type="file" id="formFile" name="imagen_usuario">
+    </div>
+
+    <!-- Botón para actualizar el perfil -->
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9 text-secondary">
+            <input type="submit" class="btn btn-primary px-4" value="Actualizar perfil" />
+        </div>
+    </div>
+</form>

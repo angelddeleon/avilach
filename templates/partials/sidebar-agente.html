@@ -1,0 +1,106 @@
+<!--wrapper-->
+<div class="wrapper">
+    <!--sidebar wrapper -->
+    <div class="sidebar-wrapper" data-simplebar="true">
+        <div class="sidebar-header">
+            <a href="{{ url_for('main.dashboard') }}">
+                <img src="{{ url_for('static', filename='imagenes/logo avilach frontend.png') }}" alt="logo" height="70px">
+            </a>
+            <div class="toggle-icon ms-auto" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-expanded="false">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+        <!--navigation-->
+        <ul class="metismenu collapse" id="sidebarMenu">
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bx-home'></i></div>
+                    <div class="menu-title">Inmuebles</div>
+                </a>
+                <ul>
+                    <!-- Cambié el enlace para no navegar, ahora es un <a> normal -->
+                    <li> <a href="{{ url_for('main.lista_inmuebles') }}"><i class="bx bx-right-arrow-alt"></i>Lista de inmuebles</a></li>
+                    <li> <a href="{{ url_for('main.mis_inmuebles') }}"><i class="bx bx-right-arrow-alt"></i>Mis inmuebles</a></li>
+                    <li> <a href="{{ url_for('main.inmuebles_venta') }}"><i class="bx bx-right-arrow-alt"></i>Inmuebles en venta</a></li>
+                    <li> <a href="{{ url_for('main.inmuebles_alquiler') }}"><i class="bx bx-right-arrow-alt"></i>Inmuebles en alquiler</a></li>
+                    <li> <a href="{{ url_for('main.negociacion') }}"><i class="bx bx-right-arrow-alt"></i>Inmuebles En Negociación</a></li>
+                    <li> <a href="{{ url_for('main.vendidos') }}"><i class="bx bx-right-arrow-alt"></i>Inmuebles Vendidos</a></li>
+                    <li> <a href="{{ url_for('main.alquilados') }}"><i class="bx bx-right-arrow-alt"></i>Inmuebles Alquilados</a></li>
+                    
+                    
+                
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bx-home'></i></div>
+                    <div class="menu-title">Crear Inmuebles</div>
+                </a>
+                <ul>
+                    <li><a href="{{ url_for('main.crear_casa') }}"><i class="bx bx-right-arrow-alt"></i>Casa</a></li>
+                    <li><a href="{{ url_for('main.crear_apartamento') }}"><i class="bx bx-right-arrow-alt"></i>Apartamento</a></li>
+                    <li><a href="{{ url_for('main.crear_comercio') }}"><i class="bx bx-right-arrow-alt"></i>Fondo de Comercio</a></li>
+                    <li><a href="{{ url_for('main.crear_local') }}"><i class="bx bx-right-arrow-alt"></i>Local / Oficina</a></li>
+                    <li><a href="{{ url_for('main.crear_galpon') }}"><i class="bx bx-right-arrow-alt"></i>Galpón</a></li>
+                    <li><a href="{{ url_for('main.crear_terreno') }}"><i class="bx bx-right-arrow-alt"></i>Terreno</a></li>
+                </ul>
+            </li>
+
+
+
+
+
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bx-calendar-star'></i></div>
+                    <div class="menu-title">Agenda</div>
+                </a>
+                <ul>
+                    
+                    <li> <a href="{{ url_for('main.ver_eventos') }}"><i class="bx bx-right-arrow-alt"></i>Ver eventos</a></li>
+                    
+                </ul>
+            </li>
+
+            
+
+            
+
+            
+            <li>
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class='bx bx-user-circle'></i></div>
+                    <div class="menu-title">Usuarios</div>
+                </a>
+                <ul>
+                    
+                    <li> <a href="{{ url_for('main.usuarios') }}"><i class="bx bx-right-arrow-alt"></i>Mi perfil</a></li>
+                    <li> <a href="{{ url_for('main.cambiar_contrasena') }}"><i class="bx bx-right-arrow-alt"></i>Cambiar Contraseña</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!--end navigation-->
+    </div>
+    <!--end sidebar wrapper -->
+
+    <!--start header -->
+    <header>
+        <div class="topbar d-flex align-items-center bg-dark shadow-none border-light-2 border-bottom">
+            <nav class="navbar navbar-expand">
+                <div class="mobile-toggle-menu text-white me-3" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-expanded="false"><i class='bx bx-menu'></i></div>
+                <div class="search-bar flex-grow-1">
+                    <div class="position-relative search-bar-box">
+                        <form>
+                            <input type="text" class="form-control search-control" autofocus placeholder="Type to search...">
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--end header -->
+</div>
+<!--end wrapper-->
+
+

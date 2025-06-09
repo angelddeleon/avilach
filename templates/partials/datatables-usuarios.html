@@ -1,0 +1,58 @@
+<div class="card"> 
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="example2" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Imagen</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id_usuario }}</td>
+                        <td>{{ usuario.nombre }} {{ usuario.apellidos }}</td>
+                        <td>{{ usuario.correo_usuario }}</td>
+                        <td>
+                            {% if usuario.imagen_usuario %}
+                                <img src="{{ url_for('static', filename='imagenes/usuarios/' + usuario.imagen_usuario) }}" alt="Imagen Usuario" style="width: 100px;">
+                            {% else %}
+                                <img src="{{ url_for('static', filename='imagenes/usuarios/perfil-vacio.png') }}" alt="Imagen Usuario" style="width: 100px;">
+                            {% endif %}
+                        </td>
+                        <td>{{ usuario.rol }}</td>
+                        <td>
+                            <!-- Botón Ver -->
+                            <a href="{{ url_for('main.ver_usuario', id=usuario.id_usuario) }}" class="btn btn-info btn-sm">Ver</a>
+                            
+                            <!-- Botón Editar -->
+                            <a href="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}" class="btn btn-primary btn-sm">Editar</a>
+                            
+                             <form action="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}" method="POST" style="display: inline;">
+        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este usuario y todos sus inmuebles?');">
+            Eliminar
+        </button>
+    </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Imagen</th>
+                        <th>Rol</th>
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

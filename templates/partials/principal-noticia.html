@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Últimas Noticias</h5>
+        <table class="table mb-0">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Enlace</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for noticia in noticias %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>  <!-- Muestra el número de la fila -->
+                    <td>{{ noticia.titulo }}</td>
+                    <td>{{ noticia.fecha }}</td>
+                    <td><a href="{{ noticia.link }}" target="_blank">Ver Noticia</a></td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">No hay noticias disponibles.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

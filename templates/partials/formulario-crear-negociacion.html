@@ -1,0 +1,54 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Nueva Negociación</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <h5 class="card-title">Detalles de la Negociación</h5>
+            <hr />
+            <form method="POST" action="{{ url_for('main.crear_negociacion', tipo_inmueble=tipo_inmueble, id=id) }}">
+                <div class="form-body mt-4">
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Cliente -->
+                                <div class="mb-3">
+                                    <label for="cliente" class="form-label">Nombre del Cliente</label>
+                                    <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Nombre del cliente" required>
+                                </div>
+
+                                <!-- Realtor -->
+                                <div class="mb-3">
+                                    <label for="realtor" class="form-label">Nombre del Realtor</label>
+                                    <input type="text" class="form-control" id="realtor" name="realtor" placeholder="Nombre del realtor" required>
+                                </div>
+
+                                <!-- Monto de la Negociación -->
+                                <div class="mb-3">
+                                    <label for="monto" class="form-label">Monto de la Negociación</label>
+                                    <input type="number" class="form-control" id="monto" name="monto" placeholder="Monto acordado" required step="0.01">
+                                </div>
+
+                                <!-- Descripción -->
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label">Descripción</label>
+                                    <textarea class="form-control" id="descripcion" name="descripcion" rows="4" placeholder="Detalles de la negociación (opcional)"></textarea>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-4">
+                            <div class="border border-3 p-4 rounded">
+                                <!-- Botón para guardar -->
+                                <div class="col-12">
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-primary">Registrar Negociación</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

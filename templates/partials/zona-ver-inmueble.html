@@ -1,0 +1,220 @@
+{% block content %}
+<div class="card" style="margin: 20px;">
+    <div class="row g-0">
+        <div class="col-md-6 border-end">
+            <div class="card">
+                <div class="card-body">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        
+                        <div class="carousel-inner">
+                            {% if inmueble.imagen_principal %}
+                                {% set img_list = inmueble.imagen_principal.split(',') %}
+                                {% for i in range(img_list|length) %}
+                                    <div class="carousel-item {% if i == 0 %}active{% endif %}">
+                                        <img src="{{ url_for('static', filename=img_list[i].replace('\\', '/').split('static/')[1]) }}" class="d-block w-100" alt="Imagen del inmueble" style="height: 600px">
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="carousel-item active">
+                                    <img src="{{ url_for('static', filename='images/no-image.jpg') }}" class="d-block w-100" alt="Imagen no disponible" style="height: 600px">
+                                </div>
+                            {% endif %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+
+                                 
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card-body">
+                <h4 class="card-title">{{ inmueble.titulo_propiedad }}</h4>
+                <p class="text-muted">Registrado por: {{ usuario.nombre }} {{ usuario.apellidos }}</p>
+                <div class="mb-3">
+                    <span class="price h4">$ {{ inmueble.precio }}</span>
+                </div>
+                <div class="mb-3">
+                    <span class="price h4">{{ inmueble.descripcion }}</span>
+                </div>
+
+                <p class="card-text fs-6">Estado: {{ inmueble.estado_fisico_propiedad }}</p>
+                <dl class="row">
+                    <dt class="col-sm-3">Tipo de Negocio</dt>
+                    <dd class="col-sm-9">{{ inmueble.tipo_negocio }}</dd>
+                    <dt class="col-sm-3">Tipo de Propiedad</dt>
+                    <dd class="col-sm-9">{{ inmueble.tipo_inmueble }}</dd>
+                    <dt class="col-sm-3">Ubicación</dt>
+                    <dd class="col-sm-9">{{ inmueble.ciudad }}, {{ inmueble.estado_departamento }}, {{ inmueble.pais }}</dd>
+                    <dt class="col-sm-3">Dirección</dt>
+                    <dd class="col-sm-9">{{ inmueble.direccion }}</dd>
+                    {% if inmueble.anio_construccion %}
+                        <dt class="col-sm-3">Año Construcción</dt>
+                        <dd class="col-sm-9">{{ inmueble.anio_construccion }}</dd>
+                    {% endif %}
+                    {% if inmueble.habitaciones %}
+                        <dt class="col-sm-3">Habitaciones</dt>
+                        <dd class="col-sm-9">{{ inmueble.habitaciones }}</dd>
+                    {% endif %}
+                    {% if inmueble.banos %}
+                        <dt class="col-sm-3">Baños</dt>
+                        <dd class="col-sm-9">{{ inmueble.banos }}</dd>
+                    {% endif %}
+                    {% if inmueble.estacionamiento %}
+                        <dt class="col-sm-3">Estacionamientos</dt>
+                        <dd class="col-sm-9">{{ inmueble.estacionamiento }}</dd>
+                    {% endif %}
+                    {% if inmueble.metros_construccion %}
+                        <dt class="col-sm-3">Metros de Construcción</dt>
+                        <dd class="col-sm-9">{{ inmueble.metros_construccion }} m²</dd>
+                    {% endif %}
+                    {% if inmueble.metros_terreno %}
+                        <dt class="col-sm-3">Metros de Terreno</dt>
+                        <dd class="col-sm-9">{{ inmueble.metros_terreno }} m²</dd>
+                    {% endif %}
+                    {% if inmueble.obra %}
+                        <dt class="col-sm-3">Obra</dt>
+                        <dd class="col-sm-9">{{ inmueble.obra }}</dd>
+                    {% endif %}
+                    {% if inmueble.estilo %}
+                        <dt class="col-sm-3">Estilo</dt>
+                        <dd class="col-sm-9">{{ inmueble.estilo }}</dd>
+                    {% endif %}
+                    {% if inmueble.tipo_piso %}
+                        <dt class="col-sm-3">Tipo de Piso</dt>
+                        <dd class="col-sm-9">{{ inmueble.tipo_piso }}</dd>
+                    {% endif %}
+                </dl>
+                <hr>
+            </div>
+        </div>
+
+       <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+   
+                            <h5 class="card-title">Detalles del Inmueble</h5>
+                            
+                            <div class="row">
+                                <!-- Columna 1 -->
+                                <div class="col-md-3">
+                                    {% if inmueble.areas_internas %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Áreas Internas</h6>
+                                        <p class="card-text">{{ inmueble.areas_internas }}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if inmueble.servicio_telefonia_fija %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Teléfonía Fija</h6>
+                                        <p class="card-text">{{ inmueble.servicio_telefonia_fija }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <!-- Columna 2 -->
+                                <div class="col-md-3">
+                                    {% if inmueble.areas_comunes %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Áreas Comunes</h6>
+                                        <p class="card-text">{{ inmueble.areas_comunes }}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if inmueble.servicio_cable %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Servicio de Cable</h6>
+                                        <p class="card-text">{{ inmueble.servicio_cable }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <!-- Columna 3 -->
+                                <div class="col-md-3">
+                                    {% if inmueble.servicio_internet %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Internet</h6>
+                                        <p class="card-text">{{ inmueble.servicio_internet }}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    <!-- Puedes agregar más campos aquí -->
+                                </div>
+                                
+                                <!-- Columna 4 -->
+                                <div class="col-md-3">
+                                    <!-- Espacio para más campos adicionales -->
+                                    {% if inmueble.otros_servicios %}
+                                    <div class="mb-3">
+                                        <h6 class="card-subtitle mb-2 text-muted">Otros Servicios</h6>
+                                        <p class="card-text">{{ inmueble.otros_servicios }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <!-- Mensaje si no hay datos -->
+                            {% if not inmueble.areas_internas and not inmueble.areas_comunes and 
+                                not inmueble.servicio_telefonia_fija and not inmueble.servicio_cable and 
+                                not inmueble.servicio_internet %}
+                            <div class="alert alert-info mt-3">
+                                No se han registrado detalles adicionales para este inmueble.
+                            </div>
+                            {% endif %}
+                        </div>
+                
+                                    
+                                    <!-- Mensaje si no hay detalles -->
+                                    {% if not inmueble.areas_internas and not inmueble.areas_comunes and not inmueble.servicio_telefonia_fija 
+                                        and not inmueble.servicio_cable and not inmueble.servicio_internet %}
+                                    <div class="alert alert-info">
+                                        No se han registrado detalles adicionales para este inmueble.
+                                    </div>
+                                    {% endif %}
+                            
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="{{ url_for('static', filename='imagenes/usuarios/' + (usuario.imagen_usuario if usuario.imagen_usuario else 'perfil-vacio.png')) }}" alt="Admin" class="" width="110">
+                        <div class="mt-3">
+                            <h4>{{ usuario.nombre }} {{ usuario.apellidos }}</h4>
+                            <p class="text-secondary mb-1">{{ usuario.rol }}</p>
+                            <p class="text-muted font-size-sm">{{ usuario.area_o_sucursal }}</p>
+                        </div>
+                    </div>
+                    <hr class="my-4" />
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><a href="{{ usuario.facebook }}" class="text-secondary" target="_blank">Facebook</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><a href="{{ usuario.instagram }}" class="text-secondary" target="_blank">Instagram</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><a href="{{ usuario.telegram }}" class="text-secondary" target="_blank">Telegram</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><a href="{{ usuario.twitter }}" class="text-secondary" target="_blank">Twitter</a></h6>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                            <h6 class="mb-0"><a href="https://wa.me/{{ usuario.telefono }}" class="text-secondary" target="_blank">WhatsApp</a></h6>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+<div class="table-responsive">
+    <div id='calendar'></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            headerToolbar: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            },
+            initialView: 'dayGridMonth',
+            initialDate: '2025-04-21',
+            navLinks: true, // can click day/week names to navigate views
+            selectable: true,
+            nowIndicator: true,
+            dayMaxEvents: true, // allow "more" link when too many events
+            editable: true,
+            businessHours: true,
+            events: {{ eventos|tojson }}  // Aquí cargamos los eventos desde Flask
+        });
+        calendar.render();
+    });
+</script>
