@@ -3,7 +3,7 @@
     <h2 class="mb-4">Agregar Propiedad</h2>
     <div class="card">
         <div class="card-body p-4">
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_local') }}">
+            <form method="POST" enctype="multipart/form-data" action="{% if local %}{{ url_for('main.editar_local', id=local.id) }}{% else %}{{ url_for('main.crear_local') }}{% endif %}">
                 <div class="form-body mt-4">
                     <!-- Datos del Propietario -->
 
@@ -23,6 +23,7 @@
                     <h5 class="card-title">Datos del Propietario</h5>
                     <hr />
                     <div class="row g-3">
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ local.nombre }}"></div>
                         <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
                         <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
                         <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>

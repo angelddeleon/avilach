@@ -2,7 +2,7 @@
     <h2 class="mb-4">Agregar Propiedad</h2>
     <div class="card">
         <div class="card-body p-4">
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_terreno') }}">
+            <form method="POST" enctype="multipart/form-data" action="{% if terreno %}{{ url_for('main.editar_terreno', id=terreno.id) }}{% else %}{{ url_for('main.crear_terreno') }}{% endif %}">
                 <div class="form-body mt-4">
                     <div class="row">
                         <div class="col-12">

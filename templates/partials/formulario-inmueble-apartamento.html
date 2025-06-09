@@ -2,7 +2,7 @@
     <h2 class="mb-4">Agregar Propiedad</h2>
     <div class="card">
         <div class="card-body p-4">
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_apartamento') }}">
+            <form method="POST" enctype="multipart/form-data" action="{% if apartamento %}{{ url_for('main.editar_apartamento', id=apartamento.id) }}{% else %}{{ url_for('main.crear_apartamento') }}{% endif %}">
                 <div class="form-body mt-4">
                     <div class="row">
                         <div class="col-12">
@@ -12,29 +12,29 @@
                                 <h5 class="card-title">Datos del Propietario</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
-                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
-                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
-                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
-                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ apartamento.nombre if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ apartamento.apellido if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ apartamento.ci if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ apartamento.rif if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ apartamento.fecha_nacimiento.strftime('%Y-%m-%d') if apartamento and apartamento.fecha_nacimiento else '' }}"></div>
+                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ apartamento.estado_civil if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ apartamento.email if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ apartamento.telefono if apartamento else '' }}"></div>
                                 </div>
 
                                 <!-- Datos del Inmueble -->
                                 <h5 class="card-title mt-4">Datos del Inmueble</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-6"><label>Título del Inmueble</label><input type="text" class="form-control" name="titulo_propiedad" required></div>
+                                    <div class="col-md-6"><label>Título del Inmueble</label><input type="text" class="form-control" name="titulo_propiedad" required value="{{ apartamento.titulo_propiedad if apartamento else '' }}"></div>
                                    
 
                                     <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                                     <div class="col-md-6">
                                         <select class="form-select" name="tipo_negocio" required>
-                                            <option value="Venta">Venta</option>
-                                            <option value="alquiler">Alquiler</option>
-                                            <option value="Venta y alquiler">Venta y Alquiler</option>
+                                            <option value="Venta" {% if apartamento and apartamento.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                            <option value="alquiler" {% if apartamento and apartamento.tipo_negocio == 'alquiler' %}selected{% endif %}>Alquiler</option>
+                                            <option value="Venta y alquiler" {% if apartamento and apartamento.tipo_negocio == 'Venta y alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
@@ -43,75 +43,75 @@
                                             <option value="apartamento">Apartamento</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ apartamento.datos_inmueble if apartamento else '' }}</textarea></div>
+                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ apartamento.referencia if apartamento else '' }}"></div>
                                 </div>
 
                               
                                 <div class="row g-3">
-                                    <div class="col-md-2"><label>Habitaciones</label><input type="number" class="form-control" name="habitaciones"></div>
-                                    <div class="col-md-2"><label>Hab. Servicio</label><input type="number" class="form-control" name="hab_servicio"></div>
-                                    <div class="col-md-2"><label>Total Habitaciones</label><input type="number" class="form-control" name="total_habitaciones"></div>
-                                    <div class="col-md-2"><label>Baños Completos</label><input type="number" class="form-control" name="banos_completos"></div>
-                                    <div class="col-md-2"><label>Baño Servicio</label><input type="number" class="form-control" name="bano_servicio"></div>
-                                    <div class="col-md-2"><label>Medio Baño</label><input type="number" class="form-control" name="medio_bano"></div>
-                                    <div class="col-md-2"><label>Total Baños</label><input type="number" class="form-control" name="total_banos"></div>
+                                    <div class="col-md-2"><label>Habitaciones</label><input type="number" class="form-control" name="habitaciones" value="{{ apartamento.habitaciones if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Hab. Servicio</label><input type="number" class="form-control" name="hab_servicio" value="{{ apartamento.hab_servicio if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Total Habitaciones</label><input type="number" class="form-control" name="total_habitaciones" value="{{ apartamento.total_habitaciones if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Baños Completos</label><input type="number" class="form-control" name="banos_completos" value="{{ apartamento.banos_completos if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Baño Servicio</label><input type="number" class="form-control" name="bano_servicio" value="{{ apartamento.bano_servicio if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Medio Baño</label><input type="number" class="form-control" name="medio_bano" value="{{ apartamento.medio_bano if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Total Baños</label><input type="number" class="form-control" name="total_banos" value="{{ apartamento.total_banos if apartamento else '' }}"></div>
                          
 
                                
                                
                                 
-                                    <div class="col-md-3"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento"></div>
-                                    <div class="col-md-3"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos"></div>
-                                    <div class="col-md-3"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos"></div>
+                                    <div class="col-md-3"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento" value="{{ apartamento.puestos_estacionamiento if apartamento else '' }}"></div>
+                                    <div class="col-md-3"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos" value="{{ apartamento.estacionamientos_cubiertos if apartamento else '' }}"></div>
+                                    <div class="col-md-3"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos" value="{{ apartamento.estacionamientos_descubiertos if apartamento else '' }}"></div>
                                 
 
                                
                                     <div class="col-md-2 d-flex align-items-end">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="tiene_maletero">
+                                            <input class="form-check-input" type="checkbox" name="tiene_maletero" {% if apartamento and apartamento.tiene_maletero %}checked{% endif %}>
                                             <label class="form-check-label">Tiene Maletero</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"><label>Total maleteros</label><input type="number" class="form-control" name="cantidad_maleteros"></div>
+                                    <div class="col-md-2"><label>Total maleteros</label><input type="number" class="form-control" name="cantidad_maleteros" value="{{ apartamento.cantidad_maleteros if apartamento else '' }}"></div>
                                
                                                                
-                                    <div class="col-md-2"><label>M2 Construcción</label><input type="number" step="0.01" class="form-control" name="metros_construccion"></div>
-                                    <div class="col-md-2"><label>M2 Terreno</label><input type="number" step="0.01" class="form-control" name="metros_terreno"></div>
-                                    <div class="col-md-2"><label>Año Construcción</label><input type="number" class="form-control" name="anio_construccion"></div>
+                                    <div class="col-md-2"><label>M2 Construcción</label><input type="number" step="0.01" class="form-control" name="metros_construccion" value="{{ apartamento.metros_construccion if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>M2 Terreno</label><input type="number" step="0.01" class="form-control" name="metros_terreno" value="{{ apartamento.metros_terreno if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Año Construcción</label><input type="number" class="form-control" name="anio_construccion" value="{{ apartamento.anio_construccion if apartamento else '' }}"></div>
                                     <div class="col-md-3">
                                         <label>Tipo de Obra</label>
                                         <select class="form-select" name="obra">
-                                            <option value="Obra Gris">Obra Gris</option>
-                                            <option value="Obra Blanca">Obra Blanca</option>
-                                            <option value="Usado">Usado</option>
-                                            <option value="Modernizado">Modernizado</option>
+                                            <option value="Obra Gris" {% if apartamento and apartamento.obra == 'Obra Gris' %}selected{% endif %}>Obra Gris</option>
+                                            <option value="Obra Blanca" {% if apartamento and apartamento.obra == 'Obra Blanca' %}selected{% endif %}>Obra Blanca</option>
+                                            <option value="Usado" {% if apartamento and apartamento.obra == 'Usado' %}selected{% endif %}>Usado</option>
+                                            <option value="Modernizado" {% if apartamento and apartamento.obra == 'Modernizado' %}selected{% endif %}>Modernizado</option>
                                             
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Estilo de Apartamento</label>
                                         <select class="form-select" name="estilo">
-                                            <option value="Sencillo">Sencillo</option>
-                                            <option value="Duplex">Duplex</option>
-                                            <option value="Triple">Triple</option>
-                                            <option value="Penthouse">Penthouse</option>
+                                            <option value="Sencillo" {% if apartamento and apartamento.estilo == 'Sencillo' %}selected{% endif %}>Sencillo</option>
+                                            <option value="Duplex" {% if apartamento and apartamento.estilo == 'Duplex' %}selected{% endif %}>Duplex</option>
+                                            <option value="Triple" {% if apartamento and apartamento.estilo == 'Triple' %}selected{% endif %}>Triple</option>
+                                            <option value="Penthouse" {% if apartamento and apartamento.estilo == 'Penthouse' %}selected{% endif %}>Penthouse</option>
             
                                             
                                         </select>
                                     </div>
                                     <div class="col-md-2 d-flex align-items-end">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="tiene_terraza">
+                                            <input class="form-check-input" type="checkbox" name="tiene_terraza" {% if apartamento and apartamento.tiene_terraza %}checked{% endif %}>
                                             <label class="form-check-label">Tiene Terraza</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-2"><label>Tipo de Piso</label><input type="text" class="form-control" name="tipo_piso"></div>
-                                    <div class="col-md-2"><label>Niveles</label><input type="number" class="form-control" name="niveles"></div>
-                                    <div class="col-md-2"><label>Aptos por Piso</label><input type="number" class="form-control" name="aptos_x_piso"></div>
-                                    <div class="col-md-2"><label>Total Pisos</label><input type="number" class="form-control" name="total_pisos"></div>
-                                    <div class="col-md-4"><label>Condominio Aprox</label><input type="number" step="0.01" class="form-control" name="condominio_aprox"></div>
-                                    <div class="col-md-4"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required></div>
+                                    <div class="col-md-2"><label>Tipo de Piso</label><input type="text" class="form-control" name="tipo_piso" value="{{ apartamento.tipo_piso if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Niveles</label><input type="number" class="form-control" name="niveles" value="{{ apartamento.niveles if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Aptos por Piso</label><input type="number" class="form-control" name="aptos_x_piso" value="{{ apartamento.aptos_x_piso if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Total Pisos</label><input type="number" class="form-control" name="total_pisos" value="{{ apartamento.total_pisos if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Condominio Aprox</label><input type="number" step="0.01" class="form-control" name="condominio_aprox" value="{{ apartamento.condominio_aprox if apartamento else '' }}"></div>
+                                    <div class="col-md-4"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required value="{{ apartamento.precio if apartamento else '' }}"></div>
                                 
                                 
                                 </div>
@@ -119,11 +119,11 @@
                            
                                
                                 <div class="row g-3">
-                                    <div class="col-md-2"><label>País</label><input type="text" class="form-control" name="pais"></div>
-                                    <div class="col-md-2"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento"></div>
-                                    <div class="col-md-2"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
-                                    <div class="col-md-2"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
-                                    <div class="col-md-2"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
+                                    <div class="col-md-2"><label>País</label><input type="text" class="form-control" name="pais" value="{{ apartamento.pais if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento" value="{{ apartamento.estado_departamento if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ apartamento.ciudad if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ apartamento.direccion if apartamento else '' }}"></div>
+                                    <div class="col-md-2"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ apartamento.codigo_postal if apartamento else '' }}"></div>
                                     </div>
 
                                     <h5 class="card-title">Áreas Internas y Comunes</h5>
@@ -135,72 +135,72 @@
                                             <h6>Áreas Internas</h6>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cocina_empotrada" name="areas_internas" value="Cocina Empotrada">
+                                                <input class="form-check-input" type="checkbox" id="cocina_empotrada" name="areas_internas" value="Cocina Empotrada" {% if apartamento and 'Cocina Empotrada' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="cocina_empotrada">Cocina Empotrada</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="sala_comedor" name="areas_internas" value="Sala - Comedor">
+                                                <input class="form-check-input" type="checkbox" id="sala_comedor" name="areas_internas" value="Sala - Comedor" {% if apartamento and 'Sala - Comedor' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="sala_comedor">Sala - Comedor</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="estudio" name="areas_internas" value="Estudio - Estar">
+                                                <input class="form-check-input" type="checkbox" id="estudio" name="areas_internas" value="Estudio - Estar" {% if apartamento and 'Estudio - Estar' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="estudio">Estudio - Estar</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="family_room" name="areas_internas" value="Family Room">
+                                                <input class="form-check-input" type="checkbox" id="family_room" name="areas_internas" value="Family Room" {% if apartamento and 'Family Room' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="family_room">Family Room</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="oficina" name="areas_internas" value="Oficina">
+                                                <input class="form-check-input" type="checkbox" id="oficina" name="areas_internas" value="Oficina" {% if apartamento and 'Oficina' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="oficina">Oficina</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="jardin" name="areas_internas" value="Jardín">
+                                                <input class="form-check-input" type="checkbox" id="jardin" name="areas_internas" value="Jardín" {% if apartamento and 'Jardín' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="jardin">Jardín</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="parrillera" name="areas_internas" value="Parrillera">
+                                                <input class="form-check-input" type="checkbox" id="parrillera" name="areas_internas" value="Parrillera" {% if apartamento and 'Parrillera' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="parrillera">Parrillera</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="tanque_agua_int" name="areas_internas" value="Tanque de Agua Int.">
+                                                <input class="form-check-input" type="checkbox" id="tanque_agua_int" name="areas_internas" value="Tanque de Agua Int." {% if apartamento and 'Tanque de Agua Int.' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="tanque_agua_int">Tanque de Agua Int.</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="vista_panoramica" name="areas_internas" value="Vista Panorámica">
+                                                <input class="form-check-input" type="checkbox" id="vista_panoramica" name="areas_internas" value="Vista Panorámica" {% if apartamento and 'Vista Panorámica' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="vista_panoramica">Vista Panorámica</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="balcon" name="areas_internas" value="Balcón">
+                                                <input class="form-check-input" type="checkbox" id="balcon" name="areas_internas" value="Balcón" {% if apartamento and 'Balcón' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="balcon">Balcón</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="patio" name="areas_internas" value="Patio">
+                                                <input class="form-check-input" type="checkbox" id="patio" name="areas_internas" value="Patio" {% if apartamento and 'Patio' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="patio">Patio</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cerco_electrico" name="areas_internas" value="Cerco Eléctrico">
+                                                <input class="form-check-input" type="checkbox" id="cerco_electrico" name="areas_internas" value="Cerco Eléctrico" {% if apartamento and 'Cerco Eléctrico' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="cerco_electrico">Cerco Eléctrico</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="circuito_cerrado_int" name="areas_internas" value="Circuito Cerrado">
+                                                <input class="form-check-input" type="checkbox" id="circuito_cerrado_int" name="areas_internas" value="Circuito Cerrado" {% if apartamento and 'Circuito Cerrado' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="circuito_cerrado_int">Circuito Cerrado</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="amoblado" name="areas_internas" value="Amoblado">
+                                                <input class="form-check-input" type="checkbox" id="amoblado" name="areas_internas" value="Amoblado" {% if apartamento and 'Amoblado' in (apartamento.areas_internas or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="amoblado">Amoblado</label>
                                             </div>
                                         </div>
@@ -211,72 +211,72 @@
                                             <h6>Áreas Comunes</h6>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="tanque_agua" name="areas_comunes" value="Tanque de Agua">
+                                                <input class="form-check-input" type="checkbox" id="tanque_agua" name="areas_comunes" value="Tanque de Agua" {% if apartamento and 'Tanque de Agua' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="tanque_agua">Tanque de Agua</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="calle_privada" name="areas_comunes" value="Calle Privada">
+                                                <input class="form-check-input" type="checkbox" id="calle_privada" name="areas_comunes" value="Calle Privada" {% if apartamento and 'Calle Privada' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="calle_privada">Calle Privada</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="pozo_agua" name="areas_comunes" value="Pozo de Agua">
+                                                <input class="form-check-input" type="checkbox" id="pozo_agua" name="areas_comunes" value="Pozo de Agua" {% if apartamento and 'Pozo de Agua' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="pozo_agua">Pozo de Agua</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="areas_verdes" name="areas_comunes" value="Áreas Verdes">
+                                                <input class="form-check-input" type="checkbox" id="areas_verdes" name="areas_comunes" value="Áreas Verdes" {% if apartamento and 'Áreas Verdes' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="areas_verdes">Áreas Verdes</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="planta_electrica" name="areas_comunes" value="Planta Eléctrica">
+                                                <input class="form-check-input" type="checkbox" id="planta_electrica" name="areas_comunes" value="Planta Eléctrica" {% if apartamento and 'Planta Eléctrica' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="planta_electrica">Planta Eléctrica</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="parque_infantil" name="areas_comunes" value="Parque Infantil">
+                                                <input class="form-check-input" type="checkbox" id="parque_infantil" name="areas_comunes" value="Parque Infantil" {% if apartamento and 'Parque Infantil' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="parque_infantil">Parque Infantil</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="estacionamiento_visitante" name="areas_comunes" value="Estacio. de Visitante">
+                                                <input class="form-check-input" type="checkbox" id="estacionamiento_visitante" name="areas_comunes" value="Estacio. de Visitante" {% if apartamento and 'Estacio. de Visitante' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="estacionamiento_visitante">Estacionamiento de Visitante</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="vigilancia" name="areas_comunes" value="Vigilancia">
+                                                <input class="form-check-input" type="checkbox" id="vigilancia" name="areas_comunes" value="Vigilancia" {% if apartamento and 'Vigilancia' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="vigilancia">Vigilancia</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="salon_fiestas" name="areas_comunes" value="Salón de Fiestas">
+                                                <input class="form-check-input" type="checkbox" id="salon_fiestas" name="areas_comunes" value="Salón de Fiestas" {% if apartamento and 'Salón de Fiestas' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="salon_fiestas">Salón de Fiestas</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="gimnasio" name="areas_comunes" value="Gimnasio">
+                                                <input class="form-check-input" type="checkbox" id="gimnasio" name="areas_comunes" value="Gimnasio" {% if apartamento and 'Gimnasio' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="gimnasio">Gimnasio</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="piscina" name="areas_comunes" value="Piscina">
+                                                <input class="form-check-input" type="checkbox" id="piscina" name="areas_comunes" value="Piscina" {% if apartamento and 'Piscina' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="piscina">Piscina</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="ascensores" name="areas_comunes" value="Ascensores">
+                                                <input class="form-check-input" type="checkbox" id="ascensores" name="areas_comunes" value="Ascensores" {% if apartamento and 'Ascensores' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="ascensores">Ascensores</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="circuito_cerrado_ext" name="areas_comunes" value="Circuito Cerrado">
+                                                <input class="form-check-input" type="checkbox" id="circuito_cerrado_ext" name="areas_comunes" value="Circuito Cerrado" {% if apartamento and 'Circuito Cerrado' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="circuito_cerrado_ext">Circuito Cerrado</label>
                                             </div>
     
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="cancha" name="areas_comunes" value="Cancha">
+                                                <input class="form-check-input" type="checkbox" id="cancha" name="areas_comunes" value="Cancha" {% if apartamento and 'Cancha' in (apartamento.areas_comunes or '') %}checked{% endif %}>
                                                 <label class="form-check-label" for="cancha">Cancha</label>
                                             </div>
                                         </div>
@@ -290,31 +290,31 @@
                                                 <div class="col-md-6">
                                                     <h6>Comodidades</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="aire_acondicionado" name="comodidades" value="Aire Acondicionado">
+                                                        <input class="form-check-input" type="checkbox" id="aire_acondicionado" name="comodidades" value="Aire Acondicionado" {% if apartamento and 'Aire Acondicionado' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="aire_acondicionado">Aire Acondicionado</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="calentador" name="comodidades" value="Calentador">
+                                                        <input class="form-check-input" type="checkbox" id="calentador" name="comodidades" value="Calentador" {% if apartamento and 'Calentador' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="calentador">Calentador</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="closet" name="comodidades" value="Closet">
+                                                        <input class="form-check-input" type="checkbox" id="closet" name="comodidades" value="Closet" {% if apartamento and 'Closet' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="closet">Closet</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="jacuzzi" name="comodidades" value="Jacuzzi">
+                                                        <input class="form-check-input" type="checkbox" id="jacuzzi" name="comodidades" value="Jacuzzi" {% if apartamento and 'Jacuzzi' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="jacuzzi">Jacuzzi</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="vestier" name="comodidades" value="Vestier">
+                                                        <input class="form-check-input" type="checkbox" id="vestier" name="comodidades" value="Vestier" {% if apartamento and 'Vestier' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="vestier">Vestier</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="lavandero" name="comodidades" value="Lavandero">
+                                                        <input class="form-check-input" type="checkbox" id="lavandero" name="comodidades" value="Lavandero" {% if apartamento and 'Lavandero' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="lavandero">Lavandero</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="parrillera_comodidad" name="comodidades" value="Parillera">
+                                                        <input class="form-check-input" type="checkbox" id="parrillera_comodidad" name="comodidades" value="Parillera" {% if apartamento and 'Parillera' in (apartamento.comodidades or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="parrillera_comodidad">Parillera</label>
                                                     </div>
                                                 </div>
@@ -323,27 +323,27 @@
                                                 <div class="col-md-6">
                                                     <h6>Servicio Telefonía Fija</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="cantv" name="telefonia" value="Cantv">
+                                                        <input class="form-check-input" type="checkbox" id="cantv" name="telefonia" value="Cantv" {% if apartamento and 'Cantv' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="cantv">Cantv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movilnet_tel" name="telefonia" value="Movilnet">
+                                                        <input class="form-check-input" type="checkbox" id="movilnet_tel" name="telefonia" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movilnet_tel">Movilnet</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movistar_tel" name="telefonia" value="Movistar">
+                                                        <input class="form-check-input" type="checkbox" id="movistar_tel" name="telefonia" value="Movistar" {% if apartamento and 'Movistar' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movistar_tel">Movistar</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="digitel" name="telefonia" value="Digitel">
+                                                        <input class="form-check-input" type="checkbox" id="digitel" name="telefonia" value="Digitel" {% if apartamento and 'Digitel' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="digitel">Digitel</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_tel" name="telefonia" value="Inter">
+                                                        <input class="form-check-input" type="checkbox" id="inter_tel" name="telefonia" value="Inter" {% if apartamento and 'Inter' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_tel">Inter</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros_tel" name="telefonia" value="Otros">
+                                                        <input class="form-check-input" type="checkbox" id="otros_tel" name="telefonia" value="Otros" {% if apartamento and 'Otros' in (apartamento.telefonia or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros_tel">Otros</label>
                                                     </div>
                                                 </div>
@@ -351,27 +351,27 @@
                                                 <div class="col-md-6">
                                                     <h6>Servicio de Cable Visión</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="directv" name="cablevision" value="Directv">
+                                                        <input class="form-check-input" type="checkbox" id="directv" name="cablevision" value="Directv" {% if apartamento and 'Directv' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="directv">Directv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_cable" name="cablevision" value="Intercable">
+                                                        <input class="form-check-input" type="checkbox" id="inter_cable" name="cablevision" value="Intercable" {% if apartamento and 'Intercable' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_cable">Intercable</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movistar_tv" name="cablevision" value="Movistar Tv">
+                                                        <input class="form-check-input" type="checkbox" id="movistar_tv" name="cablevision" value="Movistar Tv" {% if apartamento and 'Movistar Tv' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movistar_tv">Movistar Tv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movilnet_tv" name="cablevision" value="Movilnet">
+                                                        <input class="form-check-input" type="checkbox" id="movilnet_tv" name="cablevision" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movilnet_tv">Movilnet</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="netuno_tv" name="cablevision" value="Net-Uno">
+                                                        <input class="form-check-input" type="checkbox" id="netuno_tv" name="cablevision" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="netuno_tv">Net-Uno</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros_cable" name="cablevision" value="Otros">
+                                                        <input class="form-check-input" type="checkbox" id="otros_cable" name="cablevision" value="Otros" {% if apartamento and 'Otros' in (apartamento.cablevision or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros_cable">Otros</label>
                                                     </div>
                                                 </div>
@@ -381,27 +381,27 @@
                                                     <h6>Servicios de internet</h6>
     
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_aba" name="servicios_internet" value="Inter Aba">
+                                                        <input class="form-check-input" type="checkbox" id="inter_aba" name="servicios_internet" value="Inter Aba" {% if apartamento and 'Inter Aba' in (apartamento.servicios_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_aba">Inter Aba</label>
                                                     </div>
     
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_satelital" name="servicios_internet" value="Inter Satelital">
+                                                        <input class="form-check-input" type="checkbox" id="inter_satelital" name="servicios_internet" value="Inter Satelital" {% if apartamento and 'Inter Satelital' in (apartamento.servicios_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_satelital">Inter Satelital</label>
                                                     </div>
     
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="net_uno" name="servicios_internet" value="Net-Uno">
+                                                        <input class="form-check-input" type="checkbox" id="net_uno" name="servicios_internet" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.servicios_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="net_uno">Net-Uno</label>
                                                     </div>
     
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="serv_satelital" name="servicios_internet" value="Serv. Satelital">
+                                                        <input class="form-check-input" type="checkbox" id="serv_satelital" name="servicios_internet" value="Serv. Satelital" {% if apartamento and 'Serv. Satelital' in (apartamento.servicios_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="serv_satelital">Serv. Satelital</label>
                                                     </div>
     
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros" name="servicios_internet" value="Otros">
+                                                        <input class="form-check-input" type="checkbox" id="otros" name="servicios_internet" value="Otros" {% if apartamento and 'Otros' in (apartamento.servicios_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros">Otros</label>
                                                     </div>
                                                 </div>

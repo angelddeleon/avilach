@@ -33,11 +33,20 @@
                             <!-- Botón Editar -->
                             <a href="{{ url_for('main.editar_usuario', id=usuario.id_usuario) }}" class="btn btn-primary btn-sm">Editar</a>
                             
-                             <form action="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}" method="POST" style="display: inline;">
-        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este usuario y todos sus inmuebles?');">
-            Eliminar
-        </button>
-    </form>
+                            <!-- Botón Resetear Contraseña (solo admin) -->
+                            {% if user.rol == 'administrador' %}
+                            <form action="{{ url_for('main.resetear_contrasena', id=usuario.id_usuario) }}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-warning btn-sm" onclick="return confirm('¿Seguro que deseas resetear la contraseña de este usuario?');">
+                                    Resetear Contraseña
+                                </button>
+                            </form>
+                            {% endif %}
+                            
+                            <form action="{{ url_for('main.eliminar_usuario', id=usuario.id_usuario) }}" method="POST" style="display: inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este usuario y todos sus inmuebles?');">
+                                    Eliminar
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     {% endfor %}

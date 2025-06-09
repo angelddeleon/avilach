@@ -132,7 +132,6 @@ class Casa(db.Model):
 
 #modelo de los apartamentos 
 
-
 class Apartamento(db.Model):
     __tablename__ = 'apartamento'
 

@@ -4,7 +4,7 @@
         <div class="card-body p-4">
             <h5 class="card-title">Detalles del Inmueble</h5>
             <hr />
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_casa') }}">
+            <form method="POST" enctype="multipart/form-data" action="{% if casa %}{{ url_for('main.editar_casa', id=casa.id) }}{% else %}{{ url_for('main.crear_casa') }}{% endif %}">
                 <div class="form-body mt-4">
                     <div class="row">
                         <div class="col-12 col-md-12">
@@ -13,63 +13,63 @@
                                 <h5 class="card-title">Datos del Propietario</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre"></div>
-                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido"></div>
-                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci"></div>
-                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email"></div>
-                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" value="{{ casa.nombre }}"></div>
+                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" value="{{ casa.apellido }}"></div>
+                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" value="{{ casa.ci }}"></div>
+                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ casa.rif }}"></div>
+                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ casa.fecha_nacimiento }}"></div>
+                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ casa.estado_civil }}"></div>
+                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" value="{{ casa.email }}"></div>
+                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ casa.telefono }}"></div>
                                 </div>
 
                                 <hr />
                                 <h5 class="card-title mt-4">Datos del Inmueble</h5>
                                 <div class="row g-3">
                                     
-                                    <div class="col-md-6"><label>Título del Inmueble</label><input type="text" class="form-control" name="titulo_propiedad"></div>
+                                    <div class="col-md-6"><label>Título del Inmueble</label><input type="text" class="form-control" name="titulo_propiedad" value="{{ casa.titulo_propiedad }}"></div>
                                     
                                     <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                                     <div class="col-md-6">
                                         <select class="form-select" name="tipo_negocio" required>
-                                            <option value="Venta">Venta</option>
-                                            <option value="Alquiler">Alquiler</option>
-                                            <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                            <option value="Venta" {% if casa.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                            <option value="Alquiler" {% if casa.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                            <option value="Venta y Alquiler" {% if casa.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Tipo de Inmueble</label>
                                         <select class="form-select" name="tipo_inmueble">
-                                            <option value="casa">Casa</option>
+                                            <option value="casa" {% if casa.tipo_inmueble == 'casa' %}selected{% endif %}>Casa</option>
                                             
                                         </select>
                                     </div>
-                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
-                                    <div class="col-md-2"><label>Habitaciones</label><input type="number" class="form-control" name="habitaciones"></div>
-                                    <div class="col-md-2"><label>Hab. Servicio</label><input type="number" class="form-control" name="hab_servicio"></div>
-                                    <div class="col-md-2"><label>Total Hab.</label><input type="number" class="form-control" name="total_habitaciones"></div>
-                                    <div class="col-md-2"><label>Baños</label><input type="number" class="form-control" name="banos_completos"></div>
-                                    <div class="col-md-2"><label>Baño Serv.</label><input type="number" class="form-control" name="bano_servicio"></div>
-                                    <div class="col-md-2"><label>Medio Baño</label><input type="number" class="form-control" name="medio_bano"></div>
-                                    <div class="col-md-2"><label>Total Baños</label><input type="number" class="form-control" name="total_banos"></div>
-                                    <div class="col-md-4"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento"></div>
-                                    <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos"></div>
-                                    <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos"></div>
+                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ casa.datos_inmueble }}</textarea></div>
+                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ casa.referencia }}"></div>
+                                    <div class="col-md-2"><label>Habitaciones</label><input type="number" class="form-control" name="habitaciones" value="{{ casa.habitaciones }}"></div>
+                                    <div class="col-md-2"><label>Hab. Servicio</label><input type="number" class="form-control" name="hab_servicio" value="{{ casa.hab_servicio }}"></div>
+                                    <div class="col-md-2"><label>Total Hab.</label><input type="number" class="form-control" name="total_habitaciones" value="{{ casa.total_habitaciones }}"></div>
+                                    <div class="col-md-2"><label>Baños</label><input type="number" class="form-control" name="banos_completos" value="{{ casa.banos_completos }}"></div>
+                                    <div class="col-md-2"><label>Baño Serv.</label><input type="number" class="form-control" name="bano_servicio" value="{{ casa.bano_servicio }}"></div>
+                                    <div class="col-md-2"><label>Medio Baño</label><input type="number" class="form-control" name="medio_bano" value="{{ casa.medio_bano }}"></div>
+                                    <div class="col-md-2"><label>Total Baños</label><input type="number" class="form-control" name="total_banos" value="{{ casa.total_banos }}"></div>
+                                    <div class="col-md-4"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento" value="{{ casa.puestos_estacionamiento }}"></div>
+                                    <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos" value="{{ casa.estacionamientos_cubiertos }}"></div>
+                                    <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos" value="{{ casa.estacionamientos_descubiertos }}"></div>
                                 
-                                    <div class="col-md-3"><label><input type="checkbox" name="tiene_maletero"> Tiene maletero</label></div>
-                                    <div class="col-md-3"><label>Cant. Maleteros</label><input type="number" class="form-control" name="cantidad_maleteros"></div>
-                                    <div class="col-md-3"><label>Mts Construcción</label><input type="number" step="0.01" class="form-control" name="metros_construccion"></div>
-                                    <div class="col-md-3"><label>Mts Terreno</label><input type="number" step="0.01" class="form-control" name="metros_terreno"></div>
-                                    <div class="col-md-3"><label>Año Construcción</label><input type="number" class="form-control" name="anio_construccion"></div>
+                                    <div class="col-md-3"><label><input type="checkbox" name="tiene_maletero" {% if casa.tiene_maletero %}checked{% endif %}> Tiene maletero</label></div>
+                                    <div class="col-md-3"><label>Cant. Maleteros</label><input type="number" class="form-control" name="cantidad_maleteros" value="{{ casa.cantidad_maleteros }}"></div>
+                                    <div class="col-md-3"><label>Mts Construcción</label><input type="number" step="0.01" class="form-control" name="metros_construccion" value="{{ casa.metros_construccion }}"></div>
+                                    <div class="col-md-3"><label>Mts Terreno</label><input type="number" step="0.01" class="form-control" name="metros_terreno" value="{{ casa.metros_terreno }}"></div>
+                                    <div class="col-md-3"><label>Año Construcción</label><input type="number" class="form-control" name="anio_construccion" value="{{ casa.anio_construccion }}"></div>
                                  
                                     <div class="col-md-3">
                                         <label>Tipo de Obra</label>
                                         <select class="form-select" name="obra">
-                                            <option value="Obra Gris">Gris</option>
-                                            <option value="Obra Blanca">Gris</option>
-                                            <option value="Usado">Usado</option>
-                                            <option value="Modernizado">Modernizado</option>
+                                            <option value="Obra Gris" {% if casa.obra == 'Obra Gris' %}selected{% endif %}>Gris</option>
+                                            <option value="Obra Blanca" {% if casa.obra == 'Obra Blanca' %}selected{% endif %}>Gris</option>
+                                            <option value="Usado" {% if casa.obra == 'Usado' %}selected{% endif %}>Usado</option>
+                                            <option value="Modernizado" {% if casa.obra == 'Modernizado' %}selected{% endif %}>Modernizado</option>
                                             
                                         </select>
                                     </div>
@@ -79,8 +79,8 @@
                                     <div class="col-md-3">
                                         <label>Estilo de casa</label>
                                         <select class="form-select" name="estilo">
-                                            <option value="Casa">Casa</option>
-                                            <option value="Townhouse">Townhouse</option>
+                                            <option value="Casa" {% if casa.estilo == 'Casa' %}selected{% endif %}>Casa</option>
+                                            <option value="Townhouse" {% if casa.estilo == 'Townhouse' %}selected{% endif %}>Townhouse</option>
             
                                             
                                         </select>
@@ -89,30 +89,30 @@
 
 
 
-                                    <div class="col-md-3"><label><input type="checkbox" name="tiene_terraza"> Tiene terraza</label></div>
-                                    <div class="col-md-3"><label>Tipo Piso</label><input type="text" class="form-control" name="tipo_piso"></div>
+                                    <div class="col-md-3"><label><input type="checkbox" name="tiene_terraza" {% if casa.tiene_terraza %}checked{% endif %}> Tiene terraza</label></div>
+                                    <div class="col-md-3"><label>Tipo Piso</label><input type="text" class="form-control" name="tipo_piso" value="{{ casa.tipo_piso }}"></div>
                                    
 
                                     <div class="col-md-3">
                                         <label>Cantidad de Niveles</label>
                                         <select class="form-select" name="niveles">
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                            <option value="1" {% if casa.niveles == '1' %}selected{% endif %}>1</option>
+                                            <option value="2" {% if casa.niveles == '2' %}selected{% endif %}>2</option>
+                                            <option value="3" {% if casa.niveles == '3' %}selected{% endif %}>3</option>
+                                            <option value="4" {% if casa.niveles == '4' %}selected{% endif %}>4</option>
                                             
                                         </select>
                                     </div>
 
 
-                                    <div class="col-md-3"><label>País</label><input type="text" class="form-control" name="pais"></div>
-                                    <div class="col-md-3"><label>Estado/Departamento</label><input type="text" class="form-control" name="estado_departamento"></div>
-                                    <div class="col-md-3"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
-                                    <div class="col-md-3"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
-                                    <div class="col-md-3"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
+                                    <div class="col-md-3"><label>País</label><input type="text" class="form-control" name="pais" value="{{ casa.pais }}"></div>
+                                    <div class="col-md-3"><label>Estado/Departamento</label><input type="text" class="form-control" name="estado_departamento" value="{{ casa.estado_departamento }}"></div>
+                                    <div class="col-md-3"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ casa.ciudad }}"></div>
+                                    <div class="col-md-3"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ casa.direccion }}"></div>
+                                    <div class="col-md-3"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ casa.codigo_postal }}"></div>
 
-                                    <div class="col-md-3"><label>Condominio Aprox</label><input type="number" step="0.01" class="form-control" name="condominio_aprox"></div>
-                                    <div class="col-md-3"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required></div>
+                                    <div class="col-md-3"><label>Condominio Aprox</label><input type="number" step="0.01" class="form-control" name="condominio_aprox" value="{{ casa.condominio_aprox }}"></div>
+                                    <div class="col-md-3"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required value="{{ casa.precio }}"></div>
                             
                                 </div>
 
@@ -125,72 +125,72 @@
                                         <h6>Áreas Internas</h6>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="cocina_empotrada" name="areas_internas" value="Cocina Empotrada">
+                                            <input class="form-check-input" type="checkbox" id="cocina_empotrada" name="areas_internas" value="Cocina Empotrada" {% if 'Cocina Empotrada' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="cocina_empotrada">Cocina Empotrada</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sala_comedor" name="areas_internas" value="Sala - Comedor">
+                                            <input class="form-check-input" type="checkbox" id="sala_comedor" name="areas_internas" value="Sala - Comedor" {% if 'Sala - Comedor' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="sala_comedor">Sala - Comedor</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="estudio" name="areas_internas" value="Estudio - Estar">
+                                            <input class="form-check-input" type="checkbox" id="estudio" name="areas_internas" value="Estudio - Estar" {% if 'Estudio - Estar' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="estudio">Estudio - Estar</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="family_room" name="areas_internas" value="Family Room">
+                                            <input class="form-check-input" type="checkbox" id="family_room" name="areas_internas" value="Family Room" {% if 'Family Room' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="family_room">Family Room</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="oficina" name="areas_internas" value="Oficina">
+                                            <input class="form-check-input" type="checkbox" id="oficina" name="areas_internas" value="Oficina" {% if 'Oficina' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="oficina">Oficina</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="jardin" name="areas_internas" value="Jardín">
+                                            <input class="form-check-input" type="checkbox" id="jardin" name="areas_internas" value="Jardín" {% if 'Jardín' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="jardin">Jardín</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="parrillera" name="areas_internas" value="Parrillera">
+                                            <input class="form-check-input" type="checkbox" id="parrillera" name="areas_internas" value="Parrillera" {% if 'Parrillera' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="parrillera">Parrillera</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="tanque_agua_int" name="areas_internas" value="Tanque de Agua Int.">
+                                            <input class="form-check-input" type="checkbox" id="tanque_agua_int" name="areas_internas" value="Tanque de Agua Int." {% if 'Tanque de Agua Int.' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="tanque_agua_int">Tanque de Agua Int.</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="vista_panoramica" name="areas_internas" value="Vista Panorámica">
+                                            <input class="form-check-input" type="checkbox" id="vista_panoramica" name="areas_internas" value="Vista Panorámica" {% if 'Vista Panorámica' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="vista_panoramica">Vista Panorámica</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="balcon" name="areas_internas" value="Balcón">
+                                            <input class="form-check-input" type="checkbox" id="balcon" name="areas_internas" value="Balcón" {% if 'Balcón' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="balcon">Balcón</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="patio" name="areas_internas" value="Patio">
+                                            <input class="form-check-input" type="checkbox" id="patio" name="areas_internas" value="Patio" {% if 'Patio' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="patio">Patio</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="cerco_electrico" name="areas_internas" value="Cerco Eléctrico">
+                                            <input class="form-check-input" type="checkbox" id="cerco_electrico" name="areas_internas" value="Cerco Eléctrico" {% if 'Cerco Eléctrico' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="cerco_electrico">Cerco Eléctrico</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="circuito_cerrado_int" name="areas_internas" value="Circuito Cerrado">
+                                            <input class="form-check-input" type="checkbox" id="circuito_cerrado_int" name="areas_internas" value="Circuito Cerrado" {% if 'Circuito Cerrado' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="circuito_cerrado_int">Circuito Cerrado</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="amoblado" name="areas_internas" value="Amoblado">
+                                            <input class="form-check-input" type="checkbox" id="amoblado" name="areas_internas" value="Amoblado" {% if 'Amoblado' in casa.areas_internas %}checked{% endif %}>
                                             <label class="form-check-label" for="amoblado">Amoblado</label>
                                         </div>
                                     </div>
@@ -201,72 +201,72 @@
                                         <h6>Áreas Comunes</h6>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="tanque_agua" name="areas_comunes" value="Tanque de Agua">
+                                            <input class="form-check-input" type="checkbox" id="tanque_agua" name="areas_comunes" value="Tanque de Agua" {% if 'Tanque de Agua' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="tanque_agua">Tanque de Agua</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="calle_privada" name="areas_comunes" value="Calle Privada">
+                                            <input class="form-check-input" type="checkbox" id="calle_privada" name="areas_comunes" value="Calle Privada" {% if 'Calle Privada' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="calle_privada">Calle Privada</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="pozo_agua" name="areas_comunes" value="Pozo de Agua">
+                                            <input class="form-check-input" type="checkbox" id="pozo_agua" name="areas_comunes" value="Pozo de Agua" {% if 'Pozo de Agua' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="pozo_agua">Pozo de Agua</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="areas_verdes" name="areas_comunes" value="Áreas Verdes">
+                                            <input class="form-check-input" type="checkbox" id="areas_verdes" name="areas_comunes" value="Áreas Verdes" {% if 'Áreas Verdes' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="areas_verdes">Áreas Verdes</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="planta_electrica" name="areas_comunes" value="Planta Eléctrica">
+                                            <input class="form-check-input" type="checkbox" id="planta_electrica" name="areas_comunes" value="Planta Eléctrica" {% if 'Planta Eléctrica' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="planta_electrica">Planta Eléctrica</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="parque_infantil" name="areas_comunes" value="Parque Infantil">
+                                            <input class="form-check-input" type="checkbox" id="parque_infantil" name="areas_comunes" value="Parque Infantil" {% if 'Parque Infantil' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="parque_infantil">Parque Infantil</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="estacionamiento_visitante" name="areas_comunes" value="Estacio. de Visitante">
+                                            <input class="form-check-input" type="checkbox" id="estacionamiento_visitante" name="areas_comunes" value="Estacio. de Visitante" {% if 'Estacio. de Visitante' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="estacionamiento_visitante">Estacionamiento de Visitante</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="vigilancia" name="areas_comunes" value="Vigilancia">
+                                            <input class="form-check-input" type="checkbox" id="vigilancia" name="areas_comunes" value="Vigilancia" {% if 'Vigilancia' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="vigilancia">Vigilancia</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="salon_fiestas" name="areas_comunes" value="Salón de Fiestas">
+                                            <input class="form-check-input" type="checkbox" id="salon_fiestas" name="areas_comunes" value="Salón de Fiestas" {% if 'Salón de Fiestas' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="salon_fiestas">Salón de Fiestas</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gimnasio" name="areas_comunes" value="Gimnasio">
+                                            <input class="form-check-input" type="checkbox" id="gimnasio" name="areas_comunes" value="Gimnasio" {% if 'Gimnasio' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="gimnasio">Gimnasio</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="piscina" name="areas_comunes" value="Piscina">
+                                            <input class="form-check-input" type="checkbox" id="piscina" name="areas_comunes" value="Piscina" {% if 'Piscina' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="piscina">Piscina</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="ascensores" name="areas_comunes" value="Ascensores">
+                                            <input class="form-check-input" type="checkbox" id="ascensores" name="areas_comunes" value="Ascensores" {% if 'Ascensores' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="ascensores">Ascensores</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="circuito_cerrado_ext" name="areas_comunes" value="Circuito Cerrado">
+                                            <input class="form-check-input" type="checkbox" id="circuito_cerrado_ext" name="areas_comunes" value="Circuito Cerrado" {% if 'Circuito Cerrado' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="circuito_cerrado_ext">Circuito Cerrado</label>
                                         </div>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="cancha" name="areas_comunes" value="Cancha">
+                                            <input class="form-check-input" type="checkbox" id="cancha" name="areas_comunes" value="Cancha" {% if 'Cancha' in casa.areas_comunes %}checked{% endif %}>
                                             <label class="form-check-label" for="cancha">Cancha</label>
                                         </div>
                                     </div>
@@ -280,22 +280,23 @@
                                             <div class="col-md-6">
                                                 <h6>Comodidades</h6>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="aire_acondicionado" name="comodidades" value="Aire Acondicionado">
+                                                    <input class="form-check-input" type="checkbox" id="aire_acondicionado" name="comodidades" value="Aire Acondicionado" {% if 'Aire Acondicionado' in casa.comodidades %}checked{% endif %}>
                                                     <label class="form-check-label" for="aire_acondicionado">Aire Acondicionado</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="calentador" name="comodidades" value="Calentador">
+                                                    <input class="form-check-input" type="checkbox" id="calentador" name="comodidades" value="Calentador" {% if 'Calentador' in casa.comodidades %}checked{% endif %}>
                                                     <label class="form-check-label" for="calentador">Calentador</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="closet" name="comodidades" value="Closet">
+                                                    <input class="form-check-input" type="checkbox" id="closet" name="comodidades" value="Closet" {% if 'Closet' in casa.comodidades %}checked{% endif %}>
                                                     <label class="form-check-label" for="closet">Closet</label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" id="jacuzzi" name="comodidades" value="Jacuzzi">
+                                                    <input class="form-check-input" type="checkbox" id="jacuzzi" name="comodidades" value="Jacuzzi" {% if 'Jacuzzi' in casa.comodidades %}checked{% endif %}>
                                                     <label class="form-check-label" for="jacuzzi">Jacuzzi</label>
                                                 </div>
                                                 <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="vestier" name="comodidades" value="Vestier" {% if 'Vestier' in casa.comodidades %}checked{% endif %}>
                                                     <input class="form-check-input" type="checkbox" id="vestier" name="comodidades" value="Vestier">
                                                     <label class="form-check-label" for="vestier">Vestier</label>
                                                 </div>

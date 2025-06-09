@@ -46,6 +46,32 @@
                                 <a href="{{ url_for('main.ver_inmueble', tipo_inmueble=inmueble.tipo_inmueble.lower(), inmueble_id=inmueble.id) }}" class="mb-12" title="Ver">
                                     <i class="fas fa-eye"></i>
                                 </a>
+                                <!-- Botón de editar según el tipo de inmueble -->
+                                {% if inmueble.tipo_inmueble.lower() == 'casa' %}
+                                    <a href="{{ url_for('main.editar_casa', id=inmueble.id) }}" class="mb-12" title="Editar Casa">
+                                        <i class="fas fa-edit"></i> Editar Casa
+                                    </a>
+                                {% elif inmueble.tipo_inmueble.lower() == 'apartamento' %}
+                                    <a href="{{ url_for('main.editar_apartamento', id=inmueble.id) }}" class="mb-12" title="Editar Apartamento">
+                                        <i class="fas fa-edit"></i> Editar Apartamento
+                                    </a>
+                                {% elif inmueble.tipo_inmueble.lower() == 'terreno' %}
+                                    <a href="{{ url_for('main.editar_terreno', id=inmueble.id) }}" class="mb-12" title="Editar Terreno">
+                                        <i class="fas fa-edit"></i> Editar Terreno
+                                    </a>
+                                {% elif inmueble.tipo_inmueble.lower() == 'galpon' %}
+                                    <a href="{{ url_for('main.editar_galpon', id=inmueble.id) }}" class="mb-12" title="Editar Galpón">
+                                        <i class="fas fa-edit"></i> Editar Galpón
+                                    </a>
+                                {% elif inmueble.tipo_inmueble.lower() == 'local' %}
+                                    <a href="{{ url_for('main.editar_local', id=inmueble.id) }}" class="mb-12" title="Editar Local">
+                                        <i class="fas fa-edit"></i> Editar Local
+                                    </a>
+                                {% elif inmueble.tipo_inmueble.lower() == 'comercio' %}
+                                    <a href="{{ url_for('main.editar_comercio', id=inmueble.id) }}" class="mb-12" title="Editar Comercio">
+                                        <i class="fas fa-edit"></i> Editar Comercio
+                                    </a>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endif %}

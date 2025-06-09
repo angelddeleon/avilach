@@ -3,7 +3,7 @@
     <h2 class="mb-4">Agregar Propiedad</h2>
     <div class="card">
         <div class="card-body p-4">
-            <form method="POST" enctype="multipart/form-data" action="{{ url_for('main.crear_galpon') }}">
+            <form method="POST" enctype="multipart/form-data" action="{% if galpon %}{{ url_for('main.editar_galpon', id=galpon.id) }}{% else %}{{ url_for('main.crear_galpon') }}{% endif %}">
                 <div class="form-body mt-4">
                     <!-- Datos del Propietario -->
 

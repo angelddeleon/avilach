@@ -30,14 +30,10 @@ def guardar_archivo(file):
     return None
 
 
-@main_routes.route('/')
-def index():
-    return render_template('index.html')
-
 
 #ruta para el login 
 
-@main_routes.route('/login', methods=['GET', 'POST'])
+@main_routes.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -182,6 +178,12 @@ def crear_casa():
             cablevision = ','.join(request.form.getlist('cablevision'))
             servicios_internet = ','.join(request.form.getlist('servicios_internet'))  # Convertir a cadena separada por comas
 
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
+
             # Creación de la nueva casa con los datos obtenidos
             nueva_casa = Casa(
                 nombre=data['nombre'],
@@ -198,26 +200,26 @@ def crear_casa():
                 tipo_inmueble=data.get('tipo_inmueble', 'Casa'),
                 datos_inmueble=data.get('datos_inmueble'),
                 referencia=data.get('referencia'),
-                habitaciones=data.get('habitaciones'),
-                hab_servicio=data.get('hab_servicio'),
-                total_habitaciones=data.get('total_habitaciones'),
-                banos_completos=data.get('banos_completos'),
-                bano_servicio=data.get('bano_servicio'),
-                medio_bano=data.get('medio_bano'),
-                total_banos=data.get('total_banos'),
-                puestos_estacionamiento=data.get('puestos_estacionamiento'),
-                estacionamientos_cubiertos=data.get('estacionamientos_cubiertos'),
-                estacionamientos_descubiertos=data.get('estacionamientos_descubiertos'),
+                habitaciones=safe_int(data.get('habitaciones')),
+                hab_servicio=safe_int(data.get('hab_servicio')),
+                total_habitaciones=safe_int(data.get('total_habitaciones')),
+                banos_completos=safe_int(data.get('banos_completos')),
+                bano_servicio=safe_int(data.get('bano_servicio')),
+                medio_bano=safe_int(data.get('medio_bano')),
+                total_banos=safe_int(data.get('total_banos')),
+                puestos_estacionamiento=safe_int(data.get('puestos_estacionamiento')),
+                estacionamientos_cubiertos=safe_int(data.get('estacionamientos_cubiertos')),
+                estacionamientos_descubiertos=safe_int(data.get('estacionamientos_descubiertos')),
                 tiene_maletero='tiene_maletero' in data,
-                cantidad_maleteros=data.get('cantidad_maleteros'),
-                metros_construccion=data.get('metros_construccion'),
-                metros_terreno=data.get('metros_terreno'),
-                anio_construccion=data.get('anio_construccion'),
+                cantidad_maleteros=safe_int(data.get('cantidad_maleteros')),
+                metros_construccion=safe_float(data.get('metros_construccion')),
+                metros_terreno=safe_float(data.get('metros_terreno')),
+                anio_construccion=safe_int(data.get('anio_construccion')),
                 obra=data.get('obra'),
                 estilo=data.get('estilo'),
                 tiene_terraza='tiene_terraza' in data,
                 tipo_piso=data.get('tipo_piso'),
-                niveles=data.get('niveles'),
+                niveles=safe_int(data.get('niveles')),
                 pais=data.get('pais'),
                 estado_departamento=data.get('estado_departamento'),
                 ciudad=data.get('ciudad'),
@@ -229,8 +231,8 @@ def crear_casa():
                 servicio_telefonia_fija= telefonia,
                 servicio_cable= cablevision,
                 servicio_internet= servicios_internet,
-                condominio_aprox=data.get('condominio_aprox'),
-                precio=data['precio'],
+                condominio_aprox=safe_float(data.get('condominio_aprox')),
+                precio=safe_float(data['precio']),
                 imagen_cedula=imagen_cedula,
                 documento_propiedad=documento_propiedad,
                 imagen_principal=','.join(imagenes),
@@ -286,6 +288,12 @@ def crear_apartamento():
             servicios_internet = ','.join(request.form.getlist('servicios_internet'))
             tipo_negocio = data.get('tipo_negocio')
 
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
+
             nuevo_apartamento = Apartamento(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -302,37 +310,37 @@ def crear_apartamento():
                 datos_inmueble=data.get('datos_inmueble'),
                 referencia=data.get('referencia'),
 
-                habitaciones=int(data.get('habitaciones', 0)),
-                hab_servicio=int(data.get('hab_servicio', 0)),
-                total_habitaciones=int(data.get('total_habitaciones', 0)),
-                banos_completos=int(data.get('banos_completos', 0)),
-                bano_servicio=int(data.get('bano_servicio', 0)),
-                medio_bano=int(data.get('medio_bano', 0)),
-                total_banos=int(data.get('total_banos', 0)),
+                habitaciones=safe_int(data.get('habitaciones')),
+                hab_servicio=safe_int(data.get('hab_servicio')),
+                total_habitaciones=safe_int(data.get('total_habitaciones')),
+                banos_completos=safe_int(data.get('banos_completos')),
+                bano_servicio=safe_int(data.get('bano_servicio')),
+                medio_bano=safe_int(data.get('medio_bano')),
+                total_banos=safe_int(data.get('total_banos')),
 
-                puestos_estacionamiento=int(data.get('puestos_estacionamiento', 0)),
-                estacionamientos_cubiertos=int(data.get('estacionamientos_cubiertos', 0)),
-                estacionamientos_descubiertos=int(data.get('estacionamientos_descubiertos', 0)),
+                puestos_estacionamiento=safe_int(data.get('puestos_estacionamiento')),
+                estacionamientos_cubiertos=safe_int(data.get('estacionamientos_cubiertos')),
+                estacionamientos_descubiertos=safe_int(data.get('estacionamientos_descubiertos')),
 
                 tiene_maletero='tiene_maletero' in data,
-                cantidad_maleteros=int(data.get('cantidad_maleteros', 0)),
+                cantidad_maleteros=safe_int(data.get('cantidad_maleteros')),
 
-                metros_construccion=float(data.get('metros_construccion', 0)),
-                metros_terreno=float(data.get('metros_terreno', 0)),
-                anio_construccion=int(data.get('anio_construccion', 0)) if data.get('anio_construccion') else None,
+                metros_construccion=safe_float(data.get('metros_construccion')),
+                metros_terreno=safe_float(data.get('metros_terreno')),
+                anio_construccion=safe_int(data.get('anio_construccion')) if data.get('anio_construccion') else None,
                 obra=data.get('obra'),
                 estilo=data.get('estilo'),
                 tiene_terraza='tiene_terraza' in data,
                 tipo_piso=data.get('tipo_piso'),
-                niveles=int(data.get('niveles', 0)),
+                niveles=safe_int(data.get('niveles')),
 
                 pais=data.get('pais'),
                 estado_departamento=data.get('estado_departamento'),
                 ciudad=data.get('ciudad'),
                 direccion=data.get('direccion'),
                 codigo_postal=data.get('codigo_postal'),
-                aptos_x_piso=int(data.get('aptos_x_piso', 0)),
-                total_pisos=int(data.get('total_pisos', 0)),
+                aptos_x_piso=safe_int(data.get('aptos_x_piso')),
+                total_pisos=safe_int(data.get('total_pisos')),
 
                 areas_internas=areas_internas,
                 areas_comunes=areas_comunes,
@@ -341,9 +349,9 @@ def crear_apartamento():
                 servicio_internet=servicios_internet,
                 comodidades=comodidades,
 
-                condominio_aprox=float(data.get('condominio_aprox', 0)),
-                precio=float(data.get('precio', 0)),
-                comision=float(data.get('comision', 0)) if data.get('comision') else None,
+                condominio_aprox=safe_float(data.get('condominio_aprox')),
+                precio=safe_float(data.get('precio')),
+                comision=safe_float(data.get('comision')) if data.get('comision') else None,
 
                 imagen_cedula=imagen_cedula,
                 documento_propiedad=documento_propiedad,
@@ -391,12 +399,18 @@ def crear_terreno():
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
             documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
 
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
+
             # Obtener los valores de los nuevos campos
-            m2_terreno = float(data['m2_terreno']) if data['m2_terreno'] else None
-            m2_construccion = float(data['m2_construccion']) if data.get('m2_construccion') else None
-            m_frente = float(data['m_frente']) if data.get('m_frente') else None
-            m_anch = float(data['m_anch']) if data.get('m_anch') else None
-            m_largo = float(data['m_largo']) if data.get('m_largo') else None
+            m2_terreno = safe_float(data.get('m2_terreno'))
+            m2_construccion = safe_float(data.get('m2_construccion'))
+            m_frente = safe_float(data.get('m_frente'))
+            m_anch = safe_float(data.get('m_anch'))
+            m_largo = safe_float(data.get('m_largo'))
             cerca_perimetral = data.get('cerca_perimetral')
             bienechurias = data.get('bienechurias')
             otros = data.get('otros')
@@ -404,8 +418,8 @@ def crear_terreno():
             tipo_negocio = data.get('tipo_negocio')
 
             # Otros campos del formulario
-            precio = float(data['precio']) if data['precio'] else None
-            comision = float(data['comision']) if data['comision'] else None
+            precio = safe_float(data.get('precio'))
+            comision = safe_float(data.get('comision'))
 
             # Crear el nuevo terreno
             nuevo_terreno = Terreno(
@@ -484,49 +498,37 @@ def crear_galpon():
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
             documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
 
-            # Validación de campos numéricos vacíos y conversión segura
-            def safe_get_int(field):
-                try:
-                    return int(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número entero.', 'danger')
-                    return None
-
-            def safe_get_float(field):
-                try:
-                    return float(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número flotante.', 'danger')
-                    return None
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
 
             # Captura de los datos del formulario con validación
-            oficinas = safe_get_int('oficinas')
-            banos_completos = safe_get_int('banos_completos')
-            precio = safe_get_float('precio')
-            comision = safe_get_float('comision')
-
-            # Captura de valores opcionales con manejo de campos vacíos
+            oficinas = safe_int(data.get('oficinas'))
+            banos_completos = safe_int(data.get('banos_completos'))
+            precio = safe_float(data.get('precio'))
+            comision = safe_float(data.get('comision'))
             area_descanso = data['area_descanso'] or None
             amoblado = data['amoblado'] or None
             galpon = data['galpon'] or None
-            banos_servicio = safe_get_int('bano_servicio')
-            puestos_estacionamiento = safe_get_int('puestos_estacionamiento')
+            banos_servicio = safe_int(data.get('bano_servicio'))
+            puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
             kitchenette = data['kitchenette'] or None
             patio_trabajo = data['patio_trabajo'] or None
-            m_frente = safe_get_float('m_frente')
-            total_banos = safe_get_int('total_banos')
+            m_frente = safe_float(data.get('m_frente'))
+            total_banos = safe_int(data.get('total_banos'))
             descubierto = data['estacionamientos_descubiertos'] or None
             vigilancia = data['vigilancia'] or None
-            m_fondo = safe_get_float('m_fondo')
-            
+            m_fondo = safe_float(data.get('m_fondo'))
             estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
-            m_altura = safe_get_float('m_altura')
+            m_altura = safe_float(data.get('m_altura'))
             centro_comercial = data['centro_comercial'] or None
-            m2_terreno = safe_get_float('m2_terreno')
-            anos_construccion = safe_get_int('anos_construccion')
+            m2_terreno = safe_float(data.get('m2_terreno'))
+            anos_construccion = safe_int(data.get('anos_construccion'))
             parque_industrial = data['parque_industrial'] or None
-            m2_construccion = safe_get_float('m2_construccion')
-            condominio_aprox = safe_get_float('condominio_aprox')
+            m2_construccion = safe_float(data.get('m2_construccion'))
+            condominio_aprox = safe_float(data.get('condominio_aprox'))
             tipo_negocio = data.get('tipo_negocio')
 
             # Obtener las áreas internas, comodidades y servicios como listas
@@ -536,21 +538,16 @@ def crear_galpon():
             servicio_cable = ','.join(request.form.getlist('cablevision'))
             servicio_internet = ','.join(request.form.getlist('internet'))
 
-            # Capturar los detalles de propiedad
             titulo_propiedad = data['titulo_propiedad']
-           
-            destacado = 'destacado' in data  # Convertir el checkbox "destacado" a un valor booleano
+            destacado = 'destacado' in data
             tipo_inmueble = data['tipo_inmueble']
             datos_inmueble = data['datos_inmueble']
             referencia = data['referencia']
 
-            # Verificación de campos obligatorios
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_galpon'))
-          
-
-            # Crear un nuevo galpón con todos los datos obtenidos
+            
             nuevo_galpon = Galpon(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -561,7 +558,6 @@ def crear_galpon():
                 email=data['email'],
                 telefono=data.get('telefono'),
                 titulo_propiedad=titulo_propiedad,
-        
                 destacado=destacado,
                 tipo_inmueble=tipo_inmueble,
                 datos_inmueble=datos_inmueble,
@@ -570,7 +566,7 @@ def crear_galpon():
                 galpon=galpon,
                 banos_completos=banos_completos,
                 banos_servicio=banos_servicio,
-                medio_bano=data.get('medio_bano'),
+                medio_bano=safe_int(data.get('medio_bano')),
                 area_descanso=area_descanso,
                 puestos_estacionamiento=puestos_estacionamiento,
                 cubierto=data.get('cubierto'),
@@ -582,7 +578,6 @@ def crear_galpon():
                 descubierto=descubierto,
                 vigilancia=vigilancia,
                 m_fondo=m_fondo,
-                
                 estacionamiento_visitantes=estacionamiento_visitantes,
                 m_altura=m_altura,
                 centro_comercial=centro_comercial,
@@ -610,14 +605,11 @@ def crear_galpon():
                 id_usuario=user_id
             )
 
-            # Guardamos el nuevo galpón en la base de datos
             db.session.add(nuevo_galpon)
             db.session.commit()
 
             flash('Galpón creado exitosamente', 'success')
             return redirect(url_for('main.dashboard'))
-
-       
 
     return render_template('crear-inmueble-galpon.html', user=user)
 
@@ -653,71 +645,48 @@ def crear_local():
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
             documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
 
-            # Validación de campos numéricos vacíos y conversión segura
-            def safe_get_int(field):
-                try:
-                    return int(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número entero.', 'danger')
-                    return None
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
 
-            def safe_get_float(field):
-                try:
-                    return float(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número flotante.', 'danger')
-                    return None
-
-            # Captura de los datos del formulario con validación
-            banos_completos = safe_get_int('banos_completos')
-            precio = safe_get_float('precio')
-            comision = safe_get_float('comision')
-
-            # Captura de valores opcionales con manejo de campos vacíos
+            banos_completos = safe_int(data.get('banos_completos'))
+            precio = safe_float(data.get('precio'))
+            comision = safe_float(data.get('comision'))
             area_descanso = data['area_descanso'] or None
             amoblado = data['amoblado'] or None
-         
-            banos_servicio = safe_get_int('bano_servicio')
-            puestos_estacionamiento = safe_get_int('puestos_estacionamiento')
-         
+            banos_servicio = safe_int(data.get('bano_servicio'))
+            puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
             patio_trabajo = data['patio_trabajo'] or None
-            m_frente = safe_get_float('m_frente')
-            total_banos = safe_get_int('total_banos')
+            m_frente = safe_float(data.get('m_frente'))
+            total_banos = safe_int(data.get('total_banos'))
             descubierto = data['descubierto'] or None
             vigilancia = data['vigilancia'] or None
-            m_fondo = safe_get_float('m_fondo')
-    
+            m_fondo = safe_float(data.get('m_fondo'))
             estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
-            m_altura = safe_get_float('m_altura')
-            
-            m2_terreno = safe_get_float('m2_terreno')
-            anos_construccion = safe_get_int('anos_construccion')
+            m_altura = safe_float(data.get('m_altura'))
+            m2_terreno = safe_float(data.get('m2_terreno'))
+            anos_construccion = safe_int(data.get('anos_construccion'))
             parque_industrial = data['parque_industrial'] or None
-            m2_construccion = safe_get_float('m2_construccion')
-            condominio_aprox = safe_get_float('condominio_aprox')
+            m2_construccion = safe_float(data.get('m2_construccion'))
+            condominio_aprox = safe_float(data.get('condominio_aprox'))
 
-            # Obtener las áreas internas, comodidades y servicios como listas
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
             servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
             servicio_cable = ','.join(request.form.getlist('cablevision'))
             servicio_internet = ','.join(request.form.getlist('internet'))
 
-            # Capturar los detalles de propiedad
             titulo_propiedad = data['titulo_propiedad']
-         
-          
             tipo_inmueble = data['tipo_inmueble']
             datos_inmueble = data['datos_inmueble']
             referencia = data['referencia']
 
-            # Verificación de campos obligatorios
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_local'))
             
-
-            # Crear un nuevo Local con todos los datos obtenidos
             nuevo_local = Local(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -728,13 +697,12 @@ def crear_local():
                 email=data['email'],
                 telefono=data.get('telefono'),
                 titulo_propiedad=titulo_propiedad,
-            
                 tipo_inmueble=tipo_inmueble,
                 datos_inmueble=datos_inmueble,
                 referencia=referencia,
                 banos_completos=banos_completos,
                 banos_servicio=banos_servicio,
-                medio_bano=data.get('medio_bano'),
+                medio_bano=safe_int(data.get('medio_bano')),
                 area_descanso=area_descanso,
                 puestos_estacionamiento=puestos_estacionamiento,
                 cubierto=data.get('cubierto'),
@@ -771,7 +739,6 @@ def crear_local():
                 id_usuario=user_id
             )
 
-            # Guardamos el nuevo Local en la base de datos
             db.session.add(nuevo_local)
             db.session.commit()
 
@@ -815,63 +782,45 @@ def crear_comercio():
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
             documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
 
-            # Validación de campos numéricos vacíos y conversión segura
-            def safe_get_int(field):
-                try:
-                    return int(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número entero.', 'danger')
-                    return None
+            # Conversión segura de campos numéricos
+            def safe_int(val):
+                return int(val) if val not in (None, '', 'None') else None
+            def safe_float(val):
+                return float(val) if val not in (None, '', 'None') else None
 
-            def safe_get_float(field):
-                try:
-                    return float(data[field]) if data.get(field) else None
-                except ValueError:
-                    flash(f'Valor inválido en el campo {field}. Debe ser un número flotante.', 'danger')
-                    return None
-            
-            # Captura de los datos del formulario con validación
-            banos_completos = safe_get_int('banos_completos')
-            precio = safe_get_float('precio')
-            comision = safe_get_float('comision')
-
-            # Captura de valores opcionales con manejo de campos vacíos
+            banos_completos = safe_int(data.get('banos_completos'))
+            precio = safe_float(data.get('precio'))
+            comision = safe_float(data.get('comision'))
             area_descanso = data['area_descanso'] or None
             amoblado = data['amoblado'] or None
-            banos_servicio = safe_get_int('bano_servicio')
-            puestos_estacionamiento = safe_get_int('puestos_estacionamiento')
-            m_frente = safe_get_float('m_frente')
-            total_banos = safe_get_int('total_banos')
+            banos_servicio = safe_int(data.get('bano_servicio'))
+            puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+            m_frente = safe_float(data.get('m_frente'))
+            total_banos = safe_int(data.get('total_banos'))
             descubierto = data['descubierto'] or None
-            m_fondo = safe_get_float('m_fondo')
+            m_fondo = safe_float(data.get('m_fondo'))
             estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
-            m_altura = safe_get_float('m_altura')
-            m2_terreno = safe_get_float('m2_terreno')
-            anos_construccion = safe_get_int('anos_construccion')
-            m2_construccion = safe_get_float('m2_construccion')
-            condominio_aprox = safe_get_float('condominio_aprox')
+            m_altura = safe_float(data.get('m_altura'))
+            m2_terreno = safe_float(data.get('m2_terreno'))
+            anos_construccion = safe_int(data.get('anos_construccion'))
+            m2_construccion = safe_float(data.get('m2_construccion'))
+            condominio_aprox = safe_float(data.get('condominio_aprox'))
 
-            # Obtener las áreas internas, comodidades y servicios como listas
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
             servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
             servicio_cable = ','.join(request.form.getlist('cablevision'))
             servicio_internet = ','.join(request.form.getlist('internet'))
 
-            # Capturar los detalles de propiedad
             titulo_propiedad = data['titulo_propiedad']
-         
-          
             tipo_inmueble = data['tipo_inmueble']
             datos_inmueble = data['datos_inmueble']
             referencia = data['referencia']
 
-            # Verificación de campos obligatorios
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_comercio'))
            
-            # Crear un nuevo Comercio con todos los datos obtenidos
             nuevo_comercio = Comercio(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -889,7 +838,7 @@ def crear_comercio():
                 referencia=referencia,
                 banos_completos=banos_completos,
                 bano_servicio=banos_servicio,
-                medio_bano=data.get('medio_bano'),
+                medio_bano=safe_int(data.get('medio_bano')),
                 area_descanso=area_descanso,
                 puestos_estacionamiento=puestos_estacionamiento,
                 cubierto=data.get('cubierto'),
@@ -924,7 +873,6 @@ def crear_comercio():
                 id_usuario=user_id
             )
 
-            # Guardamos el nuevo Comercio en la base de datos
             db.session.add(nuevo_comercio)
             db.session.commit()
 
@@ -1414,7 +1362,13 @@ def editar_usuario(id):
         usuario.telefono = request.form['telefono']
         usuario.direccion = request.form['direccion']
 
-            # Manejar la subida de una nueva imagen de perfil
+        # Cambiar contraseña si el campo está presente y no vacío
+        nueva_contrasena = request.form.get('nueva_contrasena')
+        if nueva_contrasena:
+            usuario.set_password(nueva_contrasena)
+            flash('Contraseña actualizada con éxito.', 'success')
+
+        # Manejar la subida de una nueva imagen de perfil
         if 'imagen_usuario' in request.files:
             imagen_usuario = request.files['imagen_usuario']
             if imagen_usuario.filename != '':
@@ -1431,7 +1385,6 @@ def editar_usuario(id):
             # Si no se envió ningún archivo, asignamos la imagen predeterminada
             if not usuario.imagen_usuario:
                 usuario.imagen_usuario = 'perfil-vacio.png'
-        
         
         # Guardar los cambios en la base de datos
         db.session.commit()
@@ -2028,4 +1981,388 @@ def logout():
     session.clear()
     
     # Redirigir a la página principal o de login
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.login'))
+
+# --- EDITAR CASA ---
+@main_routes.route('/editar-casa/<int:id>', methods=['GET', 'POST'])
+def editar_casa(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    casa = Casa.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        casa.nombre = data['nombre']
+        casa.apellido = data['apellido']
+        casa.ci = data['ci']
+        casa.rif = data.get('rif')
+        casa.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        casa.estado_civil = data.get('estado_civil')
+        casa.email = data['email']
+        casa.telefono = data.get('telefono')
+        casa.titulo_propiedad = data['titulo_propiedad']
+        casa.destacado = 'destacado' in data
+        casa.tipo_inmueble = data.get('tipo_inmueble', 'Casa')
+        casa.datos_inmueble = data.get('datos_inmueble')
+        casa.referencia = data.get('referencia')
+        casa.habitaciones = safe_int(data.get('habitaciones'))
+        casa.hab_servicio = safe_int(data.get('hab_servicio'))
+        casa.total_habitaciones = safe_int(data.get('total_habitaciones'))
+        casa.banos_completos = safe_int(data.get('banos_completos'))
+        casa.bano_servicio = safe_int(data.get('bano_servicio'))
+        casa.medio_bano = safe_int(data.get('medio_bano'))
+        casa.total_banos = safe_int(data.get('total_banos'))
+        casa.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        casa.estacionamientos_cubiertos = safe_int(data.get('estacionamientos_cubiertos'))
+        casa.estacionamientos_descubiertos = safe_int(data.get('estacionamientos_descubiertos'))
+        casa.tiene_maletero = 'tiene_maletero' in data
+        casa.cantidad_maleteros = safe_int(data.get('cantidad_maleteros'))
+        casa.metros_construccion = safe_float(data.get('metros_construccion'))
+        casa.metros_terreno = safe_float(data.get('metros_terreno'))
+        casa.anio_construccion = safe_int(data.get('anio_construccion'))
+        casa.obra = data.get('obra')
+        casa.estilo = data.get('estilo')
+        casa.tiene_terraza = 'tiene_terraza' in data
+        casa.tipo_piso = data.get('tipo_piso')
+        casa.niveles = safe_int(data.get('niveles'))
+        casa.pais = data.get('pais')
+        casa.estado_departamento = data.get('estado_departamento')
+        casa.ciudad = data.get('ciudad')
+        casa.direccion = data.get('direccion')
+        casa.codigo_postal = data.get('codigo_postal')
+        casa.areas_internas = ','.join(request.form.getlist('areas_internas'))
+        casa.areas_comunes = ','.join(request.form.getlist('areas_comunes'))
+        casa.comodidades = ','.join(request.form.getlist('comodidades'))
+        casa.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
+        casa.servicio_cable = ','.join(request.form.getlist('cablevision'))
+        casa.servicio_internet = ','.join(request.form.getlist('servicios_internet'))
+        casa.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        casa.precio = safe_float(data['precio'])
+        db.session.commit()
+        flash('Casa actualizada con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-casa.html', casa=casa, user=user)
+
+# --- EDITAR APARTAMENTO ---
+@main_routes.route('/editar-apartamento/<int:id>', methods=['GET', 'POST'])
+def editar_apartamento(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    apartamento = Apartamento.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        apartamento.nombre = data['nombre']
+        apartamento.apellido = data['apellido']
+        apartamento.ci = data['ci']
+        apartamento.rif = data.get('rif')
+        apartamento.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        apartamento.estado_civil = data.get('estado_civil')
+        apartamento.email = data['email']
+        apartamento.telefono = data.get('telefono')
+        apartamento.titulo_propiedad = data['titulo_propiedad']
+        apartamento.tipo_inmueble = data.get('tipo_inmueble', 'Apartamento')
+        apartamento.datos_inmueble = data.get('datos_inmueble')
+        apartamento.referencia = data.get('referencia')
+        apartamento.habitaciones = safe_int(data.get('habitaciones'))
+        apartamento.hab_servicio = safe_int(data.get('hab_servicio'))
+        apartamento.total_habitaciones = safe_int(data.get('total_habitaciones'))
+        apartamento.banos_completos = safe_int(data.get('banos_completos'))
+        apartamento.bano_servicio = safe_int(data.get('bano_servicio'))
+        apartamento.medio_bano = safe_int(data.get('medio_bano'))
+        apartamento.total_banos = safe_int(data.get('total_banos'))
+        apartamento.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        apartamento.estacionamientos_cubiertos = safe_int(data.get('estacionamientos_cubiertos'))
+        apartamento.estacionamientos_descubiertos = safe_int(data.get('estacionamientos_descubiertos'))
+        apartamento.tiene_maletero = 'tiene_maletero' in data
+        apartamento.cantidad_maleteros = safe_int(data.get('cantidad_maleteros'))
+        apartamento.metros_construccion = safe_float(data.get('metros_construccion'))
+        apartamento.metros_terreno = safe_float(data.get('metros_terreno'))
+        apartamento.anio_construccion = safe_int(data.get('anio_construccion'))
+        apartamento.obra = data.get('obra')
+        apartamento.estilo = data.get('estilo')
+        apartamento.tiene_terraza = 'tiene_terraza' in data
+        apartamento.tipo_piso = data.get('tipo_piso')
+        apartamento.niveles = safe_int(data.get('niveles'))
+        apartamento.pais = data.get('pais')
+        apartamento.estado_departamento = data.get('estado_departamento')
+        apartamento.ciudad = data.get('ciudad')
+        apartamento.direccion = data.get('direccion')
+        apartamento.codigo_postal = data.get('codigo_postal')
+        apartamento.areas_internas = ','.join(request.form.getlist('areas_internas'))
+        apartamento.areas_comunes = ','.join(request.form.getlist('areas_comunes'))
+        apartamento.comodidades = ','.join(request.form.getlist('comodidades'))
+        apartamento.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
+        apartamento.servicio_cable = ','.join(request.form.getlist('cablevision'))
+        apartamento.servicio_internet = ','.join(request.form.getlist('servicios_internet'))
+        apartamento.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        apartamento.precio = safe_float(data['precio'])
+        db.session.commit()
+        flash('Apartamento actualizado con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-apartamento.html', apartamento=apartamento, user=user)
+
+# --- EDITAR TERRENO ---
+@main_routes.route('/editar-terreno/<int:id>', methods=['GET', 'POST'])
+def editar_terreno(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    terreno = Terreno.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        terreno.titulo_publicacion = data['titulo_publicacion']
+        terreno.tipo_inmueble = data['tipo_inmueble']
+        terreno.nombre = data['nombre']
+        terreno.apellido = data['apellido']
+        terreno.ci = data['ci']
+        terreno.rif = data.get('rif')
+        terreno.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        terreno.estado_civil = data.get('estado_civil')
+        terreno.email = data['email']
+        terreno.telefono = data.get('telefono')
+        terreno.estado = data['estado']
+        terreno.municipio = data['municipio']
+        terreno.ciudad = data['ciudad']
+        terreno.urbanizacion = data['urbanizacion']
+        terreno.referencia = data.get('referencia')
+        terreno.m2_terreno = safe_float(data.get('m2_terreno'))
+        terreno.m2_construccion = safe_float(data.get('m2_construccion'))
+        terreno.m_frente = safe_float(data.get('m_frente'))
+        terreno.m_anch = safe_float(data.get('m_anch'))
+        terreno.m_largo = safe_float(data.get('m_largo'))
+        terreno.cerca_perimetral = data.get('cerca_perimetral')
+        terreno.bienechurias = data.get('bienechurias')
+        terreno.otros = data.get('otros')
+        terreno.materiales = ','.join(request.form.getlist('materiales'))
+        terreno.precio = safe_float(data.get('precio'))
+        terreno.comision = safe_float(data.get('comision'))
+        db.session.commit()
+        flash('Terreno actualizado con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-terreno.html', terreno=terreno, user=user)
+
+# --- EDITAR GALPON ---
+@main_routes.route('/editar-galpon/<int:id>', methods=['GET', 'POST'])
+def editar_galpon(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    galpon = Galpon.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        galpon.nombre = data['nombre']
+        galpon.apellido = data['apellido']
+        galpon.ci = data['ci']
+        galpon.rif = data.get('rif')
+        galpon.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        galpon.estado_civil = data.get('estado_civil')
+        galpon.email = data['email']
+        galpon.telefono = data.get('telefono')
+        galpon.titulo_propiedad = data['titulo_propiedad']
+        galpon.destacado = 'destacado' in data
+        galpon.tipo_inmueble = data['tipo_inmueble']
+        galpon.datos_inmueble = data['datos_inmueble']
+        galpon.referencia = data['referencia']
+        galpon.oficinas = safe_int(data.get('oficinas'))
+        galpon.galpon = data.get('galpon')
+        galpon.banos_completos = safe_int(data.get('banos_completos'))
+        galpon.banos_servicio = safe_int(data.get('bano_servicio'))
+        galpon.medio_bano = safe_int(data.get('medio_bano'))
+        galpon.area_descanso = data['area_descanso'] or None
+        galpon.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        galpon.cubierto = data.get('cubierto')
+        galpon.amoblado = data['amoblado'] or None
+        galpon.kitchenette = data['kitchenette'] or None
+        galpon.patio_trabajo = data['patio_trabajo'] or None
+        galpon.m_frente = safe_float(data.get('m_frente'))
+        galpon.total_banos = safe_int(data.get('total_banos'))
+        galpon.descubierto = data['estacionamientos_descubiertos'] or None
+        galpon.vigilancia = data['vigilancia'] or None
+        galpon.m_fondo = safe_float(data.get('m_fondo'))
+        galpon.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
+        galpon.m_altura = safe_float(data.get('m_altura'))
+        galpon.centro_comercial = data['centro_comercial'] or None
+        galpon.m2_terreno = safe_float(data.get('m2_terreno'))
+        galpon.anos_construccion = safe_int(data.get('anos_construccion'))
+        galpon.parque_industrial = data['parque_industrial'] or None
+        galpon.m2_construccion = safe_float(data.get('m2_construccion'))
+        galpon.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        galpon.pais = data.get('pais')
+        galpon.estado_departamento = data.get('estado_departamento')
+        galpon.ciudad = data.get('ciudad')
+        galpon.direccion = data.get('direccion')
+        galpon.codigo_postal = data.get('codigo_postal')
+        galpon.areas_internas = ','.join(request.form.getlist('areas_internas'))
+        galpon.comodidades = ','.join(request.form.getlist('comodidades'))
+        galpon.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
+        galpon.servicio_cable = ','.join(request.form.getlist('cablevision'))
+        galpon.servicio_internet = ','.join(request.form.getlist('internet'))
+        galpon.precio = safe_float(data.get('precio'))
+        galpon.comision = safe_float(data.get('comision'))
+        db.session.commit()
+        flash('Galpón actualizado con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-galpon.html', galpon=galpon, user=user)
+
+# --- EDITAR LOCAL ---
+@main_routes.route('/editar-local/<int:id>', methods=['GET', 'POST'])
+def editar_local(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    local = Local.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        local.nombre = data['nombre']
+        local.apellido = data['apellido']
+        local.ci = data['ci']
+        local.rif = data.get('rif')
+        local.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        local.estado_civil = data.get('estado_civil')
+        local.email = data['email']
+        local.telefono = data.get('telefono')
+        local.titulo_propiedad = data['titulo_propiedad']
+        local.tipo_inmueble = data['tipo_inmueble']
+        local.datos_inmueble = data['datos_inmueble']
+        local.referencia = data['referencia']
+        local.banos_completos = safe_int(data.get('banos_completos'))
+        local.banos_servicio = safe_int(data.get('bano_servicio'))
+        local.medio_bano = safe_int(data.get('medio_bano'))
+        local.area_descanso = data['area_descanso'] or None
+        local.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        local.cubierto = data.get('cubierto')
+        local.amoblado = data['amoblado'] or None
+        local.patio_trabajo = data['patio_trabajo'] or None
+        local.m_frente = safe_float(data.get('m_frente'))
+        local.total_banos = safe_int(data.get('total_banos'))
+        local.descubierto = data['descubierto'] or None
+        local.vigilancia = data['vigilancia'] or None
+        local.m_fondo = safe_float(data.get('m_fondo'))
+        local.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
+        local.m_altura = safe_float(data.get('m_altura'))
+        local.m2_terreno = safe_float(data.get('m2_terreno'))
+        local.anos_construccion = safe_int(data.get('anos_construccion'))
+        local.parque_industrial = data['parque_industrial'] or None
+        local.m2_construccion = safe_float(data.get('m2_construccion'))
+        local.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        local.pais = data.get('pais')
+        local.estado_departamento = data.get('estado_departamento')
+        local.ciudad = data.get('ciudad')
+        local.direccion = data.get('direccion')
+        local.codigo_postal = data.get('codigo_postal')
+        local.areas_internas = ','.join(request.form.getlist('areas_internas'))
+        local.comodidades = ','.join(request.form.getlist('comodidades'))
+        local.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
+        local.servicio_cable = ','.join(request.form.getlist('cablevision'))
+        local.servicio_internet = ','.join(request.form.getlist('internet'))
+        local.precio = safe_float(data.get('precio'))
+        local.comision = safe_float(data.get('comision'))
+        db.session.commit()
+        flash('Local actualizado con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-local.html', local=local, user=user)
+
+# --- EDITAR COMERCIO ---
+@main_routes.route('/editar-comercio/<int:id>', methods=['GET', 'POST'])
+def editar_comercio(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    user = User.query.get(user_id)
+    comercio = Comercio.query.get_or_404(id)
+    if request.method == 'POST':
+        data = request.form
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        comercio.nombre = data['nombre']
+        comercio.apellido = data['apellido']
+        comercio.ci = data['ci']
+        comercio.rif = data.get('rif')
+        comercio.fecha_nacimiento = datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None
+        comercio.estado_civil = data.get('estado_civil')
+        comercio.email = data['email']
+        comercio.telefono = data.get('telefono')
+        comercio.titulo_propiedad = data['titulo_propiedad']
+        comercio.tipo_inmueble = data['tipo_inmueble']
+        comercio.datos_inmueble = data['datos_inmueble']
+        comercio.referencia = data['referencia']
+        comercio.banos_completos = safe_int(data.get('banos_completos'))
+        comercio.bano_servicio = safe_int(data.get('bano_servicio'))
+        comercio.medio_bano = safe_int(data.get('medio_bano'))
+        comercio.area_descanso = data['area_descanso'] or None
+        comercio.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        comercio.cubierto = data.get('cubierto')
+        comercio.amoblado = data['amoblado'] or None
+        comercio.m_frente = safe_float(data.get('m_frente'))
+        comercio.total_banos = safe_int(data.get('total_banos'))
+        comercio.descubierto = data['descubierto'] or None
+        comercio.m_fondo = safe_float(data.get('m_fondo'))
+        comercio.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
+        comercio.m_altura = safe_float(data.get('m_altura'))
+        comercio.m2_terreno = safe_float(data.get('m2_terreno'))
+        comercio.anos_construccion = safe_int(data.get('anos_construccion'))
+        comercio.m2_construccion = safe_float(data.get('m2_construccion'))
+        comercio.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        comercio.pais = data.get('pais')
+        comercio.estado_departamento = data.get('estado_departamento')
+        comercio.ciudad = data.get('ciudad')
+        comercio.direccion = data.get('direccion')
+        comercio.codigo_postal = data.get('codigo_postal')
+        comercio.areas_internas = ','.join(request.form.getlist('areas_internas'))
+        comercio.comodidades = ','.join(request.form.getlist('comodidades'))
+        comercio.telefonia = ','.join(request.form.getlist('telefonia'))
+        comercio.cablevision = ','.join(request.form.getlist('cablevision'))
+        comercio.internet = ','.join(request.form.getlist('internet'))
+        comercio.precio = safe_float(data.get('precio'))
+        comercio.comision = safe_float(data.get('comision'))
+        db.session.commit()
+        flash('Comercio actualizado con éxito.', 'success')
+        return redirect(url_for('main.lista_inmuebles'))
+    return render_template('editar-comercio.html', comercio=comercio, user=user)
+
+@main_routes.route('/resetear-contrasena/<int:id>', methods=['POST'])
+def resetear_contrasena(id):
+    if 'user_id' not in session:
+        return redirect(url_for('main.login'))
+    user_id = session['user_id']
+    usuario_logueado = User.query.get(user_id)
+    if usuario_logueado.rol != 'administrador':
+        flash('No tienes permisos para resetear contraseñas', 'danger')
+        return redirect(url_for('main.lista_usuarios'))
+    usuario = User.query.get(id)
+    if not usuario:
+        flash('Usuario no encontrado', 'danger')
+        return redirect(url_for('main.lista_usuarios'))
+    nueva_contrasena = '12345678'
+    usuario.set_password(nueva_contrasena)
+    db.session.commit()
+    flash('Contraseña reseteada a 12345678', 'success')
+    return redirect(url_for('main.lista_usuarios'))
