@@ -6,6 +6,7 @@ import os
 import logging
 
 app = Flask(__name__)
+application = app
 app.config.from_object(Config)
 
 # Carpeta para imágenes principales

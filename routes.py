@@ -1,3 +1,5 @@
+import pymysql
+pymysql.install_as_MySQLdb()
 from flask import Flask, render_template, redirect, url_for, request, flash, session, Blueprint, current_app
 from models import db, User, Casa, Apartamento,Negociacion, Terreno, Vendidos, Alquilados, Galpon, Local, Comercio, Agenda, Notificaciones,Talleres, Noticias,EventoDelMedio
 from werkzeug.security import check_password_hash

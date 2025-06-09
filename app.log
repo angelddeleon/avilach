@@ -23819,3 +23819,145 @@
 2025-06-09 16:28:48,204 - INFO - 127.0.0.1 - - [09/Jun/2025 16:28:48] "[36mGET /static/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js HTTP/1.1[0m" 304 -
 2025-06-09 16:28:48,325 - INFO - 127.0.0.1 - - [09/Jun/2025 16:28:48] "[36mGET /static/assets/js/app.js HTTP/1.1[0m" 304 -
 2025-06-09 16:28:48,341 - INFO - 127.0.0.1 - - [09/Jun/2025 16:28:48] "[36mGET /static/assets/plugins/fullcalendar/js/main.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:03:22,129 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 17:03:22,132 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 17:03:22,139 - INFO -  * Restarting with stat
+2025-06-09 17:03:23,119 - WARNING -  * Debugger is active!
+2025-06-09 17:03:23,123 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:03:27,431 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:27] "[35m[1mGET /dashboard HTTP/1.1[0m" 500 -
+2025-06-09 17:03:27,569 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:27] "GET /dashboard?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-06-09 17:03:27,619 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:27] "GET /dashboard?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-06-09 17:03:27,991 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:27] "GET /dashboard?__debugger__=yes&cmd=resource&f=console.png&s=BzVMcvoHUvdJ5xZVTuIH HTTP/1.1" 200 -
+2025-06-09 17:03:28,227 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:28] "GET /dashboard?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-06-09 17:03:32,696 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:32] "[35m[1mGET /crear_taller HTTP/1.1[0m" 500 -
+2025-06-09 17:03:32,970 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:32] "GET /crear_taller?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-06-09 17:03:33,109 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:33] "GET /crear_taller?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-06-09 17:03:33,469 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:33] "GET /crear_taller?__debugger__=yes&cmd=resource&f=console.png&s=BzVMcvoHUvdJ5xZVTuIH HTTP/1.1" 200 -
+2025-06-09 17:03:33,734 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:33] "GET /crear_taller?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-06-09 17:03:38,036 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:38] "[35m[1mGET /crear_evento_medio HTTP/1.1[0m" 500 -
+2025-06-09 17:03:38,072 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:38] "GET /crear_evento_medio?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-06-09 17:03:38,395 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:38] "GET /crear_evento_medio?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-06-09 17:03:38,653 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:38] "GET /crear_evento_medio?__debugger__=yes&cmd=resource&f=console.png&s=BzVMcvoHUvdJ5xZVTuIH HTTP/1.1" 200 -
+2025-06-09 17:03:38,743 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:38] "GET /crear_evento_medio?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-06-09 17:03:43,855 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:43] "GET / HTTP/1.1" 200 -
+2025-06-09 17:03:44,073 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:44] "[36mGET /static/login.css HTTP/1.1[0m" 304 -
+2025-06-09 17:03:44,380 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:44] "[36mGET /static/imagenes/logo%20avilach%20frontend.png HTTP/1.1[0m" 304 -
+2025-06-09 17:03:44,773 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:44] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-06-09 17:03:54,875 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:54] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-06-09 17:03:55,151 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:55] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-06-09 17:03:55,226 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:55] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-06-09 17:03:55,616 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:55] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=BzVMcvoHUvdJ5xZVTuIH HTTP/1.1" 200 -
+2025-06-09 17:03:55,851 - INFO - 127.0.0.1 - - [09/Jun/2025 17:03:55] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-06-09 17:04:41,727 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 17:04:41,728 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 17:04:41,730 - INFO -  * Restarting with stat
+2025-06-09 17:04:42,810 - WARNING -  * Debugger is active!
+2025-06-09 17:04:42,813 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:04:49,135 - INFO - 127.0.0.1 - - [09/Jun/2025 17:04:49] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-06-09 17:04:49,225 - INFO - 127.0.0.1 - - [09/Jun/2025 17:04:49] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-06-09 17:04:49,292 - INFO - 127.0.0.1 - - [09/Jun/2025 17:04:49] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-06-09 17:04:49,639 - INFO - 127.0.0.1 - - [09/Jun/2025 17:04:49] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=5MhIX6kvQGdLI38ZIm3k HTTP/1.1" 200 -
+2025-06-09 17:04:49,887 - INFO - 127.0.0.1 - - [09/Jun/2025 17:04:49] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-06-09 17:06:16,677 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-06-09 17:06:16,677 - INFO - [33mPress CTRL+C to quit[0m
+2025-06-09 17:06:16,677 - INFO -  * Restarting with stat
+2025-06-09 17:06:17,757 - WARNING -  * Debugger is active!
+2025-06-09 17:06:17,763 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:06:24,590 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:24] "[35m[1mPOST / HTTP/1.1[0m" 500 -
+2025-06-09 17:06:24,690 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:24] "[36mGET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:24,960 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:24] "[36mGET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:25,324 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:25] "GET /?__debugger__=yes&cmd=resource&f=console.png&s=XZLxTVtRoqgldeHzXbOk HTTP/1.1" 200 -
+2025-06-09 17:06:25,571 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:25] "[36mGET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-06-09 17:06:49,169 - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\tigrito\\avilach\\avilach\\config.py', reloading
+2025-06-09 17:06:49,372 - INFO -  * Restarting with stat
+2025-06-09 17:06:50,560 - WARNING -  * Debugger is active!
+2025-06-09 17:06:50,566 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:06:52,716 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:52] "[32mPOST / HTTP/1.1[0m" 302 -
+2025-06-09 17:06:52,773 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:52] "GET /dashboard HTTP/1.1" 200 -
+2025-06-09 17:06:52,854 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:52] "[36mGET /static/assets/plugins/simplebar/css/simplebar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,131 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/metismenu/css/metisMenu.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,132 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,133 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/fullcalendar/css/main.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,134 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/css/bootstrap-extended.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,135 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,175 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/css/app.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,441 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/css/icons.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,450 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,450 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/imagenes/logo%20avilach%20frontend.png HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,452 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/js/jquery.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,460 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/metismenu/js/metisMenu.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,486 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,751 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/fonts/boxicons.woff2 HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,766 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/js/app.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:53,828 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:53] "[36mGET /static/assets/plugins/fullcalendar/js/main.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:54,312 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:54] "[33mGET /static/assets/images/favicon-32x32.png HTTP/1.1[0m" 404 -
+2025-06-09 17:06:56,886 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:56] "GET /lista-inmuebles HTTP/1.1" 200 -
+2025-06-09 17:06:57,110 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/simplebar/css/simplebar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,254 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/datatable/css/dataTables.bootstrap5.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,255 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/metismenu/css/metisMenu.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,257 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,257 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/css/bootstrap-extended.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,258 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,419 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/css/app.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,579 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/css/icons.css HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,581 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/metismenu/js/metisMenu.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,582 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/imagenes/logo%20avilach%20frontend.png HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,582 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,583 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/js/jquery.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,728 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,902 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/datatable/js/jquery.dataTables.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,903 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/plugins/datatable/js/dataTables.bootstrap5.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:06:57,903 - INFO - 127.0.0.1 - - [09/Jun/2025 17:06:57] "[36mGET /static/assets/js/app.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:00,636 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:00] "GET /editar-apartamento/1 HTTP/1.1" 200 -
+2025-06-09 17:07:00,693 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:00] "[36mGET /static/assets/plugins/simplebar/css/simplebar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:00,774 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:00] "[36mGET /static/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,029 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/plugins/metismenu/css/metisMenu.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,029 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/css/bootstrap-extended.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,029 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,029 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/css/app.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,036 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/css/icons.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,091 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,340 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/imagenes/logo%20avilach%20frontend.png HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,340 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,351 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/plugins/metismenu/js/metisMenu.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,351 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,351 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/js/jquery.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,402 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:01,658 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:01] "[36mGET /static/assets/js/app.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:14,826 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:14] "[32mPOST /editar-apartamento/1 HTTP/1.1[0m" 302 -
+2025-06-09 17:07:14,849 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:14] "GET /lista-inmuebles HTTP/1.1" 200 -
+2025-06-09 17:07:15,021 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/simplebar/css/simplebar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,229 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/datatable/css/dataTables.bootstrap5.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,229 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,229 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,229 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/metismenu/css/metisMenu.min.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,233 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/css/bootstrap-extended.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,335 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/css/app.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,552 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/css/icons.css HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,552 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,554 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/imagenes/logo%20avilach%20frontend.png HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,561 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/js/jquery.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,564 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/metismenu/js/metisMenu.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,660 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,874 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/datatable/js/dataTables.bootstrap5.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,877 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/plugins/datatable/js/jquery.dataTables.min.js HTTP/1.1[0m" 304 -
+2025-06-09 17:07:15,877 - INFO - 127.0.0.1 - - [09/Jun/2025 17:07:15] "[36mGET /static/assets/js/app.js HTTP/1.1[0m" 304 -
+2025-06-09 17:18:06,163 - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\tigrito\\avilach\\avilach\\config.py', reloading
+2025-06-09 17:18:06,394 - INFO -  * Restarting with stat
+2025-06-09 17:18:07,601 - WARNING -  * Debugger is active!
+2025-06-09 17:18:07,604 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:19:17,475 - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\tigrito\\avilach\\avilach\\config.py', reloading
+2025-06-09 17:19:17,700 - INFO -  * Restarting with stat
+2025-06-09 17:19:18,907 - WARNING -  * Debugger is active!
+2025-06-09 17:19:18,910 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:19:36,150 - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\tigrito\\avilach\\avilach\\config.py', reloading
+2025-06-09 17:19:36,354 - INFO -  * Restarting with stat
+2025-06-09 17:19:37,443 - WARNING -  * Debugger is active!
+2025-06-09 17:19:37,447 - INFO -  * Debugger PIN: 634-264-562
+2025-06-09 17:19:50,651 - INFO -  * Detected change in 'C:\\Users\\HP\\Documents\\tigrito\\avilach\\avilach\\config.py', reloading
+2025-06-09 17:19:50,836 - INFO -  * Restarting with stat
+2025-06-09 17:19:52,011 - WARNING -  * Debugger is active!
+2025-06-09 17:19:52,015 - INFO -  * Debugger PIN: 634-264-562
