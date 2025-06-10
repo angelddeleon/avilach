@@ -250,7 +250,7 @@ def crear_casa():
 
        
 
-    return render_template('crear-inmueble-casa.html', user=user)
+    return render_template('crear-inmueble-casa.html', user=user, casa=None)
 
 #ruta para crear apartamentos 
 
@@ -371,7 +371,7 @@ def crear_apartamento():
 
         
 
-    return render_template('crear-inmueble-apartamento.html', user=user)
+    return render_template('crear-inmueble-apartamento.html', user=user, apartamento=None)
 
 #ruta para crear terreno
 @main_routes.route('/crear-terreno', methods=['GET', 'POST'])
@@ -471,7 +471,7 @@ def crear_terreno():
             flash(f'Error al crear el terreno: {str(e)}', 'danger')
             
 
-    return render_template('crear-inmueble-terreno.html', user=user)
+    return render_template('crear-inmueble-terreno.html', user=user, terreno=None)
 
 
 @main_routes.route('/crear-galpon', methods=['GET', 'POST'])
@@ -613,7 +613,7 @@ def crear_galpon():
             flash('Galpón creado exitosamente', 'success')
             return redirect(url_for('main.dashboard'))
 
-    return render_template('crear-inmueble-galpon.html', user=user)
+    return render_template('crear-inmueble-galpon.html', user=user, galpon=None)
 
 #ruta para locales
 
@@ -752,7 +752,7 @@ def crear_local():
             flash(f'Error al crear el Local: {str(e)}', 'danger')
             return redirect(url_for('main.crear_local'))  # Redirige al formulario de creación
 
-    return render_template('crear-inmueble-local.html', user=user)
+    return render_template('crear-inmueble-local.html', user=user, local=None)
 
 #crear comercio 
 
@@ -881,7 +881,7 @@ def crear_comercio():
             flash('Comercio creado exitosamente', 'success')
             return redirect(url_for('main.dashboard'))  # Redirige al dashboard
 
-    return render_template('crear-inmueble-comercio.html', user=user)
+    return render_template('crear-inmueble-comercio.html', user=user, comercio=None)
 
 #ruta para lista-inmuebles
 
