@@ -137,6 +137,26 @@
             var imageItem = btn.closest('.image-item');
             imageItem.remove(); // Elimina el contenedor de la imagen
         }
+
+        // Función para eliminar una imagen existente (en edición)
+        function eliminarImagenExistente(btn, imgNombre) {
+            var imageItem = btn.closest('.image-item');
+            if (imageItem) {
+                imageItem.remove();
+            }
+            // Marcar la imagen para eliminar en el backend
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'imagenes_eliminar[]';
+            input.value = imgNombre;
+            // Busca el formulario más cercano
+            let form = btn.closest('form');
+            if (form) {
+                form.appendChild(input);
+            } else {
+                document.querySelector('form').appendChild(input);
+            }
+        }
     </script>
     
 </body>

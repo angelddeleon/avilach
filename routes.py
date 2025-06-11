@@ -755,9 +755,7 @@ def crear_comercio():
     if request.method == 'POST':
         
             data = request.form  # Obtiene los datos del formulario
-
             tipo_negocio = data.get('tipo_negocio')
-
             # Procesar múltiples imágenes principales
             imagenes = []
             if 'imagenes' in request.files:
@@ -768,17 +766,14 @@ def crear_comercio():
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
                         imagenes.append(filename)  # Guardar solo el nombre del archivo
-
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
             documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
-
             # Conversión segura de campos numéricos
             def safe_int(val):
                 return int(val) if val not in (None, '', 'None') else None
             def safe_float(val):
                 return float(val) if val not in (None, '', 'None') else None
-
             banos_completos = safe_int(data.get('banos_completos'))
             precio = safe_float(data.get('precio'))
             comision = safe_float(data.get('comision'))
@@ -796,22 +791,21 @@ def crear_comercio():
             anos_construccion = safe_int(data.get('anos_construccion'))
             m2_construccion = safe_float(data.get('m2_construccion'))
             condominio_aprox = safe_float(data.get('condominio_aprox'))
-
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
             servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
             servicio_cable = ','.join(request.form.getlist('cablevision'))
             servicio_internet = ','.join(request.form.getlist('internet'))
-
             titulo_propiedad = data['titulo_propiedad']
             tipo_inmueble = data['tipo_inmueble']
             datos_inmueble = data['datos_inmueble']
             referencia = data['referencia']
-
+            # --- CAMBIO: Manejo de destacado ---
+            destacado = 'destacado' in data or data.get('destacado', 'off') == 'on'
+            # Si el campo no viene, será False
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_comercio'))
-           
             nuevo_comercio = Comercio(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -822,8 +816,6 @@ def crear_comercio():
                 email=data['email'],
                 telefono=data.get('telefono'),
                 titulo_propiedad=titulo_propiedad,
-              
-           
                 tipo_inmueble=tipo_inmueble,
                 datos_inmueble=datos_inmueble,
                 referencia=referencia,
@@ -837,7 +829,6 @@ def crear_comercio():
                 m_frente=m_frente,
                 total_banos=total_banos,
                 descubierto=descubierto,
-        
                 m_fondo=m_fondo,
                 estacionamiento_visitantes=estacionamiento_visitantes,
                 m_altura=m_altura,
@@ -861,12 +852,11 @@ def crear_comercio():
                 precio=precio,
                 comision=comision,
                 tipo_negocio = tipo_negocio,
-                id_usuario=user_id
+                id_usuario=user_id,
+                destacado=destacado
             )
-
             db.session.add(nuevo_comercio)
             db.session.commit()
-
             flash('Comercio creado exitosamente', 'success')
             return redirect(url_for('main.dashboard'))  # Redirige al dashboard
 
@@ -2162,6 +2152,28 @@ def editar_terreno(id):
     terreno = Terreno.query.get_or_404(id)
     if request.method == 'POST':
         data = request.form
+        # Procesar imágenes eliminadas y actuales
+        imagenes_eliminar = request.form.getlist('imagenes_eliminar[]')
+        imagenes_actuales = request.form.getlist('imagenes_actuales[]')
+        # Procesar nuevas imágenes subidas
+        nuevas_imagenes = []
+        if 'imagenes' in request.files:
+            archivos = request.files.getlist('imagenes')
+            for archivo in archivos:
+                if archivo and archivo.filename:
+                    filename = secure_filename(archivo.filename)
+                    ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    archivo.save(ruta)
+                    nuevas_imagenes.append(filename)
+        # Eliminar físicamente las imágenes marcadas para eliminar
+        for img_nombre in imagenes_eliminar:
+            if img_nombre:
+                ruta_img = os.path.join(current_app.config['UPLOAD_FOLDER'], img_nombre)
+                if os.path.exists(ruta_img):
+                    os.remove(ruta_img)
+        # Construir la lista final de imágenes
+        imagenes_finales = imagenes_actuales + nuevas_imagenes
+        terreno.imagen_principal = ','.join(imagenes_finales)
         def safe_int(val):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
@@ -2338,6 +2350,28 @@ def editar_comercio(id):
     comercio = Comercio.query.get_or_404(id)
     if request.method == 'POST':
         data = request.form
+        # Procesar imágenes eliminadas y actuales
+        imagenes_eliminar = request.form.getlist('imagenes_eliminar[]')
+        imagenes_actuales = request.form.getlist('imagenes_actuales[]')
+        # Procesar nuevas imágenes subidas
+        nuevas_imagenes = []
+        if 'imagenes' in request.files:
+            archivos = request.files.getlist('imagenes')
+            for archivo in archivos:
+                if archivo and archivo.filename:
+                    filename = secure_filename(archivo.filename)
+                    ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    archivo.save(ruta)
+                    nuevas_imagenes.append(filename)
+        # Eliminar físicamente las imágenes marcadas para eliminar
+        for img_nombre in imagenes_eliminar:
+            if img_nombre:
+                ruta_img = os.path.join(current_app.config['UPLOAD_FOLDER'], img_nombre)
+                if os.path.exists(ruta_img):
+                    os.remove(ruta_img)
+        # Construir la lista final de imágenes
+        imagenes_finales = imagenes_actuales + nuevas_imagenes
+        comercio.imagen_principal = ','.join(imagenes_finales)
         def safe_int(val):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):

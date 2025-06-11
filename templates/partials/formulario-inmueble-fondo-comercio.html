@@ -23,14 +23,14 @@
                     <h5 class="card-title">Datos del Propietario</h5>
                     <hr />
                     <div class="row g-3">
-                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
-                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
-                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
-                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
-                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ comercio.nombre if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ comercio.apellido if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ comercio.ci if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ comercio.rif if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ comercio.fecha_nacimiento.strftime('%Y-%m-%d') if comercio and comercio.fecha_nacimiento else '' }}"></div>
+                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ comercio.estado_civil if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ comercio.email if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ comercio.telefono if comercio else '' }}"></div>
                     </div>
 
                     <h5 class="card-title mt-4">Detalles de Propiedad</h5>
@@ -39,7 +39,7 @@
                         <!-- Título de la Propiedad -->
                         <div class="col-md-4">
                             <label>Título de Propiedad</label>
-                            <input type="text" class="form-control" name="titulo_propiedad" required>
+                            <input type="text" class="form-control" name="titulo_propiedad" required value="{{ comercio.titulo_propiedad if comercio else '' }}">
                         </div>
 
                       
@@ -47,9 +47,9 @@
                         <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                         <div class="col-md-6">
                             <select class="form-select" name="tipo_negocio" required>
-                                <option value="Venta">Venta</option>
-                                <option value="Alquiler">Alquiler</option>
-                                <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                <option value="Venta" {% if comercio and comercio.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                <option value="Alquiler" {% if comercio and comercio.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                <option value="Venta y Alquiler" {% if comercio and comercio.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                             </select>
                         </div>
 
@@ -60,20 +60,20 @@
                         <div class="col-md-4">
                             <label>Tipo de Inmueble</label>
                             <select class="form-select" name="tipo_inmueble" required>
-                                <option value="comercio">Comercio</option>
+                                <option value="comercio" {% if comercio and comercio.tipo_inmueble == 'comercio' %}selected{% endif %}>Comercio</option>
                             </select>
                         </div>
 
                         <!-- Datos del Inmueble -->
                    
-                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais"></div>
-                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento"></div>
-                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
-                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
-                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
+                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais" value="{{ comercio.pais if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento" value="{{ comercio.estado_departamento if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ comercio.ciudad if comercio else '' }}"></div>
+                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ comercio.direccion if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ comercio.codigo_postal if comercio else '' }}"></div>
 
-                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ comercio.datos_inmueble if comercio else '' }}</textarea></div>
+                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ comercio.referencia if comercio else '' }}"></div>
                    <!-- Datos del Galpón -->
                     <h5 class="card-title mt-4">Datos del Galpón</h5>
                     <hr />
