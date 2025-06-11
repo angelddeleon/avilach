@@ -121,7 +121,6 @@
                     div.classList.add('rounded');
                     div.innerHTML = `
                         <img src="${e.target.result}" alt="${file.name}" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
-                        <input type="hidden" name="imagenes_ruta[]" value="${e.target.result}">
                         <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
                         <div class="delete-btn" onclick="eliminarImagen(this)">X</div> <!-- Círculo de eliminación -->
                     `;
@@ -137,6 +136,26 @@
         function eliminarImagen(btn) {
             var imageItem = btn.closest('.image-item');
             imageItem.remove(); // Elimina el contenedor de la imagen
+        }
+
+        // Función para eliminar una imagen existente (en edición)
+        function eliminarImagenExistente(btn, imgNombre) {
+            var imageItem = btn.closest('.image-item');
+            if (imageItem) {
+                imageItem.remove();
+            }
+            // Marcar la imagen para eliminar en el backend
+            let input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'imagenes_eliminar[]';
+            input.value = imgNombre;
+            // Busca el formulario más cercano
+            let form = btn.closest('form');
+            if (form) {
+                form.appendChild(input);
+            } else {
+                document.querySelector('form').appendChild(input);
+            }
         }
     </script>
     

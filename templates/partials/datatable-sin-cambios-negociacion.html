@@ -29,7 +29,8 @@
                             <td>
                                 {% if inmueble.imagen_principal %}
                                     {% set imagenes = inmueble.imagen_principal.split(',') %}
-                                    <img src="{{ url_for('static', filename='' + imagenes[0].replace('\\', '/').split('static/')[1]) }}" alt="Imagen Inmueble" style="width: 100px;">
+                                    {% set primera = imagenes[0].strip() %}
+                                    <img src="/static/imagenes/inmuebles/{{ primera }}" alt="Imagen Inmueble" style="width: 100px;">
                                 {% else %}
                                     No imagen
                                 {% endif %}

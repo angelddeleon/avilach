@@ -1,0 +1,16 @@
+<div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+    {% if comercio and comercio.imagen_principal %}
+        {% set imagenes = comercio.imagen_principal.split(',') %}
+        {% for img in imagenes %}
+            {% set img_nombre = img.strip() %}
+            {% if img_nombre %}
+                <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
+                    <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
+                    <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
+                    <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
+                    <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div> 

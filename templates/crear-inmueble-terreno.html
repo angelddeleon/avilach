@@ -121,7 +121,6 @@
                     div.classList.add('rounded');
                     div.innerHTML = `
                         <img src="${e.target.result}" alt="${file.name}" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
-                        <input type="hidden" name="imagenes_ruta[]" value="${e.target.result}">
                         <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
                         <div class="delete-btn" onclick="eliminarImagen(this)">X</div> <!-- Círculo de eliminación -->
                     `;

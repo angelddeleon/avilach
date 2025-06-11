@@ -166,7 +166,7 @@ def crear_casa():
                         filename = secure_filename(archivo.filename)
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+                        imagenes.append(filename)  # Guardar solo el nombre del archivo
 
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
@@ -258,118 +258,107 @@ def crear_casa():
 def crear_apartamento():
     if 'user_id' not in session:
         return redirect(url_for('main.login'))
-    
     user_id = session['user_id']
     user = User.query.get(user_id)  # Obtener el usuario desde la base de datos
 
     if request.method == 'POST':
-        
-            data = request.form
+        data = request.form
+        tipo_negocio = data.get('tipo_negocio')
+        imagenes = []
+        if 'imagenes' in request.files:
+            archivos = request.files.getlist('imagenes')
+            for archivo in archivos:
+                if archivo and archivo.filename:
+                    filename = secure_filename(archivo.filename)
+                    ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    archivo.save(ruta)
+                    imagenes.append(filename)
+        imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
+        documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
+        # Listas de checkbox convertidas en strings separados por coma
+        areas_internas = ','.join(request.form.getlist('areas_internas'))
+        areas_comunes = ','.join(request.form.getlist('areas_comunes'))
+        comodidades = ','.join(request.form.getlist('comodidades'))
+        telefonia = ','.join(request.form.getlist('telefonia'))
+        cablevision = ','.join(request.form.getlist('cablevision'))
+        servicios_internet = ','.join(request.form.getlist('servicios_internet'))
+        # Conversión segura de campos numéricos
+        def safe_int(val):
+            return int(val) if val not in (None, '', 'None') else None
+        def safe_float(val):
+            return float(val) if val not in (None, '', 'None') else None
+        nuevo_apartamento = Apartamento(
+            nombre=data['nombre'],
+            apellido=data['apellido'],
+            ci=data['ci'],
+            rif=data.get('rif'),
+            fecha_nacimiento=datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None,
+            estado_civil=data.get('estado_civil'),
+            email=data['email'],
+            telefono=data.get('telefono'),
 
-            # Procesar múltiples imágenes principales
-            imagenes = []
-            if 'imagenes' in request.files:
-                archivos = request.files.getlist('imagenes')
-                for archivo in archivos:
-                    if archivo and archivo.filename:
-                        filename = secure_filename(archivo.filename)
-                        ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-                        archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+            titulo_propiedad=data['titulo_propiedad'],
+           
+            tipo_inmueble=data.get('tipo_inmueble', 'Apartamento'),
+            datos_inmueble=data.get('datos_inmueble'),
+            referencia=data.get('referencia'),
 
-            # Guardar otras imágenes
-            imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
-            documento_propiedad = guardar_archivo(request.files.get('documento_propiedad'))
+            habitaciones=safe_int(data.get('habitaciones')),
+            hab_servicio=safe_int(data.get('hab_servicio')),
+            total_habitaciones=safe_int(data.get('total_habitaciones')),
+            banos_completos=safe_int(data.get('banos_completos')),
+            bano_servicio=safe_int(data.get('bano_servicio')),
+            medio_bano=safe_int(data.get('medio_bano')),
+            total_banos=safe_int(data.get('total_banos')),
 
-            # Listas de checkbox convertidas en strings separados por coma
-            areas_internas = ','.join(request.form.getlist('areas_internas'))
-            areas_comunes = ','.join(request.form.getlist('areas_comunes'))
-            comodidades = ','.join(request.form.getlist('comodidades'))
-            telefonia = ','.join(request.form.getlist('telefonia'))
-            cablevision = ','.join(request.form.getlist('cablevision'))
-            servicios_internet = ','.join(request.form.getlist('servicios_internet'))
-            tipo_negocio = data.get('tipo_negocio')
+            puestos_estacionamiento=safe_int(data.get('puestos_estacionamiento')),
+            estacionamientos_cubiertos=safe_int(data.get('estacionamientos_cubiertos')),
+            estacionamientos_descubiertos=safe_int(data.get('estacionamientos_descubiertos')),
 
-            # Conversión segura de campos numéricos
-            def safe_int(val):
-                return int(val) if val not in (None, '', 'None') else None
-            def safe_float(val):
-                return float(val) if val not in (None, '', 'None') else None
+            tiene_maletero='tiene_maletero' in data,
+            cantidad_maleteros=safe_int(data.get('cantidad_maleteros')),
 
-            nuevo_apartamento = Apartamento(
-                nombre=data['nombre'],
-                apellido=data['apellido'],
-                ci=data['ci'],
-                rif=data.get('rif'),
-                fecha_nacimiento=datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None,
-                estado_civil=data.get('estado_civil'),
-                email=data['email'],
-                telefono=data.get('telefono'),
+            metros_construccion=safe_float(data.get('metros_construccion')),
+            metros_terreno=safe_float(data.get('metros_terreno')),
+            anio_construccion=safe_int(data.get('anio_construccion')) if data.get('anio_construccion') else None,
+            obra=data.get('obra'),
+            estilo=data.get('estilo'),
+            tiene_terraza='tiene_terraza' in data,
+            tipo_piso=data.get('tipo_piso'),
+            niveles=safe_int(data.get('niveles')),
 
-                titulo_propiedad=data['titulo_propiedad'],
-               
-                tipo_inmueble=data.get('tipo_inmueble', 'Apartamento'),
-                datos_inmueble=data.get('datos_inmueble'),
-                referencia=data.get('referencia'),
+            pais=data.get('pais'),
+            estado_departamento=data.get('estado_departamento'),
+            ciudad=data.get('ciudad'),
+            direccion=data.get('direccion'),
+            codigo_postal=data.get('codigo_postal'),
+            aptos_x_piso=safe_int(data.get('aptos_x_piso')),
+            total_pisos=safe_int(data.get('total_pisos')),
 
-                habitaciones=safe_int(data.get('habitaciones')),
-                hab_servicio=safe_int(data.get('hab_servicio')),
-                total_habitaciones=safe_int(data.get('total_habitaciones')),
-                banos_completos=safe_int(data.get('banos_completos')),
-                bano_servicio=safe_int(data.get('bano_servicio')),
-                medio_bano=safe_int(data.get('medio_bano')),
-                total_banos=safe_int(data.get('total_banos')),
+            areas_internas=areas_internas,
+            areas_comunes=areas_comunes,
+            servicio_telefonia_fija=telefonia,
+            servicio_cable=cablevision,
+            servicio_internet=servicios_internet,
+            comodidades=comodidades,
 
-                puestos_estacionamiento=safe_int(data.get('puestos_estacionamiento')),
-                estacionamientos_cubiertos=safe_int(data.get('estacionamientos_cubiertos')),
-                estacionamientos_descubiertos=safe_int(data.get('estacionamientos_descubiertos')),
+            condominio_aprox=safe_float(data.get('condominio_aprox')),
+            precio=safe_float(data.get('precio')),
+            comision=safe_float(data.get('comision')) if data.get('comision') else None,
 
-                tiene_maletero='tiene_maletero' in data,
-                cantidad_maleteros=safe_int(data.get('cantidad_maleteros')),
+            imagen_cedula=imagen_cedula,
+            documento_propiedad=documento_propiedad,
+            imagen_principal=','.join(imagenes),
+            tipo_negocio = tipo_negocio,
+            
+            id_usuario=user_id  # Aquí guardamos las rutas separadas por coma
+        )
 
-                metros_construccion=safe_float(data.get('metros_construccion')),
-                metros_terreno=safe_float(data.get('metros_terreno')),
-                anio_construccion=safe_int(data.get('anio_construccion')) if data.get('anio_construccion') else None,
-                obra=data.get('obra'),
-                estilo=data.get('estilo'),
-                tiene_terraza='tiene_terraza' in data,
-                tipo_piso=data.get('tipo_piso'),
-                niveles=safe_int(data.get('niveles')),
+        db.session.add(nuevo_apartamento)
+        db.session.commit()
 
-                pais=data.get('pais'),
-                estado_departamento=data.get('estado_departamento'),
-                ciudad=data.get('ciudad'),
-                direccion=data.get('direccion'),
-                codigo_postal=data.get('codigo_postal'),
-                aptos_x_piso=safe_int(data.get('aptos_x_piso')),
-                total_pisos=safe_int(data.get('total_pisos')),
-
-                areas_internas=areas_internas,
-                areas_comunes=areas_comunes,
-                servicio_telefonia_fija=telefonia,
-                servicio_cable=cablevision,
-                servicio_internet=servicios_internet,
-                comodidades=comodidades,
-
-                condominio_aprox=safe_float(data.get('condominio_aprox')),
-                precio=safe_float(data.get('precio')),
-                comision=safe_float(data.get('comision')) if data.get('comision') else None,
-
-                imagen_cedula=imagen_cedula,
-                documento_propiedad=documento_propiedad,
-                imagen_principal=','.join(imagenes),
-                tipo_negocio = tipo_negocio,
-                
-                id_usuario=user_id  # Aquí guardamos las rutas separadas por coma
-            )
-
-            db.session.add(nuevo_apartamento)
-            db.session.commit()
-
-            flash('Apartamento creado exitosamente', 'success')
-            return redirect(url_for('main.dashboard'))
-
-        
+        flash('Apartamento creado exitosamente', 'success')
+        return redirect(url_for('main.dashboard'))
 
     return render_template('crear-inmueble-apartamento.html', user=user, apartamento=None)
 
@@ -395,7 +384,7 @@ def crear_terreno():
                         filename = secure_filename(archivo.filename)
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+                        imagenes.append(filename)  # Guardar solo el nombre del archivo
 
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
@@ -494,7 +483,7 @@ def crear_galpon():
                         filename = secure_filename(archivo.filename)
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+                        imagenes.append(filename)  # Guardar solo el nombre del archivo
 
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
@@ -641,7 +630,7 @@ def crear_local():
                         filename = secure_filename(archivo.filename)
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+                        imagenes.append(filename)  # Guardar solo el nombre del archivo
 
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
@@ -778,7 +767,7 @@ def crear_comercio():
                         filename = secure_filename(archivo.filename)
                         ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
                         archivo.save(ruta)
-                        imagenes.append(ruta)  # Guardar la ruta
+                        imagenes.append(filename)  # Guardar solo el nombre del archivo
 
             # Guardar otras imágenes
             imagen_cedula = guardar_archivo(request.files.get('imagen_cedula'))
@@ -1995,6 +1984,35 @@ def editar_casa(id):
     casa = Casa.query.get_or_404(id)
     if request.method == 'POST':
         data = request.form
+
+        # Procesar imágenes eliminadas y actuales
+        imagenes_eliminar = request.form.getlist('imagenes_eliminar[]')
+        imagenes_actuales = request.form.getlist('imagenes_actuales[]')
+
+        # Procesar nuevas imágenes subidas
+        nuevas_imagenes = []
+        if 'imagenes' in request.files:
+            archivos = request.files.getlist('imagenes')
+            for archivo in archivos:
+                if archivo and archivo.filename:
+                    filename = secure_filename(archivo.filename)
+                    ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    archivo.save(ruta)
+                    nuevas_imagenes.append(filename)
+
+        # Eliminar físicamente las imágenes marcadas para eliminar
+        for img_nombre in imagenes_eliminar:
+            img_path = os.path.join(current_app.config['UPLOAD_FOLDER'], img_nombre)
+            if os.path.exists(img_path):
+                try:
+                    os.remove(img_path)
+                except Exception as e:
+                    print(f"No se pudo eliminar {img_path}: {e}")
+
+        # Actualizar la lista de imágenes en la base de datos
+        imagenes_finales = imagenes_actuales + nuevas_imagenes
+        casa.imagen_principal = ','.join(imagenes_finales)
+
         def safe_int(val):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
@@ -2060,6 +2078,26 @@ def editar_apartamento(id):
     apartamento = Apartamento.query.get_or_404(id)
     if request.method == 'POST':
         data = request.form
+        imagenes_eliminar = request.form.getlist('imagenes_eliminar[]')
+        imagenes_actuales = request.form.getlist('imagenes_actuales[]')
+        nuevas_imagenes = []
+        if 'imagenes' in request.files:
+            archivos = request.files.getlist('imagenes')
+            for archivo in archivos:
+                if archivo and archivo.filename:
+                    filename = secure_filename(archivo.filename)
+                    ruta = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+                    archivo.save(ruta)
+                    nuevas_imagenes.append(filename)
+        for img_nombre in imagenes_eliminar:
+            img_path = os.path.join(current_app.config['UPLOAD_FOLDER'], img_nombre)
+            if os.path.exists(img_path):
+                try:
+                    os.remove(img_path)
+                except Exception as e:
+                    print(f"No se pudo eliminar {img_path}: {e}")
+        imagenes_finales = imagenes_actuales + nuevas_imagenes
+        apartamento.imagen_principal = ','.join(imagenes_finales)
         def safe_int(val):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
