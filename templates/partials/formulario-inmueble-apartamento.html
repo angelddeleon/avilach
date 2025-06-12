@@ -323,85 +323,81 @@
                                                 <div class="col-md-6">
                                                     <h6>Servicio Telefonía Fija</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="cantv" name="telefonia" value="Cantv" {% if apartamento and 'Cantv' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="cantv" name="telefonia" value="Cantv" {% if apartamento and 'Cantv' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="cantv">Cantv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movilnet_tel" name="telefonia" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="movilnet_tel" name="telefonia" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movilnet_tel">Movilnet</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movistar_tel" name="telefonia" value="Movistar" {% if apartamento and 'Movistar' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="movistar_tel" name="telefonia" value="Movistar" {% if apartamento and 'Movistar' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movistar_tel">Movistar</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="digitel" name="telefonia" value="Digitel" {% if apartamento and 'Digitel' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="digitel" name="telefonia" value="Digitel" {% if apartamento and 'Digitel' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="digitel">Digitel</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_tel" name="telefonia" value="Inter" {% if apartamento and 'Inter' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="inter_tel" name="telefonia" value="Inter" {% if apartamento and 'Inter' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_tel">Inter</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros_tel" name="telefonia" value="Otros" {% if apartamento and 'Otros' in (apartamento.telefonia or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="otros_tel" name="telefonia" value="Otros" {% if apartamento and 'Otros' in (apartamento.servicio_telefonia_fija or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros_tel">Otros</label>
                                                     </div>
                                                 </div>
     
+                                                <!-- Servicio de Cable Visión -->
                                                 <div class="col-md-6">
                                                     <h6>Servicio de Cable Visión</h6>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="directv" name="cablevision" value="Directv" {% if apartamento and 'Directv' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="directv" name="cablevision" value="Directv" {% if apartamento and 'Directv' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="directv">Directv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_cable" name="cablevision" value="Intercable" {% if apartamento and 'Intercable' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="inter_cable" name="cablevision" value="Intercable" {% if apartamento and 'Intercable' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_cable">Intercable</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movistar_tv" name="cablevision" value="Movistar Tv" {% if apartamento and 'Movistar Tv' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="movistar_tv" name="cablevision" value="Movistar Tv" {% if apartamento and 'Movistar Tv' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movistar_tv">Movistar Tv</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="movilnet_tv" name="cablevision" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="movilnet_tv" name="cablevision" value="Movilnet" {% if apartamento and 'Movilnet' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="movilnet_tv">Movilnet</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="netuno_tv" name="cablevision" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="netuno_tv" name="cablevision" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="netuno_tv">Net-Uno</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros_cable" name="cablevision" value="Otros" {% if apartamento and 'Otros' in (apartamento.cablevision or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="otros_cable" name="cablevision" value="Otros" {% if apartamento and 'Otros' in (apartamento.servicio_cable or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros_cable">Otros</label>
                                                     </div>
                                                 </div>
     
+                                                <!-- Servicios de internet -->
                                                 <div class="col-md-6">
-    
                                                     <h6>Servicios de internet</h6>
-    
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_aba" name="servicios_internet" value="Inter Aba" {% if apartamento and 'Inter Aba' in (apartamento.servicios_internet or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="inter_aba" name="internet" value="Inter Aba" {% if apartamento and 'Inter Aba' in (apartamento.servicio_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_aba">Inter Aba</label>
                                                     </div>
-    
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="inter_satelital" name="servicios_internet" value="Inter Satelital" {% if apartamento and 'Inter Satelital' in (apartamento.servicios_internet or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="inter_satelital" name="internet" value="Inter Satelital" {% if apartamento and 'Inter Satelital' in (apartamento.servicio_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="inter_satelital">Inter Satelital</label>
                                                     </div>
-    
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="net_uno" name="servicios_internet" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.servicios_internet or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="net_uno" name="internet" value="Net-Uno" {% if apartamento and 'Net-Uno' in (apartamento.servicio_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="net_uno">Net-Uno</label>
                                                     </div>
-    
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="serv_satelital" name="servicios_internet" value="Serv. Satelital" {% if apartamento and 'Serv. Satelital' in (apartamento.servicios_internet or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="serv_satelital" name="internet" value="Serv. Satelital" {% if apartamento and 'Serv. Satelital' in (apartamento.servicio_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="serv_satelital">Serv. Satelital</label>
                                                     </div>
-    
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" id="otros" name="servicios_internet" value="Otros" {% if apartamento and 'Otros' in (apartamento.servicios_internet or '') %}checked{% endif %}>
+                                                        <input class="form-check-input" type="checkbox" id="otros" name="internet" value="Otros" {% if apartamento and 'Otros' in (apartamento.servicio_internet or '') %}checked{% endif %}>
                                                         <label class="form-check-label" for="otros">Otros</label>
                                                     </div>
                                                 </div>
@@ -414,8 +410,24 @@
                                 <h5 class="card-title mt-4">Documentación</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-12"><label>Imagen de Cédula</label><input type="file" class="form-control" name="imagen_cedula" accept="image/*"></div>
-                                    <div class="col-md-12"><label>Documento de Propiedad</label><input type="file" class="form-control" name="documento_propiedad" accept=".pdf"></div>
+                                    <div class="col-md-12">
+                                        <label>Imagen de Cédula</label>
+                                        <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                                        {% if apartamento and apartamento.imagen_cedula %}
+                                            <div class="mt-2">
+                                                <img src="/static/archivos/{{ apartamento.imagen_cedula }}" alt="Imagen de Cédula" style="max-width: 200px;">
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label>Documento de Propiedad</label>
+                                        <input type="file" class="form-control" name="documento_propiedad" accept="application/pdf">
+                                        {% if apartamento and apartamento.documento_propiedad %}
+                                            <div class="mt-2">
+                                                <a href="/static/archivos/{{ apartamento.documento_propiedad }}" target="_blank">Ver documento actual</a>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
 
                                 <h5 class="card-title">Imagenes del Inmueble</h5>

@@ -28,8 +28,11 @@
                             <td>
                                 {% if inmueble.imagen_principal %}
                                     {% set imagenes = inmueble.imagen_principal.split(',') %}
-                                    {% set primera = imagenes[0].strip() %}
-                                    <img src="/static/imagenes/inmuebles/{{ primera }}" alt="Imagen Inmueble" style="width: 100px;">
+                                    {% if imagenes and imagenes[0] %}
+                                        <img src="/static/imagenes/inmuebles/{{ imagenes[0] }}" alt="Imagen Inmueble" style="width: 100px;">
+                                    {% else %}
+                                        No imagen
+                                    {% endif %}
                                 {% else %}
                                     No imagen
                                 {% endif %}
@@ -87,8 +90,11 @@
                             <td>
                                 {% if inmueble.imagen_principal %}
                                     {% set imagenes = inmueble.imagen_principal.split(',') %}
-                                    {% set primera = imagenes[0].strip() %}
-                                    <img src="/static/imagenes/inmuebles/{{ primera }}" alt="Imagen Inmueble" style="width: 100px;">
+                                    {% if imagenes and imagenes[0] %}
+                                        <img src="/static/imagenes/inmuebles/{{ imagenes[0] }}" alt="Imagen Inmueble" style="width: 100px;">
+                                    {% else %}
+                                        No imagen
+                                    {% endif %}
                                 {% else %}
                                     No imagen
                                 {% endif %}

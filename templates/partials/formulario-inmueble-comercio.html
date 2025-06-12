@@ -1,16 +1,195 @@
-<div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
-    {% if comercio and comercio.imagen_principal %}
-        {% set imagenes = comercio.imagen_principal.split(',') %}
-        {% for img in imagenes %}
-            {% set img_nombre = img.strip() %}
-            {% if img_nombre %}
-                <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
-                    <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
-                    <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
-                    <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
-                    <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
+<div class="container mt-5">
+    <h2 class="mb-4">Agregar Comercio</h2>
+    <div class="card">
+        <div class="card-body p-4">
+            <form method="POST" enctype="multipart/form-data" action="{% if comercio %}{{ url_for('main.editar_comercio', id=comercio.id) }}{% else %}{{ url_for('main.crear_comercio') }}{% endif %}">
+                <div class="form-body mt-4">
+                    <!-- Mensajes flash -->
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="alert-container">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ category }}">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% endwith %}
+                    <h5 class="card-title">Datos del Propietario</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ comercio.nombre if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ comercio.apellido if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ comercio.ci if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ comercio.rif if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ comercio.fecha_nacimiento if comercio and comercio.fecha_nacimiento else '' }}"></div>
+                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ comercio.estado_civil if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ comercio.email if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ comercio.telefono if comercio else '' }}"></div>
+                    </div>
+                    <h5 class="card-title mt-4">Detalles de Propiedad</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label>Título de Propiedad</label>
+                            <input type="text" class="form-control" name="titulo_propiedad" required value="{{ comercio.titulo_propiedad if comercio else '' }}">
+                        </div>
+                        <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
+                        <div class="col-md-6">
+                            <select class="form-select" name="tipo_negocio" required>
+                                <option value="Venta" {% if comercio and comercio.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                <option value="Alquiler" {% if comercio and comercio.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                <option value="Venta y Alquiler" {% if comercio and comercio.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Tipo de Inmueble</label>
+                            <select class="form-select" name="tipo_inmueble" required>
+                                <option value="comercio" {% if comercio and comercio.tipo_inmueble == 'comercio' %}selected{% endif %}>Comercio</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais" value="{{ comercio.pais if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento" value="{{ comercio.estado_departamento if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ comercio.ciudad if comercio else '' }}"></div>
+                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ comercio.direccion if comercio else '' }}"></div>
+                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ comercio.codigo_postal if comercio else '' }}"></div>
+                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ comercio.datos_inmueble if comercio else '' }}</textarea></div>
+                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ comercio.referencia if comercio else '' }}"></div>
+                    </div>
+                    <h5 class="card-title mt-4">Servicios</h5>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Servicio Telefonía Fija</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv" {% if comercio and 'Cantv' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Cantv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar" {% if comercio and 'Movistar' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Movistar</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter" {% if comercio and 'Inter' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Inter</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet" {% if comercio and 'Movilnet' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Movilnet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel" {% if comercio and 'Digitel' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Digitel</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros" {% if comercio and 'Otros' in (comercio.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Servicio de Cable Visión</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv" {% if comercio and 'Directv' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Directv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv" {% if comercio and 'Movistar Tv' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Movistar Tv</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable" {% if comercio and 'Intercable' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Intercable</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet" {% if comercio and 'Movilnet' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Movilnet</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno" {% if comercio and 'Net-Uno' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Net-Uno</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros" {% if comercio and 'Otros' in (comercio.servicio_cable or '') %}checked{% endif %}>
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Servicio de Internet</h6>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Aba" {% if comercio and 'Aba' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Aba</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter" {% if comercio and 'Inter' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Inter</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno" {% if comercio and 'Net-Uno' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Net-Uno</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital" {% if comercio and 'Inter Satelital' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Inter Satelital</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital" {% if comercio and 'Serv. Satelital' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Serv. Satelital</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Otros" {% if comercio and 'Otros' in (comercio.servicio_internet or '') %}checked{% endif %}>
+                                <label class="form-check-label">Otros</label>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 class="card-title mt-4">Documentación</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label>Imagen de Cédula</label>
+                            <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                            {% if comercio and comercio.imagen_cedula %}
+                                <div class="mt-2">
+                                    <img src="/static/archivos/{{ comercio.imagen_cedula }}" alt="Imagen de Cédula" style="max-width: 200px;">
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <label>Documento de Propiedad</label>
+                            <input type="file" class="form-control" name="documento_propiedad" accept="application/pdf">
+                            {% if comercio and comercio.documento_propiedad %}
+                                <div class="mt-2">
+                                    <a href="/static/archivos/{{ comercio.documento_propiedad }}" target="_blank">Ver Documento de Propiedad</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label>Arrastra y suelta las imágenes</label>
+                            <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+                                {% if comercio and comercio.imagen_principal %}
+                                    {% set imagenes = comercio.imagen_principal.split(',') %}
+                                    {% for img in imagenes %}
+                                        {% set img_nombre = img.strip() %}
+                                        {% if img_nombre %}
+                                            <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
+                                                <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
+                                                <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
+                                                <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
+                                                <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
+                            <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-end">
+                        <button type="submit" class="btn btn-primary">Guardar Comercio</button>
+                    </div>
                 </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
+            </form>
+        </div>
+    </div>
 </div> 

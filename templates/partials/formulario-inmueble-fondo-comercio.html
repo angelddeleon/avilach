@@ -81,92 +81,92 @@
                         <!-- Número de Oficinas -->
                         <div class="col-md-4">
                             <label># Oficinas</label>
-                            <input type="number" class="form-control" name="oficinas">
+                            <input type="number" class="form-control" name="oficinas" value="{{ comercio.oficinas if comercio else '' }}">
                         </div>
 
                         <!-- Número de Ambientes -->
                         <div class="col-md-4">
                             <label># Ambientes</label>
-                            <input type="number" class="form-control" name="ambientes">
+                            <input type="number" class="form-control" name="ambientes" value="{{ comercio.ambientes if comercio else '' }}">
                         </div>
 
                         <!-- Número de Baños Completos -->
                         <div class="col-md-4">
                             <label># Baños Completos</label>
-                            <input type="number" class="form-control" name="banos_completos">
+                            <input type="number" class="form-control" name="banos_completos" value="{{ comercio.banos_completos if comercio else '' }}">
                         </div>
 
                         <!-- 1/2 Baños -->
                         <div class="col-md-4">
                             <label>1/2 Baños</label>
-                            <input type="number" class="form-control" name="medio_bano">
+                            <input type="number" class="form-control" name="medio_bano" value="{{ comercio.medio_bano if comercio else '' }}">
                         </div>
 
                         <!-- Baño de Servicio -->
                         <div class="col-md-4">
                             <label>Baño de Servicio</label>
-                            <input type="number" class="form-control" name="bano_servicio">
+                            <input type="number" class="form-control" name="bano_servicio" value="{{ comercio.bano_servicio if comercio else '' }}">
                         </div>
 
                         <!-- Total de Baños -->
                         <div class="col-md-4">
                             <label>Total de Baños</label>
-                            <input type="number" class="form-control" name="total_banos">
+                            <input type="number" class="form-control" name="total_banos" value="{{ comercio.total_banos if comercio else '' }}">
                         </div>
 
                         <!-- Galpón -->
                         <div class="col-md-4">
                             <label>Galpón</label>
-                            <input type="text" class="form-control" name="galpon">
+                            <input type="text" class="form-control" name="galpon" value="{{ comercio.galpon if comercio else '' }}">
                         </div>
 
                         <!-- Área de Descanso -->
                         <div class="col-md-4">
                             <label>Área de Descanso</label>
-                            <input type="text" class="form-control" name="area_descanso">
+                            <input type="text" class="form-control" name="area_descanso" value="{{ comercio.area_descanso if comercio else '' }}">
                         </div>
 
                         <!-- Puestos de Estacionamiento -->
                         <div class="col-md-4">
                             <label>Puestos de Estacionamiento</label>
-                            <input type="number" class="form-control" name="puestos_estacionamiento">
+                            <input type="number" class="form-control" name="puestos_estacionamiento" value="{{ comercio.puestos_estacionamiento if comercio else '' }}">
                         </div>
 
                         <!-- Cubierto -->
                         <div class="col-md-4">
                             <label>Cubierto</label>
-                            <input type="text" class="form-control" name="cubierto">
+                            <input type="text" class="form-control" name="cubierto" value="{{ comercio.cubierto if comercio else '' }}">
                         </div>
 
                         <!-- Descubierto -->
                         <div class="col-md-4">
                             <label>Descubierto</label>
-                            <input type="text" class="form-control" name="descubierto">
+                            <input type="text" class="form-control" name="descubierto" value="{{ comercio.descubierto if comercio else '' }}">
                         </div>
 
                         <!-- Estacionamiento Visitantes -->
                         <div class="col-md-4">
                             <label>Estacionamiento Visitantes</label>
-                            <input type="text" class="form-control" name="estacionamiento_visitantes">
+                            <input type="text" class="form-control" name="estacionamiento_visitantes" value="{{ comercio.estacionamiento_visitantes if comercio else '' }}">
                         </div>
 
                         <!-- Amoblado -->
                         <div class="col-md-4">
                             <label>Amoblado</label>
-                            <input type="text" class="form-control" name="amoblado">
+                            <input type="text" class="form-control" name="amoblado" value="{{ comercio.amoblado if comercio else '' }}">
                         </div>
 
 
                         <!-- M Frente -->
                         <div class="col-md-4">
                             <label>M Frente</label>
-                            <input type="number" class="form-control" name="m_frente">
+                            <input type="number" class="form-control" name="m_frente" value="{{ comercio.m_frente if comercio else '' }}">
                         </div>
 
                         <!-- M Fondo -->
                         <div class="col-md-4">
                             <label>M Fondo</label>
-                            <input type="number" class="form-control" name="m_fondo">
+                            <input type="number" class="form-control" name="m_fondo" value="{{ comercio.m_fondo if comercio else '' }}">
                         </div>
 
                         
@@ -174,19 +174,19 @@
                         <!-- M Altura -->
                         <div class="col-md-4">
                             <label>M Altura</label>
-                            <input type="number" class="form-control" name="m_altura">
+                            <input type="number" class="form-control" name="m_altura" value="{{ comercio.m_altura if comercio else '' }}">
                         </div>
 
                         <!-- m2 de Terreno -->
                         <div class="col-md-4">
                             <label>m2 de Terreno</label>
-                            <input type="number" class="form-control" name="m2_terreno">
+                            <input type="number" class="form-control" name="m2_terreno" value="{{ comercio.m2_terreno if comercio else '' }}">
                         </div>
 
                         <!-- Años de Construcción -->
                         <div class="col-md-4">
                             <label>Años de Construcción</label>
-                            <input type="number" class="form-control" name="anos_construccion">
+                            <input type="number" class="form-control" name="anos_construccion" value="{{ comercio.anos_construccion if comercio else '' }}">
                         </div>
 
                        
@@ -194,19 +194,19 @@
                         <!-- m2 de Construcción -->
                         <div class="col-md-4">
                             <label>m2 de Construcción</label>
-                            <input type="number" class="form-control" name="m2_construccion">
+                            <input type="number" class="form-control" name="m2_construccion" value="{{ comercio.m2_construccion if comercio else '' }}">
                         </div>
 
                         <!-- Condominio Aprox -->
                         <div class="col-md-4">
-                            <label>Condominio Aproximado</label>
-                            <input type="number" class="form-control" name="condominio_aprox">
+                            <label>Condominio Aprox</label>
+                            <input type="number" class="form-control" name="condominio_aprox" value="{{ comercio.condominio_aprox if comercio else '' }}">
                         </div>
 
                         <!-- Nombre / Razón Social -->
                         <div class="col-md-4">
                             <label>Nombre / Razón Social</label>
-                            <input type="text" class="form-control" name="razon_social" required>
+                            <input type="text" class="form-control" name="razon_social" value="{{ comercio.razon_social if comercio else '' }}" required>
                         </div>
 
                         <!-- Objeto -->
@@ -221,55 +221,71 @@
                         <!-- Año de Apertura -->
                         <div class="col-md-4">
                             <label>Año de Apertura</label>
-                            <input type="number" class="form-control" name="anio_apertura" required>
+                            <input type="number" class="form-control" name="anio_apertura" value="{{ comercio.anio_apertura if comercio else '' }}" required>
                         </div>
 
                         <!-- Punto de Venta -->
                         <div class="col-md-4">
-                            <label>Punto de Venta</label>
-                            <input type="checkbox" class="form-check-input" name="punto_venta" value="Punto de Venta">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="punto_venta" {% if comercio and comercio.punto_venta %}checked{% endif %}>
+                                <label class="form-check-label">Punto de Venta</label>
+                            </div>
                         </div>
 
                         <!-- Maquinas / Equipos -->
                         <div class="col-md-4">
-                            <label>Maquinas / Equipos</label>
-                            <input type="checkbox" class="form-check-input" name="maquinas_equipos" value="Maquinas / Equipos">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="maquinas_equipos" {% if comercio and comercio.maquinas_equipos %}checked{% endif %}>
+                                <label class="form-check-label">Maquinas / Equipos</label>
+                            </div>
                         </div>
 
                         <!-- Mobiliario -->
                         <div class="col-md-4">
-                            <label>Mobiliario</label>
-                            <input type="checkbox" class="form-check-input" name="mobiliario" value="Mobiliario">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="mobiliario" {% if comercio and comercio.mobiliario %}checked{% endif %}>
+                                <label class="form-check-label">Mobiliario</label>
+                            </div>
                         </div>
 
                         <!-- Lineas telefónicas -->
                         <div class="col-md-4">
-                            <label>Lineas telefónicas</label>
-                            <input type="checkbox" class="form-check-input" name="lineas_telefonicas" value="Lineas telefónicas">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="lineas_telefonicas" {% if comercio and comercio.lineas_telefonicas %}checked{% endif %}>
+                                <label class="form-check-label">Lineas telefónicas</label>
+                            </div>
                         </div>
 
                         <!-- RRSS Activas -->
                         <div class="col-md-4">
-                            <label>RRSS Activas</label>
-                            <input type="checkbox" class="form-check-input" name="rrss_activas" value="RRSS Activas">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="rrss_activas" {% if comercio and comercio.rrss_activas %}checked{% endif %}>
+                                <label class="form-check-label">RRSS Activas</label>
+                            </div>
                         </div>
 
                         <!-- Sistema Fiscal -->
                         <div class="col-md-4">
-                            <label>Sistema Fiscal</label>
-                            <input type="checkbox" class="form-check-input" name="sistema_fiscal" value="Sistema Fiscal">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="sistema_fiscal" {% if comercio and comercio.sistema_fiscal %}checked{% endif %}>
+                                <label class="form-check-label">Sistema Fiscal</label>
+                            </div>
                         </div>
 
                         <!-- Pag. web activa -->
                         <div class="col-md-4">
-                            <label>Pag. web activa</label>
-                            <input type="checkbox" class="form-check-input" name="pag_web_activa" value="Pag. web activa">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="pag_web_activa" {% if comercio and comercio.pag_web_activa %}checked{% endif %}>
+                                <label class="form-check-label">Pag. web activa</label>
+                            </div>
                         </div>
 
                         <!-- Contabilidad -->
                         <div class="col-md-4">
-                            <label>Contabilidad</label>
-                            <input type="checkbox" class="form-check-input" name="contabilidad" value="Contabilidad">
+                            <div class="form-check mt-4">
+                                <input type="checkbox" class="form-check-input" name="contabilidad" {% if comercio and comercio.contabilidad %}checked{% endif %}>
+                                <label class="form-check-label">Contabilidad</label>
+                            </div>
                         </div>
                     
                     </div>
@@ -277,11 +293,11 @@
                 
                          <div class="col-md-4">
                              <label>Precio</label>
-                             <input type="number" class="form-control" name="precio" step="0.01" required>
+                             <input type="number" class="form-control" name="precio" step="0.01" required value="{{ comercio.precio if comercio else '' }}">
                          </div>
                          <div class="col-md-4">
                              <label>Comisión</label>
-                             <input type="number" class="form-control" name="comision" step="0.01">
+                             <input type="number" class="form-control" name="comision" step="0.01" value="{{ comercio.comision if comercio else '' }}">
                          </div>
                     
 
@@ -291,88 +307,59 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v" {% if comercio and comercio.areas_internas and 'Electricidad 110 v' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 110 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v" {% if comercio and comercio.areas_internas and 'Electricidad 220 v' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 220 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v" {% if comercio and comercio.areas_internas and 'Electricidad 440 v' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 440 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica" {% if comercio and comercio.areas_internas and 'Electricidad Trifásica' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad Trifásica</label>
                             </div>
-        
                             <div class="form-check">
-                                <label>Vigilancia</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Vigilancia" {% if comercio and comercio.areas_internas and 'Vigilancia' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Vigilancia</label>
                             </div>
-                        
-                            <!-- Sistema de Ventilación -->
                             <div class="form-check">
-                                <label>Sistema de Ventilación</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación">
-                            </div>
-                        
-                            
-                
-                        
-                            <!-- Pozo de Agua -->
-                            <div class="form-check">
-                                <label>Pozo de Agua</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua">
-                            </div>
-                        
-                            <!-- Circuito Cerrado -->
-                            <div class="form-check">
-                                <label>Circuito Cerrado</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado">
-                            </div>
-                        
-                            <!-- Tanque de Agua Interno -->
-                            <div class="form-check">
-                                <label>Tanque de Agua Interno</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno">
-                            </div>
-                        
-                        
-                        
-                            <!-- Estación de Visitantes -->
-                            <div class="form-check">
-                                <label>Estación de Visitantes</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes">
-                            </div>
-                        
-                            <!-- Planta Eléctrica -->
-                            <div class="form-check">
-                                <label>Planta Eléctrica</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica">
-                            </div>
-                            
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación" {% if comercio and comercio.areas_internas and 'Sistema de Ventilación' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Sistema de Ventilación</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico">
-                                <label class="form-check-label">Cerco Eléctrico</label>
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Pozo de Agua" {% if comercio and comercio.areas_internas and 'Pozo de Agua' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Pozo de Agua</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma">
-                                <label class="form-check-label">Alarma</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado" {% if comercio and comercio.areas_internas and 'Circuito Cerrado' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Circuito Cerrado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Tanque de Agua Interno" {% if comercio and comercio.areas_internas and 'Tanque de Agua Interno' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Tanque de Agua Interno</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Estacionamiento de Visitantes" {% if comercio and comercio.areas_internas and 'Estacionamiento de Visitantes' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Estacionamiento de Visitantes</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Planta Eléctrica" {% if comercio and comercio.areas_internas and 'Planta Eléctrica' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Planta Eléctrica</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico" {% if comercio and comercio.areas_internas and 'Cerco Eléctrico' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Cerco Eléctrico</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma" {% if comercio and comercio.areas_internas and 'Alarma' in comercio.areas_internas.split(',') %}checked{% endif %}>
+                                <label class="form-check-label">Alarma</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers" {% if comercio and comercio.areas_internas and 'Plataforma para Trailers' in comercio.areas_internas.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Plataforma para Trailers</label>
                             </div>
                         </div>
@@ -384,166 +371,161 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado" {% if comercio and comercio.comodidades and 'Aire Acondicionado' in comercio.comodidades.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Aire Acondicionado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana" {% if comercio and comercio.comodidades and 'De ventana' in comercio.comodidades.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">De ventana</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split" {% if comercio and comercio.comodidades and 'Tipo Split' in comercio.comodidades.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Tipo Split</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central" {% if comercio and comercio.comodidades and 'Aire central' in comercio.comodidades.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Aire central</label>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Servicios de Telefonía Fija -->
-                    <h5 class="card-title mt-4">Servicio Telefonía Fija</h5>
+                    <!-- Servicios -->
+                    <h5 class="card-title mt-4">Servicios</h5>
                     <hr />
                     <div class="row">
                         <div class="col-md-6">
+                            <h6>Servicio Telefonía Fija</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv" {% if comercio and comercio.telefonia and 'Cantv' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Cantv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar" {% if comercio and comercio.telefonia and 'Movistar' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Movistar</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter" {% if comercio and comercio.telefonia and 'Inter' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet" {% if comercio and comercio.telefonia and 'Movilnet' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel" {% if comercio and comercio.telefonia and 'Digitel' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Digitel</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros" {% if comercio and comercio.telefonia and 'Otros' in comercio.telefonia.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Servicios de Cable y de Internet -->
-                    <h5 class="card-title mt-4">Servicios de Cable y de Internet</h5>
-                    <hr />
-                    <div class="row">
                         <div class="col-md-6">
                             <h6>Servicio de Cable Visión</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv" {% if comercio and comercio.cablevision and 'Directv' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Directv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv" {% if comercio and comercio.cablevision and 'Movistar Tv' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Movistar Tv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable" {% if comercio and comercio.cablevision and 'Intercable' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Intercable</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet" {% if comercio and comercio.cablevision and 'Movilnet' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno" {% if comercio and comercio.cablevision and 'Net-Uno' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros" {% if comercio and comercio.cablevision and 'Otros' in comercio.cablevision.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
-
                         <div class="col-md-6">
                             <h6>Servicio de Internet</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Aba">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Aba" {% if comercio and comercio.internet and 'Aba' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Aba</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter" {% if comercio and comercio.internet and 'Inter' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno" {% if comercio and comercio.internet and 'Net-Uno' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital" {% if comercio and comercio.internet and 'Inter Satelital' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Inter Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital" {% if comercio and comercio.internet and 'Serv. Satelital' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Serv. Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Otros" {% if comercio and comercio.internet and 'Otros' in comercio.internet.split(',') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
-
-                        <h5 class="card-title mt-4">Documentación</h5>
-                        <hr />
-                        <div class="row g-3">
-                            <!-- Imagen de Cédula -->
-                            <div class="col-md-6">
-                                <label>Imagen de Cédula</label>
-                                <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
-                            </div>
-
-                            <!-- Documento de Propiedad -->
-                            <div class="col-md-6">
-                                <label>Documento de Propiedad</label>
-                                <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
-                            </div>
-                        </div>
-
-                        <!-- Imágenes del Galpón -->
-                        <div class="row g-3">
-                            <div class="col-md-12">
-                                <label>Arrastra y suelta las imágenes</label>
-
-                                <!-- Cuadro visual para las imágenes -->
-                                <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
-                                    {% if comercio and comercio.imagen_principal %}
-                                        {% set imagenes = comercio.imagen_principal.split(',') %}
-                                        {% for img in imagenes %}
-                                            {% set img_nombre = img.strip() %}
-                                            {% if img_nombre %}
-                                                <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
-                                                    <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
-                                                    <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
-                                                    <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
-                                                    <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                </div>
-                                
-                                <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
-                                <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <!-- Botón -->
-                    <div class="mt-4 text-end">
-                        <button type="submit" class="btn btn-primary">Guardar Comercio</button>
+                    <!-- Documentación -->
+                    <h5 class="card-title mt-4">Documentación</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <!-- Imagen de Cédula -->
+                        <div class="col-md-6">
+                            <label>Imagen de Cédula</label>
+                            <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                        </div>
+
+                        <!-- Documento de Propiedad -->
+                        <div class="col-md-6">
+                            <label>Documento de Propiedad</label>
+                            <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
+                        </div>
                     </div>
+
+                    <!-- Imágenes del Galpón -->
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label>Arrastra y suelta las imágenes</label>
+
+                            <!-- Cuadro visual para las imágenes -->
+                            <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+                                {% if comercio and comercio.imagen_principal %}
+                                    {% set imagenes = comercio.imagen_principal.split(',') %}
+                                    {% for img in imagenes %}
+                                        {% set img_nombre = img.strip() %}
+                                        {% if img_nombre %}
+                                            <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
+                                                <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
+                                                <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
+                                                <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
+                                                <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            
+                            <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
+                            <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Botón -->
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-primary">Guardar Comercio</button>
                 </div>
             </form>
         </div>

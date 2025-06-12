@@ -23,14 +23,14 @@
                     <h5 class="card-title">Datos del Propietario</h5>
                     <hr />
                     <div class="row g-3">
-                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
-                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
-                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
-                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
-                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ galpon.nombre if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ galpon.apellido if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ galpon.ci if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ galpon.rif if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ galpon.fecha_nacimiento.strftime('%Y-%m-%d') if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ galpon.estado_civil if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ galpon.email if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ galpon.telefono if galpon else '' }}"></div>
                     </div>
 
                     <h5 class="card-title mt-4">Detalles de Propiedad</h5>
@@ -39,7 +39,7 @@
                         <!-- Título de la Propiedad -->
                         <div class="col-md-4">
                             <label>Título de Propiedad</label>
-                            <input type="text" class="form-control" name="titulo_propiedad" required>
+                            <input type="text" class="form-control" name="titulo_propiedad" required value="{{ galpon.titulo_propiedad if galpon else '' }}">
                         </div>
 
                     
@@ -47,9 +47,9 @@
                         <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                         <div class="col-md-6">
                             <select class="form-select" name="tipo_negocio" required>
-                                <option value="Venta">Venta</option>
-                                <option value="Alquiler">Alquiler</option>
-                                <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                <option value="Venta" {% if galpon and galpon.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                <option value="Alquiler" {% if galpon and galpon.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                <option value="Venta y Alquiler" {% if galpon and galpon.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                             </select>
                         </div>
 
@@ -59,18 +59,18 @@
                         <div class="col-md-4">
                             <label>Tipo de Inmueble</label>
                             <select class="form-select" name="tipo_inmueble" required>
-                                <option value="galpon">Galpón</option>
+                                <option value="galpon" {% if galpon and galpon.tipo_inmueble == 'galpon' %}selected{% endif %}>Galpón</option>
                             </select>
                         </div>
 
                   
-                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais"></div>
-                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento"></div>
-                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
-                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
-                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
-                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais" value="{{ galpon.pais if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento" value="{{ galpon.estado_departamento if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ galpon.ciudad if galpon else '' }}"></div>
+                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ galpon.direccion if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ galpon.codigo_postal if galpon else '' }}"></div>
+                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ galpon.datos_inmueble if galpon else '' }}</textarea></div>
+                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ galpon.referencia if galpon else '' }}"></div>
 
 
                    <!-- Datos del Galpón -->
@@ -80,37 +80,37 @@
                         <!-- Número de Oficinas -->
                         <div class="col-md-4">
                             <label># Oficinas</label>
-                            <input type="number" class="form-control" name="oficinas">
+                            <input type="number" class="form-control" name="oficinas" value="{{ galpon.oficinas if galpon else '' }}">
                         </div>
 
                         <!-- Número de Ambientes -->
                         <div class="col-md-4">
                             <label># Ambientes</label>
-                            <input type="number" class="form-control" name="ambientes">
+                            <input type="number" class="form-control" name="ambientes" value="{{ galpon.ambientes if galpon else '' }}">
                         </div>
 
                         <!-- Número de Baños Completos -->
                         <div class="col-md-4">
                             <label># Baños Completos</label>
-                            <input type="number" class="form-control" name="banos_completos">
+                            <input type="number" class="form-control" name="banos_completos" value="{{ galpon.banos_completos if galpon else '' }}">
                         </div>
 
                         <!-- 1/2 Baños -->
                         <div class="col-md-4">
                             <label>1/2 Baños</label>
-                            <input type="number" class="form-control" name="medio_bano">
+                            <input type="number" class="form-control" name="medio_bano" value="{{ galpon.medio_bano if galpon else '' }}">
                         </div>
 
                         <!-- Baño de Servicio -->
                         <div class="col-md-4">
                             <label>Baño de Servicio</label>
-                            <input type="number" class="form-control" name="bano_servicio">
+                            <input type="number" class="form-control" name="bano_servicio" value="{{ galpon.bano_servicio if galpon else '' }}">
                         </div>
 
                          <!-- Total de Baños -->
                          <div class="col-md-4">
                             <label>Total de Baños</label>
-                            <input type="number" class="form-control" name="total_banos">
+                            <input type="number" class="form-control" name="total_banos" value="{{ galpon.total_banos if galpon else '' }}">
                         </div>
 
                         
@@ -118,49 +118,49 @@
                         <!-- Área de Descanso -->
                         <div class="col-md-4">
                             <label>Área de Descanso</label>
-                            <input type="text" class="form-control" name="area_descanso">
+                            <input type="text" class="form-control" name="area_descanso" value="{{ galpon.area_descanso if galpon else '' }}">
                         </div>
 
                         <!-- Puestos de Estacionamiento -->
-                        <div class="col-md-4"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento"></div>
-                        <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos"></div>
-                        <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos"></div>
+                        <div class="col-md-4"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento" value="{{ galpon.puestos_estacionamiento if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos" value="{{ galpon.estacionamientos_cubiertos if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos" value="{{ galpon.estacionamientos_descubiertos if galpon else '' }}"></div>
                                 
 
                         <!-- Estacionamiento Visitantes -->
                         <div class="col-md-4">
                             <label>Estacionamiento Visitantes</label>
-                            <input type="text" class="form-control" name="estacionamiento_visitantes">
+                            <input type="text" class="form-control" name="estacionamiento_visitantes" value="{{ galpon.estacionamiento_visitantes if galpon else '' }}">
                         </div>
 
                         <!-- Amoblado -->
                         <div class="col-md-4">
                             <label>Amoblado</label>
-                            <input type="text" class="form-control" name="amoblado">
+                            <input type="text" class="form-control" name="amoblado" value="{{ galpon.amoblado if galpon else '' }}">
                         </div>
 
                         <!-- Kitchenette -->
                         <div class="col-md-4">
                             <label>Kitchenette</label>
-                            <input type="text" class="form-control" name="kitchenette">
+                            <input type="text" class="form-control" name="kitchenette" value="{{ galpon.kitchenette if galpon else '' }}">
                         </div>
 
                         <!-- Patio de trabajo -->
                         <div class="col-md-4">
                             <label>Patio de trabajo</label>
-                            <input type="text" class="form-control" name="patio_trabajo">
+                            <input type="text" class="form-control" name="patio_trabajo" value="{{ galpon.patio_trabajo if galpon else '' }}">
                         </div>
 
                         <!-- M Frente -->
                         <div class="col-md-4">
                             <label>M Frente</label>
-                            <input type="number" class="form-control" name="m_frente">
+                            <input type="number" class="form-control" name="m_frente" value="{{ galpon.m_frente if galpon else '' }}">
                         </div>
 
                       <!-- Galpón -->
                       <div class="col-md-4">
                         <label>M2 Galpón</label>
-                        <input type="text" class="form-control" name="galpon">
+                        <input type="text" class="form-control" name="galpon" value="{{ galpon.galpon if galpon else '' }}">
                     </div>
 
                         
@@ -168,13 +168,13 @@
                         <!-- Vigilancia -->
                         <div class="col-md-4">
                             <label>Vigilancia</label>
-                            <input type="text" class="form-control" name="vigilancia">
+                            <input type="text" class="form-control" name="vigilancia" value="{{ galpon.vigilancia if galpon else '' }}">
                         </div>
 
                         <!-- M Fondo -->
                         <div class="col-md-4">
                             <label>M Fondo</label>
-                            <input type="number" class="form-control" name="m_fondo">
+                            <input type="number" class="form-control" name="m_fondo" value="{{ galpon.m_fondo if galpon else '' }}">
                         </div>
 
                         
@@ -183,51 +183,51 @@
                         <!-- M Altura -->
                         <div class="col-md-4">
                             <label>M Altura</label>
-                            <input type="number" class="form-control" name="m_altura">
+                            <input type="number" class="form-control" name="m_altura" value="{{ galpon.m_altura if galpon else '' }}">
                         </div>
 
                         <!-- Centro Comercial -->
                         <div class="col-md-4">
                             <label>Centro Comercial</label>
-                            <input type="text" class="form-control" name="centro_comercial">
+                            <input type="text" class="form-control" name="centro_comercial" value="{{ galpon.centro_comercial if galpon else '' }}">
                         </div>
 
                         <!-- m2 de Terreno -->
                         <div class="col-md-4">
                             <label>m2 de Terreno</label>
-                            <input type="number" class="form-control" name="m2_terreno">
+                            <input type="number" class="form-control" name="m2_terreno" value="{{ galpon.m2_terreno if galpon else '' }}">
                         </div>
 
                         <!-- Años de Construcción -->
                         <div class="col-md-4">
                             <label>Años de Construcción</label>
-                            <input type="number" class="form-control" name="anos_construccion">
+                            <input type="number" class="form-control" name="anos_construccion" value="{{ galpon.anos_construccion if galpon else '' }}">
                         </div>
 
                         <!-- Parque Industrial -->
                         <div class="col-md-4">
                             <label>Parque Industrial</label>
-                            <input type="text" class="form-control" name="parque_industrial">
+                            <input type="text" class="form-control" name="parque_industrial" value="{{ galpon.parque_industrial if galpon else '' }}">
                         </div>
 
                         <!-- m2 de Construcción -->
                         <div class="col-md-4">
                             <label>m2 de Construcción</label>
-                            <input type="number" class="form-control" name="m2_construccion">
+                            <input type="number" class="form-control" name="m2_construccion" value="{{ galpon.m2_construccion if galpon else '' }}">
                         </div>
 
                         <!-- Condominio Aprox -->
                         <div class="col-md-4">
                             <label>Condominio Aproximado</label>
-                            <input type="number" class="form-control" name="condominio_aprox">
+                            <input type="number" class="form-control" name="condominio_aprox" value="{{ galpon.condominio_aprox if galpon else '' }}">
                         </div>
 
                         <!-- Pie de Calle -->
                         <div class="col-md-4">
                             <label>Pie de Calle</label>
                             <select class="form-select" name="pie_de_calle">
-                                <option value="Si">Sí</option>
-                                <option value="No">No</option>
+                                <option value="Si" {% if galpon and galpon.pie_de_calle == 'Si' %}selected{% endif %}>Sí</option>
+                                <option value="No" {% if galpon and galpon.pie_de_calle == 'No' %}selected{% endif %}>No</option>
                             </select>
                         </div>
                     </div>
@@ -236,11 +236,11 @@
              
                          <div class="col-md-4">
                              <label>Precio</label>
-                             <input type="number" class="form-control" name="precio" step="0.01" required>
+                             <input type="number" class="form-control" name="precio" step="0.01" required value="{{ galpon.precio if galpon else '' }}">
                          </div>
                          <div class="col-md-4">
                              <label>Comisión</label>
-                             <input type="number" class="form-control" name="comision" step="0.01">
+                             <input type="number" class="form-control" name="comision" step="0.01" value="{{ galpon.comision if galpon else '' }}">
                          </div>
                     
 
@@ -250,31 +250,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v" {% if galpon and 'Electricidad 110 v' in (galpon.areas_internas or '') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 110 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v" {% if galpon and 'Electricidad 220 v' in (galpon.areas_internas or '') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 220 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v" {% if galpon and 'Electricidad 440 v' in (galpon.areas_internas or '') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 440 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica" {% if galpon and 'Electricidad Trifásica' in (galpon.areas_internas or '') %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad Trifásica</label>
                             </div>
         
                             <div class="form-check">
                                 <label>Vigilancia</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia" {% if galpon and 'Vigilancia' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                             <!-- Sistema de Ventilación -->
                             <div class="form-check">
                                 <label>Sistema de Ventilación</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación" {% if galpon and 'Sistema de Ventilación' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                             
@@ -283,19 +283,19 @@
                             <!-- Pozo de Agua -->
                             <div class="form-check">
                                 <label>Pozo de Agua</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua" {% if galpon and 'Pozo de Agua' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                             <!-- Circuito Cerrado -->
                             <div class="form-check">
                                 <label>Circuito Cerrado</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado" {% if galpon and 'Circuito Cerrado' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                             <!-- Tanque de Agua Interno -->
                             <div class="form-check">
                                 <label>Tanque de Agua Interno</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno" {% if galpon and 'Tanque de Agua Interno' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                         
@@ -303,13 +303,13 @@
                             <!-- Estación de Visitantes -->
                             <div class="form-check">
                                 <label>Estación de Visitantes</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes" {% if galpon and 'Estacionamiento de Visitantes' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                         
                             <!-- Planta Eléctrica -->
                             <div class="form-check">
                                 <label>Planta Eléctrica</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica">
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica" {% if galpon and 'Planta Eléctrica' in (galpon.areas_internas or '') %}checked{% endif %}>
                             </div>
                             
                         </div>
@@ -343,19 +343,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado" {% if galpon and 'Aire Acondicionado' in (galpon.comodidades or '') %}checked{% endif %}>
                                 <label class="form-check-label">Aire Acondicionado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana" {% if galpon and 'De ventana' in (galpon.comodidades or '') %}checked{% endif %}>
                                 <label class="form-check-label">De ventana</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split" {% if galpon and 'Tipo Split' in (galpon.comodidades or '') %}checked{% endif %}>
                                 <label class="form-check-label">Tipo Split</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central" {% if galpon and 'Aire central' in (galpon.comodidades or '') %}checked{% endif %}>
                                 <label class="form-check-label">Aire central</label>
                             </div>
                         </div>
@@ -367,27 +367,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv" {% if galpon and 'Cantv' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Cantv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar" {% if galpon and 'Movistar' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Movistar</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter" {% if galpon and 'Inter' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet" {% if galpon and 'Movilnet' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel" {% if galpon and 'Digitel' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Digitel</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros" {% if galpon and 'Otros' in (galpon.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -400,27 +400,27 @@
                         <div class="col-md-6">
                             <h6>Servicio de Cable Visión</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv" {% if galpon and 'Directv' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Directv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv" {% if galpon and 'Movistar Tv' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Movistar Tv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable" {% if galpon and 'Intercable' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Intercable</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet" {% if galpon and 'Movilnet' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno" {% if galpon and 'Net-Uno' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros" {% if galpon and 'Otros' in (galpon.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -428,27 +428,27 @@
                         <div class="col-md-6">
                             <h6>Servicio de Internet</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Aba">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Aba" {% if galpon and 'Aba' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Aba</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter" {% if galpon and 'Inter' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno" {% if galpon and 'Net-Uno' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital" {% if galpon and 'Inter Satelital' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Inter Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital" {% if galpon and 'Serv. Satelital' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Serv. Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="internet" value="Otros" {% if galpon and 'Otros' in (galpon.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -460,12 +460,18 @@
                             <div class="col-md-6">
                                 <label>Imagen de Cédula</label>
                                 <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                                {% if galpon and galpon.imagen_cedula %}
+                                    <img src="/static/archivos/{{ galpon.imagen_cedula }}" alt="Imagen de Cédula" style="max-width: 200px; margin-top: 10px;">
+                                {% endif %}
                             </div>
 
                             <!-- Documento de Propiedad -->
                             <div class="col-md-6">
                                 <label>Documento de Propiedad</label>
                                 <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
+                                {% if galpon and galpon.documento_propiedad %}
+                                    <a href="/static/archivos/{{ galpon.documento_propiedad }}" target="_blank">Ver Documento de Propiedad</a>
+                                {% endif %}
                             </div>
                         </div>
 
