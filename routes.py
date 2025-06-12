@@ -514,9 +514,9 @@ def crear_galpon():
             # Obtener las áreas internas, comodidades y servicios como listas
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
-            servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
-            servicio_cable = ','.join(request.form.getlist('cablevision'))
-            servicio_internet = ','.join(request.form.getlist('internet'))
+            servicio_telefonia_fija = ','.join(request.form.getlist('servicio_telefonia_fija'))
+            servicio_cable = ','.join(request.form.getlist('servicio_cable'))
+            servicio_internet = ','.join(request.form.getlist('servicio_internet'))
 
             titulo_propiedad = data['titulo_propiedad']
             destacado = 'destacado' in data
@@ -606,7 +606,6 @@ def crear_local():
     if request.method == 'POST':
             
         try:
-       
             data = request.form  # Obtiene los datos del formulario
 
             tipo_negocio = data.get('tipo_negocio')
@@ -631,50 +630,58 @@ def crear_local():
             def safe_float(val):
                 return float(val) if val not in (None, '', 'None') else None
 
+            # Campos numéricos
             banos_completos = safe_int(data.get('banos_completos'))
             precio = safe_float(data.get('precio'))
             comision = safe_float(data.get('comision'))
-            area_descanso = data['area_descanso'] or None
-            amoblado = data['amoblado'] or None
             banos_servicio = safe_int(data.get('bano_servicio'))
             puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
-            patio_trabajo = data['patio_trabajo'] or None
             m_frente = safe_float(data.get('m_frente'))
             total_banos = safe_int(data.get('total_banos'))
-            descubierto = data['descubierto'] or None
-            vigilancia = data['vigilancia'] or None
             m_fondo = safe_float(data.get('m_fondo'))
-            estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
             m_altura = safe_float(data.get('m_altura'))
             m2_terreno = safe_float(data.get('m2_terreno'))
             anos_construccion = safe_int(data.get('anos_construccion'))
-            parque_industrial = data['parque_industrial'] or None
             m2_construccion = safe_float(data.get('m2_construccion'))
             condominio_aprox = safe_float(data.get('condominio_aprox'))
 
+            # Campos de texto
+            area_descanso = data.get('area_descanso')
+            amoblado = data.get('amoblado')
+            patio_trabajo = data.get('patio_trabajo')
+            descubierto = data.get('descubierto')
+            vigilancia = data.get('vigilancia')
+            estacionamiento_visitantes = data.get('estacionamiento_visitantes')
+            parque_industrial = data.get('parque_industrial')
+
+            # Campos de servicios
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
-            servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
-            servicio_cable = ','.join(request.form.getlist('cablevision'))
-            servicio_internet = ','.join(request.form.getlist('internet'))
+            servicio_telefonia_fija = ','.join(request.form.getlist('servicio_telefonia_fija'))
+            servicio_cable = ','.join(request.form.getlist('servicio_cable'))
+            servicio_internet = ','.join(request.form.getlist('servicio_internet'))
 
-            titulo_propiedad = data['titulo_propiedad']
-            tipo_inmueble = data['tipo_inmueble']
-            datos_inmueble = data['datos_inmueble']
-            referencia = data['referencia']
+            # Campos obligatorios
+            titulo_propiedad = data.get('titulo_propiedad')
+            tipo_inmueble = data.get('tipo_inmueble')
+            datos_inmueble = data.get('datos_inmueble')
+            referencia = data.get('referencia')
+
+            # Campo destacado
+            destacado = 'destacado' in data
 
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_local'))
             
             nuevo_local = Local(
-                nombre=data['nombre'],
-                apellido=data['apellido'],
-                ci=data['ci'],
+                nombre=data.get('nombre'),
+                apellido=data.get('apellido'),
+                ci=data.get('ci'),
                 rif=data.get('rif'),
-                fecha_nacimiento=datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None,
+                fecha_nacimiento=datetime.strptime(data.get('fecha_nacimiento'), '%Y-%m-%d') if data.get('fecha_nacimiento') else None,
                 estado_civil=data.get('estado_civil'),
-                email=data['email'],
+                email=data.get('email'),
                 telefono=data.get('telefono'),
                 titulo_propiedad=titulo_propiedad,
                 tipo_inmueble=tipo_inmueble,
@@ -715,7 +722,8 @@ def crear_local():
                 servicio_internet=servicio_internet,
                 precio=precio,
                 comision=comision,
-                tipo_negocio = tipo_negocio,
+                tipo_negocio=tipo_negocio,
+                destacado=destacado,
                 id_usuario=user_id
             )
 
@@ -2373,6 +2381,8 @@ def editar_local(id):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
             return float(val) if val not in (None, '', 'None') else None
+        
+        # Datos básicos
         local.nombre = data['nombre']
         local.apellido = data['apellido']
         local.ci = data['ci']
@@ -2381,47 +2391,61 @@ def editar_local(id):
         local.estado_civil = data.get('estado_civil')
         local.email = data['email']
         local.telefono = data.get('telefono')
+        
+        # Datos del inmueble
         local.titulo_propiedad = data['titulo_propiedad']
         local.tipo_inmueble = data['tipo_inmueble']
         local.datos_inmueble = data['datos_inmueble']
         local.referencia = data['referencia']
-        local.banos_completos = safe_int(data.get('banos_completos'))
-        local.banos_servicio = safe_int(data.get('bano_servicio'))
-        local.medio_bano = safe_int(data.get('medio_bano'))
-        local.area_descanso = data['area_descanso'] or None
-        local.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
-        local.cubierto = data.get('cubierto')
-        local.amoblado = data['amoblado'] or None
-        local.patio_trabajo = data['patio_trabajo'] or None
-        local.m_frente = safe_float(data.get('m_frente'))
-        local.total_banos = safe_int(data.get('total_banos'))
-        local.descubierto = data['descubierto'] or None
-        local.vigilancia = data['vigilancia'] or None
-        local.m_fondo = safe_float(data.get('m_fondo'))
-        local.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
-        local.m_altura = safe_float(data.get('m_altura'))
-        local.m2_terreno = safe_float(data.get('m2_terreno'))
-        local.anos_construccion = safe_int(data.get('anos_construccion'))
-        local.parque_industrial = data['parque_industrial'] or None
-        local.m2_construccion = safe_float(data.get('m2_construccion'))
-        local.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        
+        # Ubicación
         local.pais = data.get('pais')
         local.estado_departamento = data.get('estado_departamento')
         local.ciudad = data.get('ciudad')
         local.direccion = data.get('direccion')
         local.codigo_postal = data.get('codigo_postal')
+        
+        # Características específicas
+        local.banos_completos = safe_int(data.get('banos_completos'))
+        local.bano_servicio = safe_int(data.get('bano_servicio'))
+        local.medio_bano = safe_int(data.get('medio_bano'))
+        local.total_banos = safe_int(data.get('total_banos'))
+        local.area_descanso = data.get('area_descanso')
+        local.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        local.cubierto = data.get('cubierto')
+        local.descubierto = data.get('descubierto')
+        local.estacionamiento_visitantes = data.get('estacionamiento_visitantes')
+        local.amoblado = data.get('amoblado')
+        local.patio_trabajo = data.get('patio_trabajo')
+        
+        # Medidas
+        local.m_frente = safe_float(data.get('m_frente'))
+        local.m_fondo = safe_float(data.get('m_fondo'))
+        local.m_altura = safe_float(data.get('m_altura'))
+        local.m2_terreno = safe_float(data.get('m2_terreno'))
+        local.m2_construccion = safe_float(data.get('m2_construccion'))
+        local.anos_construccion = safe_int(data.get('anos_construccion'))
+        local.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        
+        # Servicios
         local.areas_internas = ','.join(request.form.getlist('areas_internas'))
         local.comodidades = ','.join(request.form.getlist('comodidades'))
-        local.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
-        local.servicio_cable = ','.join(request.form.getlist('cablevision'))
-        local.servicio_internet = ','.join(request.form.getlist('internet'))
+        local.telefonia = ','.join(request.form.getlist('telefonia'))
+        local.cablevision = ','.join(request.form.getlist('cablevision'))
+        local.internet = ','.join(request.form.getlist('internet'))
+        
+        # Precio y tipo de negocio
         local.precio = safe_float(data.get('precio'))
         local.comision = safe_float(data.get('comision'))
         local.tipo_negocio = data.get('tipo_negocio')
+        
+        # Destacado
+        local.destacado = 'destacado' in data
+        
         db.session.commit()
         flash('Local actualizado con éxito.', 'success')
         return redirect(url_for('main.lista_inmuebles'))
-    return render_template('editar-local.html', local=local, user=user)
+    return render_template('crear-inmueble-local.html', local=local, user=user)
 
 # --- EDITAR COMERCIO ---
 @main_routes.route('/editar-comercio/<int:id>', methods=['GET', 'POST'])
@@ -2464,6 +2488,8 @@ def editar_comercio(id):
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
             return float(val) if val not in (None, '', 'None') else None
+        
+        # Datos básicos
         comercio.nombre = data['nombre']
         comercio.apellido = data['apellido']
         comercio.ci = data['ci']
@@ -2472,47 +2498,74 @@ def editar_comercio(id):
         comercio.estado_civil = data.get('estado_civil')
         comercio.email = data['email']
         comercio.telefono = data.get('telefono')
+        
+        # Datos del inmueble
         comercio.titulo_propiedad = data['titulo_propiedad']
         comercio.tipo_inmueble = data['tipo_inmueble']
         comercio.datos_inmueble = data['datos_inmueble']
         comercio.referencia = data['referencia']
-        comercio.banos_completos = safe_int(data.get('banos_completos'))
-        comercio.bano_servicio = safe_int(data.get('bano_servicio'))
-        comercio.medio_bano = safe_int(data.get('medio_bano'))
-        comercio.area_descanso = data['area_descanso'] or None
-        comercio.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
-        comercio.cubierto = data.get('cubierto')
-        comercio.amoblado = data['amoblado'] or None
-        comercio.m_frente = safe_float(data.get('m_frente'))
-        comercio.total_banos = safe_int(data.get('total_banos'))
-        comercio.descubierto = data['descubierto'] or None
-        comercio.m_fondo = safe_float(data.get('m_fondo'))
-        comercio.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
-        comercio.m_altura = safe_float(data.get('m_altura'))
-        comercio.m2_terreno = safe_float(data.get('m2_terreno'))
-        comercio.anos_construccion = safe_int(data.get('anos_construccion'))
-        comercio.m2_construccion = safe_float(data.get('m2_construccion'))
-        comercio.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        
+        # Ubicación
         comercio.pais = data.get('pais')
         comercio.estado_departamento = data.get('estado_departamento')
         comercio.ciudad = data.get('ciudad')
         comercio.direccion = data.get('direccion')
         comercio.codigo_postal = data.get('codigo_postal')
+        
+        # Características específicas
+        comercio.oficinas = safe_int(data.get('oficinas'))
+        comercio.ambientes = safe_int(data.get('ambientes'))
+        comercio.banos_completos = safe_int(data.get('banos_completos'))
+        comercio.bano_servicio = safe_int(data.get('bano_servicio'))
+        comercio.medio_bano = safe_int(data.get('medio_bano'))
+        comercio.total_banos = safe_int(data.get('total_banos'))
+        comercio.area_descanso = data.get('area_descanso')
+        comercio.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
+        comercio.cubierto = data.get('cubierto')
+        comercio.descubierto = data.get('descubierto')
+        comercio.estacionamiento_visitantes = data.get('estacionamiento_visitantes')
+        comercio.amoblado = data.get('amoblado')
+        
+        # Medidas
+        comercio.m_frente = safe_float(data.get('m_frente'))
+        comercio.m_fondo = safe_float(data.get('m_fondo'))
+        comercio.m_altura = safe_float(data.get('m_altura'))
+        comercio.m2_terreno = safe_float(data.get('m2_terreno'))
+        comercio.m2_construccion = safe_float(data.get('m2_construccion'))
+        comercio.anos_construccion = safe_int(data.get('anos_construccion'))
+        comercio.condominio_aprox = safe_float(data.get('condominio_aprox'))
+        
+        # Datos comerciales
+        comercio.razon_social = data.get('razon_social')
+        comercio.anio_apertura = safe_int(data.get('anio_apertura'))
+        comercio.punto_venta = 'punto_venta' in data
+        comercio.maquinas_equipos = 'maquinas_equipos' in data
+        comercio.mobiliario = 'mobiliario' in data
+        comercio.lineas_telefonicas = 'lineas_telefonicas' in data
+        comercio.rrss_activas = 'rrss_activas' in data
+        comercio.sistema_fiscal = 'sistema_fiscal' in data
+        comercio.pag_web_activa = 'pag_web_activa' in data
+        comercio.contabilidad = 'contabilidad' in data
+        
+        # Servicios
         comercio.areas_internas = ','.join(request.form.getlist('areas_internas'))
         comercio.comodidades = ','.join(request.form.getlist('comodidades'))
-        comercio.servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
-        comercio.servicio_cable = ','.join(request.form.getlist('cablevision'))
-        comercio.servicio_internet = ','.join(request.form.getlist('internet'))
+        comercio.telefonia = ','.join(request.form.getlist('telefonia'))
+        comercio.cablevision = ','.join(request.form.getlist('cablevision'))
+        comercio.internet = ','.join(request.form.getlist('internet'))
+        
+        # Precio y tipo de negocio
         comercio.precio = safe_float(data.get('precio'))
         comercio.comision = safe_float(data.get('comision'))
         comercio.tipo_negocio = data.get('tipo_negocio')
-        comercio.telefonia = data.get('telefonia')
-        comercio.cablevision = data.get('cablevision')
-        comercio.internet = data.get('internet')
+        
+        # Destacado
+        comercio.destacado = 'destacado' in data
+        
         db.session.commit()
         flash('Comercio actualizado con éxito.', 'success')
         return redirect(url_for('main.lista_inmuebles'))
-    return render_template('editar-comercio.html', comercio=comercio, user=user)
+    return render_template('crear-inmueble-comercio.html', comercio=comercio, user=user)
 
 @main_routes.route('/resetear-contrasena/<int:id>', methods=['POST'])
 def resetear_contrasena(id):

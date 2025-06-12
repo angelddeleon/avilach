@@ -440,15 +440,15 @@ class Local(db.Model):
     email = db.Column(db.String(120), nullable=False)
     telefono = db.Column(db.String(20), nullable=True)
 
-    # Datos del galpón
+    # Datos del local
     titulo_propiedad = db.Column(db.String(200), nullable=False)
     estado_publicacion = db.Column(db.String(20), nullable=False, default="Activo") 
     destacado = db.Column(db.Boolean, default=False)
-    tipo_inmueble = db.Column(db.String(50), nullable=False, default='Galpón')
+    tipo_inmueble = db.Column(db.String(50), nullable=False, default='Local')
     datos_inmueble = db.Column(db.Text, nullable=True)
     referencia = db.Column(db.Text, nullable=True)
 
-    # Características específicas del galpón
+    # Características específicas del local
     banos_completos = db.Column(db.Integer, nullable=True)
     banos_servicio = db.Column(db.Integer, nullable=True)
     medio_bano = db.Column(db.Integer, nullable=True)
@@ -469,9 +469,8 @@ class Local(db.Model):
     parque_industrial = db.Column(db.String(50), nullable=True)
     m2_construccion = db.Column(db.Float, nullable=True)
     condominio_aprox = db.Column(db.Float, nullable=True)
-    pie_de_calle = db.Column(db.String(50), nullable=True, default="No" )
 
-    # Ubicación del galpón
+    # Ubicación del local
     pais = db.Column(db.String(100), nullable=True)
     estado_departamento = db.Column(db.String(100), nullable=True)
     ciudad = db.Column(db.String(100), nullable=True)
@@ -491,25 +490,14 @@ class Local(db.Model):
     # Comodidades (checkboxes)
     comodidades = db.Column(db.String(500), nullable=True)
 
-    # Servicio de telefonía fija (checkboxes)
+    # Servicios
     servicio_telefonia_fija = db.Column(db.String(500), nullable=True)
-
-    # Servicio de cable (checkboxes)
     servicio_cable = db.Column(db.String(500), nullable=True)
-
-    # Servicio de internet (checkboxes)
     servicio_internet = db.Column(db.String(500), nullable=True)
 
-    # Nuevos campos de precio y comisión
-    precio = db.Column(db.Float, nullable=False)  # El precio del galpón
-    comision = db.Column(db.Float, nullable=True)  # La comisión asociada al galpón
-
-     # Dirección del Comercio
-    pais = db.Column(db.String(100), nullable=True)
-    estado_departamento = db.Column(db.String(100), nullable=True)
-    ciudad = db.Column(db.String(100), nullable=True)
-    direccion = db.Column(db.String(255), nullable=True)
-    codigo_postal = db.Column(db.String(20), nullable=True)
+    # Precio y comisión
+    precio = db.Column(db.Float, nullable=False)
+    comision = db.Column(db.Float, nullable=True)
 
     tipo_negocio = db.Column(db.String(50), nullable=False)
 
@@ -520,7 +508,7 @@ class Local(db.Model):
     agente = db.relationship('User', backref='locales', lazy=True)
 
     def __repr__(self):
-        return f"<Local {self.titulo_propiedad}>"
+        return f'<Local {self.id}>'
     
 #ruta para comercio 
 class Comercio(db.Model):

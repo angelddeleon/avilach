@@ -5,8 +5,6 @@
         <div class="card-body p-4">
             <form method="POST" enctype="multipart/form-data" action="{% if local %}{{ url_for('main.editar_local', id=local.id) }}{% else %}{{ url_for('main.crear_local') }}{% endif %}">
                 <div class="form-body mt-4">
-                    <!-- Datos del Propietario -->
-
                     <!-- Mostrar mensajes flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -23,15 +21,14 @@
                     <h5 class="card-title">Datos del Propietario</h5>
                     <hr />
                     <div class="row g-3">
-                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ local.nombre }}"></div>
-                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
-                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
-                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
-                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
-                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                        <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ local.nombre if local else '' }}"></div>
+                        <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ local.apellido if local else '' }}"></div>
+                        <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ local.ci if local else '' }}"></div>
+                        <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ local.rif if local else '' }}"></div>
+                        <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ local.fecha_nacimiento.strftime('%Y-%m-%d') if local and local.fecha_nacimiento else '' }}"></div>
+                        <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ local.estado_civil if local else '' }}"></div>
+                        <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ local.email if local else '' }}"></div>
+                        <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ local.telefono if local else '' }}"></div>
                     </div>
 
                     <h5 class="card-title mt-4">Detalles de Propiedad</h5>
@@ -40,193 +37,147 @@
                         <!-- Título de la Propiedad -->
                         <div class="col-md-4">
                             <label>Título de Propiedad</label>
-                            <input type="text" class="form-control" name="titulo_propiedad" required>
+                            <input type="text" class="form-control" name="titulo_propiedad" required value="{{ local.titulo_propiedad if local else '' }}">
                         </div>
-
-                 
-                       
 
                         <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                         <div class="col-md-6">
                             <select class="form-select" name="tipo_negocio" required>
-                                <option value="Venta">Venta</option>
-                                <option value="Alquiler">Alquiler</option>
-                                <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                <option value="Venta" {% if local and local.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                <option value="Alquiler" {% if local and local.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                <option value="Venta y Alquiler" {% if local and local.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                             </select>
                         </div>
-
-                      
 
                         <!-- Tipo de Inmueble -->
-                        
                         <div class="col-md-6">
-                           
                             <select class="form-select" name="tipo_inmueble" required>
-                                <option value="Local">local</option>
-                                <option value="Oficina">oficina</option>
-                                
+                                <option value="Local" {% if local and local.tipo_inmueble == 'Local' %}selected{% endif %}>Local</option>
+                                <option value="Oficina" {% if local and local.tipo_inmueble == 'Oficina' %}selected{% endif %}>Oficina</option>
                             </select>
                         </div>
 
-                      
-                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais"></div>
-                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento"></div>
-                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad"></div>
-                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion"></div>
-                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal"></div>
+                        <div class="col-md-4"><label>País</label><input type="text" class="form-control" name="pais" value="{{ local.pais if local else '' }}"></div>
+                        <div class="col-md-4"><label>Estado/Depto</label><input type="text" class="form-control" name="estado_departamento" value="{{ local.estado_departamento if local else '' }}"></div>
+                        <div class="col-md-4"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" value="{{ local.ciudad if local else '' }}"></div>
+                        <div class="col-md-8"><label>Dirección</label><input type="text" class="form-control" name="direccion" value="{{ local.direccion if local else '' }}"></div>
+                        <div class="col-md-4"><label>Código Postal</label><input type="text" class="form-control" name="codigo_postal" value="{{ local.codigo_postal if local else '' }}"></div>
 
-                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+                        <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ local.datos_inmueble if local else '' }}</textarea></div>
+                        <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ local.referencia if local else '' }}"></div>
 
                    <!-- Datos del Galpón -->
                     <h5 class="card-title mt-4">Datos del Galpón</h5>
                     <hr />
                     <div class="row g-3">
-
-
                         <!-- Número de Baños Completos -->
                         <div class="col-md-4">
                             <label># Baños Completos</label>
-                            <input type="number" class="form-control" name="banos_completos">
+                            <input type="number" class="form-control" name="banos_completos" value="{{ local.banos_completos if local else '' }}">
                         </div>
 
                         <!-- 1/2 Baños -->
                         <div class="col-md-4">
                             <label>1/2 Baños</label>
-                            <input type="number" class="form-control" name="medio_bano">
+                            <input type="number" class="form-control" name="medio_bano" value="{{ local.medio_bano if local else '' }}">
                         </div>
 
                         <!-- Baño de Servicio -->
                         <div class="col-md-4">
                             <label>Baño de Servicio</label>
-                            <input type="number" class="form-control" name="bano_servicio">
-                        </div>
-
-                        <!-- Área de Descanso -->
-                        <div class="col-md-4">
-                            <label>Área de Descanso</label>
-                            <input type="text" class="form-control" name="area_descanso">
-                        </div>
-
-                        <!-- Puestos de Estacionamiento -->
-                        <div class="col-md-4">
-                            <label>Puestos de Estacionamiento</label>
-                            <input type="number" class="form-control" name="puestos_estacionamiento">
-                        </div>
-
-                        <!-- Cubierto -->
-                        <div class="col-md-4">
-                            <label>Cubierto</label>
-                            <input type="text" class="form-control" name="cubierto">
-                        </div>
-
-                        <!-- Descubierto -->
-                        <div class="col-md-4">
-                            <label>Descubierto</label>
-                            <input type="text" class="form-control" name="descubierto">
-                        </div>
-
-                        <!-- Estacionamiento Visitantes -->
-                        <div class="col-md-4">
-                            <label>Estacionamiento Visitantes</label>
-                            <input type="text" class="form-control" name="estacionamiento_visitantes">
-                        </div>
-
-                        <!-- Amoblado -->
-                        <div class="col-md-4">
-                            <label>Amoblado</label>
-                            <input type="text" class="form-control" name="amoblado">
-                        </div>
-
-                        <!-- Patio de trabajo -->
-                        <div class="col-md-4">
-                            <label>Patio de trabajo</label>
-                            <input type="text" class="form-control" name="patio_trabajo">
-                        </div>
-
-                        <!-- M Frente -->
-                        <div class="col-md-4">
-                            <label>M Frente</label>
-                            <input type="number" class="form-control" name="m_frente">
+                            <input type="number" class="form-control" name="bano_servicio" value="{{ local.bano_servicio if local else '' }}">
                         </div>
 
                         <!-- Total de Baños -->
                         <div class="col-md-4">
                             <label>Total de Baños</label>
-                            <input type="number" class="form-control" name="total_banos">
+                            <input type="number" class="form-control" name="total_banos" value="{{ local.total_banos if local else '' }}">
                         </div>
 
-                        
-
-                        <!-- Vigilancia -->
+                        <!-- Área de Descanso -->
                         <div class="col-md-4">
-                            <label>Vigilancia</label>
-                            <input type="text" class="form-control" name="vigilancia">
+                            <label>Área de Descanso</label>
+                            <input type="text" class="form-control" name="area_descanso" value="{{ local.area_descanso if local else '' }}">
+                        </div>
+
+                        <!-- Puestos de Estacionamiento -->
+                        <div class="col-md-4">
+                            <label>Puestos de Estacionamiento</label>
+                            <input type="number" class="form-control" name="puestos_estacionamiento" value="{{ local.puestos_estacionamiento if local else '' }}">
+                        </div>
+
+                        <!-- Cubierto -->
+                        <div class="col-md-4">
+                            <label>Cubierto</label>
+                            <input type="text" class="form-control" name="cubierto" value="{{ local.cubierto if local else '' }}">
+                        </div>
+
+                        <!-- Descubierto -->
+                        <div class="col-md-4">
+                            <label>Descubierto</label>
+                            <input type="text" class="form-control" name="descubierto" value="{{ local.descubierto if local else '' }}">
+                        </div>
+
+                        <!-- Estacionamiento Visitantes -->
+                        <div class="col-md-4">
+                            <label>Estacionamiento Visitantes</label>
+                            <input type="text" class="form-control" name="estacionamiento_visitantes" value="{{ local.estacionamiento_visitantes if local else '' }}">
+                        </div>
+
+                        <!-- Amoblado -->
+                        <div class="col-md-4">
+                            <label>Amoblado</label>
+                            <input type="text" class="form-control" name="amoblado" value="{{ local.amoblado if local else '' }}">
+                        </div>
+
+                        <!-- Patio de trabajo -->
+                        <div class="col-md-4">
+                            <label>Patio de trabajo</label>
+                            <input type="text" class="form-control" name="patio_trabajo" value="{{ local.patio_trabajo if local else '' }}">
+                        </div>
+
+                        <!-- M Frente -->
+                        <div class="col-md-4">
+                            <label>M Frente</label>
+                            <input type="number" class="form-control" name="m_frente" value="{{ local.m_frente if local else '' }}">
                         </div>
 
                         <!-- M Fondo -->
                         <div class="col-md-4">
                             <label>M Fondo</label>
-                            <input type="number" class="form-control" name="m_fondo">
+                            <input type="number" class="form-control" name="m_fondo" value="{{ local.m_fondo if local else '' }}">
                         </div>
-
-
-
-                        
 
                         <!-- M Altura -->
                         <div class="col-md-4">
                             <label>M Altura</label>
-                            <input type="number" class="form-control" name="m_altura">
+                            <input type="number" class="form-control" name="m_altura" value="{{ local.m_altura if local else '' }}">
                         </div>
-
 
                         <!-- m2 de Terreno -->
                         <div class="col-md-4">
                             <label>m2 de Terreno</label>
-                            <input type="number" class="form-control" name="m2_terreno">
-                        </div>
-
-                        <!-- Años de Construcción -->
-                        <div class="col-md-4">
-                            <label>Años de Construcción</label>
-                            <input type="number" class="form-control" name="anos_construccion">
-                        </div>
-
-                        <!-- Parque Industrial -->
-                        <div class="col-md-4">
-                            <label>Parque Industrial</label>
-                            <input type="text" class="form-control" name="parque_industrial">
+                            <input type="number" class="form-control" name="m2_terreno" value="{{ local.m2_terreno if local else '' }}">
                         </div>
 
                         <!-- m2 de Construcción -->
                         <div class="col-md-4">
                             <label>m2 de Construcción</label>
-                            <input type="number" class="form-control" name="m2_construccion">
+                            <input type="number" class="form-control" name="m2_construccion" value="{{ local.m2_construccion if local else '' }}">
+                        </div>
+
+                        <!-- Años de Construcción -->
+                        <div class="col-md-4">
+                            <label>Años de Construcción</label>
+                            <input type="number" class="form-control" name="anos_construccion" value="{{ local.anos_construccion if local else '' }}">
                         </div>
 
                         <!-- Condominio Aprox -->
                         <div class="col-md-4">
-                            <label>Condominio Aproximado</label>
-                            <input type="number" class="form-control" name="condominio_aprox">
-                        </div>
-
-                        <!-- Pie de Calle -->
-                        <div class="col-md-4">
-                            <label>Pie de Calle</label>
-                            <select class="form-select" name="pie_de_calle">
-                                <option value="Si">Sí</option>
-                                <option value="No">No</option>
-                            </select>
+                            <label>Condominio Aprox</label>
+                            <input type="number" class="form-control" name="condominio_aprox" value="{{ local.condominio_aprox if local else '' }}">
                         </div>
                     </div>
-
-                         <div class="col-md-6">
-                             <label>Precio</label>
-                             <input type="number" class="form-control" name="precio" step="0.01" required>
-                         </div>
-                        
-               
 
                     <!-- Áreas Internas -->
                     <h5 class="card-title mt-4">Áreas Internas</h5>
@@ -351,27 +302,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Cantv" {% if local and 'Cantv' in (local.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Cantv" {% if local and 'Cantv' in (local.servicio_telefonia_fija or '') %}checked{% endif %}>
                                 <label class="form-check-label">Cantv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movistar">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movistar">
                                 <label class="form-check-label">Movistar</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Inter">
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movilnet">
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Digitel">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Digitel">
                                 <label class="form-check-label">Digitel</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="telefonia" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Otros">
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -384,27 +335,27 @@
                         <div class="col-md-6">
                             <h6>Servicio de Cable Visión</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Directv" {% if local and 'Directv' in (local.servicio_cable or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Directv" {% if local and 'Directv' in (local.servicio_cable or '') %}checked{% endif %}>
                                 <label class="form-check-label">Directv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movistar Tv">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movistar Tv">
                                 <label class="form-check-label">Movistar Tv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Intercable">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Intercable">
                                 <label class="form-check-label">Intercable</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movilnet">
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Net-Uno">
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="cablevision" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Otros">
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -412,91 +363,119 @@
                         <div class="col-md-6">
                             <h6>Servicio de Internet</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Aba" {% if local and 'Aba' in (local.servicio_internet or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Aba" {% if local and 'Aba' in (local.servicio_internet or '') %}checked{% endif %}>
                                 <label class="form-check-label">Aba</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter">
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Net-Uno">
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Inter Satelital">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter Satelital">
                                 <label class="form-check-label">Inter Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Serv. Satelital">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Serv. Satelital">
                                 <label class="form-check-label">Serv. Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="internet" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Otros">
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
-
-                        <h5 class="card-title mt-4">Documentación</h5>
-                        <hr />
-                        <div class="row g-3">
-                            <!-- Imagen de Cédula -->
-                            <div class="col-md-6">
-                                <label>Imagen de Cédula</label>
-                                <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
-                            </div>
-
-                            <!-- Documento de Propiedad -->
-                            <div class="col-md-6">
-                                <label>Documento de Propiedad</label>
-                                <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
-                            </div>
-                        </div>
-
-                        <!-- Imágenes del Galpón -->
-                        <div class="row g-3">
-                            <div class="col-md-12">
-                                <label>Arrastra y suelta las imágenes</label>
-
-                                <!-- Cuadro visual para las imágenes -->
-                                <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
-                                    {% if local and local.imagen_principal %}
-                                        {% set imagenes = local.imagen_principal.split(',') %}
-                                        {% for img in imagenes %}
-                                            {% set img_nombre = img.strip() %}
-                                            {% if img_nombre %}
-                                                <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
-                                                    <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
-                                                    <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
-                                                    <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
-                                                    <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
-                                                </div>
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endif %}
-                                </div>
-                                
-                                <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
-                                <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
-                            </div>
-                        </div>
-
                     </div>
 
-                    <!-- Botón -->
-                    <div class="mt-4 text-end">
-                        <button type="submit" class="btn btn-primary">Guardar Local</button>
+                    <!-- Documentación -->
+                    <h5 class="card-title mt-4">Documentación</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <!-- Imagen de Cédula -->
+                        <div class="col-md-6">
+                            <label>Imagen de Cédula</label>
+                            <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                            {% if local and local.imagen_cedula %}
+                            <div class="mt-2">
+                                <img src="/static/archivos/{{ local.imagen_cedula }}" alt="Imagen de cédula" style="max-width: 200px; max-height: 200px;">
+                            </div>
+                            {% endif %}
+                        </div>
+
+                        <!-- Documento de Propiedad -->
+                        <div class="col-md-6">
+                            <label>Documento de Propiedad</label>
+                            <input type="file" class="form-control" name="documento_propiedad">
+                            {% if local and local.documento_propiedad %}
+                            <div class="mt-2">
+                                <a href="/static/archivos/{{ local.documento_propiedad }}" target="_blank" class="btn btn-primary">Ver Documento de Propiedad</a>
+                            </div>
+                            {% endif %}
+                        </div>
                     </div>
+
+                    <!-- Precio y Comisión -->
+                    <h5 class="card-title mt-4">Precio y Comisión</h5>
+                    <hr />
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label>Precio</label>
+                            <input type="number" class="form-control" name="precio" step="0.01" required value="{{ local.precio if local else '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Comisión</label>
+                            <input type="number" class="form-control" name="comision" step="0.01" value="{{ local.comision if local else '' }}">
+                        </div>
+                    </div>
+
+                    <!-- Destacado -->
+                    <div class="row g-3 mt-3">
+                        <div class="col-md-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="destacado" id="destacado" {% if local and local.destacado %}checked{% endif %}>
+                                <label class="form-check-label" for="destacado">Destacado</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Imágenes del Galpón -->
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label>Arrastra y suelta las imágenes</label>
+
+                            <!-- Cuadro visual para las imágenes -->
+                            <div id="imagenes-cuadro" class="border p-3" style="min-height: 150px; display: flex; flex-wrap: wrap;">
+                                {% if local and local.imagen_principal %}
+                                    {% set imagenes = local.imagen_principal.split(',') %}
+                                    {% for img in imagenes %}
+                                        {% set img_nombre = img.strip() %}
+                                        {% if img_nombre %}
+                                            <div class="image-item border p-2 m-2 rounded" data-imagen="{{ img_nombre }}">
+                                                <img src="/static/imagenes/inmuebles/{{ img_nombre }}" alt="Imagen inmueble" style="max-width: 100px; max-height: 100px; margin-bottom: 10px;">
+                                                <input type="hidden" name="imagenes_actuales[]" value="{{ img_nombre }}">
+                                                <div class="drag-handle" style="cursor: move; text-align: center; font-size: 20px;">&#x21C5;</div>
+                                                <div class="delete-btn" onclick="eliminarImagenExistente(this, '{{ img_nombre }}')">X</div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            
+                            <input type="file" id="imagenes-input" class="form-control" name="imagenes" multiple accept="image/*" style="display: none;" />
+                            <button type="button" id="upload-btn" class="btn btn-primary mt-2">Seleccionar Imágenes</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Botón -->
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-primary">Guardar Local</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- Mostrar imagen_cedula y documento_propiedad -->
-{% if local and local.imagen_cedula %}
-  <img src="/static/archivos/{{ local.imagen_cedula }}" alt="Imagen de Cédula" style="max-width: 200px;">
-{% endif %}
-{% if local and local.documento_propiedad %}
-  <a href="/static/archivos/{{ local.documento_propiedad }}" target="_blank">Ver Documento de Propiedad</a>
-{% endif %}

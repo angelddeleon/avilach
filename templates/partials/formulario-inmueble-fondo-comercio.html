@@ -484,12 +484,24 @@
                         <div class="col-md-6">
                             <label>Imagen de Cédula</label>
                             <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                            {% if comercio and comercio.imagen_cedula %}
+                            <div class="mt-2">
+                                <img src="/static/archivos/{{ comercio.imagen_cedula }}" alt="Imagen de cédula" style="max-width: 200px; max-height: 200px;">
+                            </div>
+                            {% endif %}
                         </div>
 
                         <!-- Documento de Propiedad -->
                         <div class="col-md-6">
                             <label>Documento de Propiedad</label>
                             <input type="file" class="form-control" name="documento_propiedad" accept=".pdf">
+                            {% if comercio and comercio.documento_propiedad %}
+                            <div class="mt-2">
+                                <a href="/static/archivos/{{ comercio.documento_propiedad }}" target="_blank" class="btn btn-primary">
+                                    Ver Documento de Propiedad
+                                </a>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
 
