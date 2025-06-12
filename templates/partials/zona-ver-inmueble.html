@@ -10,8 +10,9 @@
                             {% if inmueble.imagen_principal %}
                                 {% set img_list = inmueble.imagen_principal.split(',') %}
                                 {% for i in range(img_list|length) %}
+                                    {% set img_nombre = img_list[i].strip() %}
                                     <div class="carousel-item {% if i == 0 %}active{% endif %}">
-                                        <img src="{{ url_for('static', filename=img_list[i].replace('\\', '/').split('static/')[1]) }}" class="d-block w-100" alt="Imagen del inmueble" style="height: 600px">
+                                        <img src="/static/imagenes/inmuebles/{{ img_nombre }}" class="d-block w-100" alt="Imagen del inmueble" style="height: 600px">
                                     </div>
                                 {% endfor %}
                             {% else %}

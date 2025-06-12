@@ -28,7 +28,7 @@ def guardar_archivo(file):
         filename = secure_filename(file.filename)
         ruta = os.path.join(ARCHIVOS_FOLDER, filename)
         file.save(ruta)
-        return f'/static/archivos/{filename}'
+        return filename  # Solo el nombre del archivo
     return None
 
 
@@ -2002,6 +2002,17 @@ def editar_casa(id):
         # Actualizar la lista de imágenes en la base de datos
         imagenes_finales = imagenes_actuales + nuevas_imagenes
         casa.imagen_principal = ','.join(imagenes_finales)
+
+        # Procesar imagen_cedula y documento_propiedad
+        imagen_cedula_file = request.files.get('imagen_cedula')
+        if imagen_cedula_file and imagen_cedula_file.filename:
+            casa.imagen_cedula = guardar_archivo(imagen_cedula_file)
+        # Si no se sube nada, se mantiene el valor anterior
+
+        documento_propiedad_file = request.files.get('documento_propiedad')
+        if documento_propiedad_file and documento_propiedad_file.filename:
+            casa.documento_propiedad = guardar_archivo(documento_propiedad_file)
+        # Si no se sube nada, se mantiene el valor anterior
 
         def safe_int(val):
             return int(val) if val not in (None, '', 'None') else None

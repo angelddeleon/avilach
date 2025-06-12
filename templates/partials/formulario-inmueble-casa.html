@@ -405,8 +405,24 @@
 
                                 
 
-                                <div class="mb-3"><label>Imagen de Cédula</label><input type="file" class="form-control" name="imagen_cedula" accept="image/*"></div>
-                                <div class="mb-3"><label>Documento de Propiedad</label><input type="file" class="form-control" name="documento_propiedad" accept="application/pdf"></div>
+                                <div class="mb-3">
+                                    <label>Imagen de Cédula</label>
+                                    <input type="file" class="form-control" name="imagen_cedula" accept="image/*">
+                                    {% if casa and casa.imagen_cedula %}
+                                        <div class="mt-2">
+                                            <img src="/static/archivos/{{ casa.imagen_cedula }}" alt="Imagen de Cédula" style="max-width: 200px;">
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <div class="mb-3">
+                                    <label>Documento de Propiedad</label>
+                                    <input type="file" class="form-control" name="documento_propiedad" accept="application/pdf">
+                                    {% if casa and casa.documento_propiedad %}
+                                        <div class="mt-2">
+                                            <a href="/static/archivos/{{ casa.documento_propiedad }}" target="_blank">Ver documento actual</a>
+                                        </div>
+                                    {% endif %}
+                                </div>
                                 
 
                                 <div class="row g-3">
