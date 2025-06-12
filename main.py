@@ -38,5 +38,12 @@ db.init_app(app)
 # Registrar las rutas desde otro archivo
 app.register_blueprint(main_routes)
 
+def split_and_strip(value):
+    if not value:
+        return []
+    return [v.strip() for v in value.split(',')]
+
+app.jinja_env.filters['split_and_strip'] = split_and_strip
+
 if __name__ == '__main__':
     app.run(debug=True)

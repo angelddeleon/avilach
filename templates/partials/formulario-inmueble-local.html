@@ -185,31 +185,31 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v" {% if local and 'Electricidad 110 v' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 110 v" {% if local and 'Electricidad 110 v' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 110 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v" {% if local and 'Electricidad 220 v' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 220 v" {% if local and 'Electricidad 220 v' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 220 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v" {% if local and 'Electricidad 440 v' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad 440 v" {% if local and 'Electricidad 440 v' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad 440 v</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica" {% if local and 'Electricidad Trifásica' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Electricidad Trifásica" {% if local and 'Electricidad Trifásica' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Electricidad Trifásica</label>
                             </div>
         
                             <div class="form-check">
                                 <label>Vigilancia</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia" {% if local and 'Vigilancia' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Vigilancia" {% if local and 'Vigilancia' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                             <!-- Sistema de Ventilación -->
                             <div class="form-check">
                                 <label>Sistema de Ventilación</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación" {% if local and 'Sistema de Ventilación' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Sistema de Ventilación" {% if local and 'Sistema de Ventilación' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                             
@@ -218,19 +218,19 @@
                             <!-- Pozo de Agua -->
                             <div class="form-check">
                                 <label>Pozo de Agua</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua" {% if local and 'Pozo de Agua' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Pozo de Agua" {% if local and 'Pozo de Agua' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                             <!-- Circuito Cerrado -->
                             <div class="form-check">
                                 <label>Circuito Cerrado</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado" {% if local and 'Circuito Cerrado' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Circuito Cerrado" {% if local and 'Circuito Cerrado' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                             <!-- Tanque de Agua Interno -->
                             <div class="form-check">
                                 <label>Tanque de Agua Interno</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno" {% if local and 'Tanque de Agua Interno' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Tanque de Agua Interno" {% if local and 'Tanque de Agua Interno' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                         
@@ -238,35 +238,35 @@
                             <!-- Estación de Visitantes -->
                             <div class="form-check">
                                 <label>Estación de Visitantes</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes" {% if local and 'Estacionamiento de Visitantes' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Estacionamiento de Visitantes" {% if local and 'Estacionamiento de Visitantes' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                         
                             <!-- Planta Eléctrica -->
                             <div class="form-check">
                                 <label>Planta Eléctrica</label>
-                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica" {% if local and 'Planta Eléctrica' in (local.areas_internas or '') %}checked{% endif %}>
+                                <input type="checkbox" class="form-check-input" name="areas_internas" value="Planta Eléctrica" {% if local and 'Planta Eléctrica' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                             </div>
                             
                         </div>
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación" {% if local and 'Sistema de Ventilación' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Sistema de Ventilación</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico" {% if local and 'Cerco Eléctrico' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Cerco Eléctrico</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma" {% if local and 'Alarma' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Alarma</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado" {% if local and 'Circuito Cerrado' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Circuito Cerrado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers" {% if local and 'Plataforma para Trailers' in (local.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Plataforma para Trailers</label>
                             </div>
                         </div>
@@ -278,19 +278,19 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado" {% if local and 'Aire Acondicionado' in (local.comodidades or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire Acondicionado" {% if local and 'Aire Acondicionado' in (local.comodidades|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Aire Acondicionado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="De ventana" {% if local and 'De ventana' in (local.comodidades|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">De ventana</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Tipo Split" {% if local and 'Tipo Split' in (local.comodidades|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Tipo Split</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central">
+                                <input class="form-check-input" type="checkbox" name="comodidades" value="Aire central" {% if local and 'Aire central' in (local.comodidades|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Aire central</label>
                             </div>
                         </div>
@@ -302,27 +302,27 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Cantv" {% if local and 'Cantv' in (local.servicio_telefonia_fija or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Cantv" {% if local and 'Cantv' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Cantv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movistar">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movistar" {% if local and 'Movistar' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Movistar</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Inter" {% if local and 'Inter' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Movilnet" {% if local and 'Movilnet' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Digitel">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Digitel" {% if local and 'Digitel' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Digitel</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_telefonia_fija" value="Otros" {% if local and 'Otros' in (local.servicio_telefonia_fija|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -335,27 +335,27 @@
                         <div class="col-md-6">
                             <h6>Servicio de Cable Visión</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Directv" {% if local and 'Directv' in (local.servicio_cable or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Directv" {% if local and 'Directv' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Directv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movistar Tv">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movistar Tv" {% if local and 'Movistar Tv' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Movistar Tv</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Intercable">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Intercable" {% if local and 'Intercable' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Intercable</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movilnet">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Movilnet" {% if local and 'Movilnet' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Movilnet</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Net-Uno" {% if local and 'Net-Uno' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_cable" value="Otros" {% if local and 'Otros' in (local.servicio_cable|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>
@@ -363,27 +363,27 @@
                         <div class="col-md-6">
                             <h6>Servicio de Internet</h6>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Aba" {% if local and 'Aba' in (local.servicio_internet or '') %}checked{% endif %}>
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Aba" {% if local and 'Aba' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Aba</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter" {% if local and 'Inter' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Inter</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Net-Uno">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Net-Uno" {% if local and 'Net-Uno' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Net-Uno</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter Satelital">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Inter Satelital" {% if local and 'Inter Satelital' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Inter Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Serv. Satelital">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Serv. Satelital" {% if local and 'Serv. Satelital' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Serv. Satelital</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Otros">
+                                <input class="form-check-input" type="checkbox" name="servicio_internet" value="Otros" {% if local and 'Otros' in (local.servicio_internet|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Otros</label>
                             </div>
                         </div>

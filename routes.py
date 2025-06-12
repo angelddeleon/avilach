@@ -536,7 +536,7 @@ def crear_galpon():
                 fecha_nacimiento=datetime.strptime(data['fecha_nacimiento'], '%Y-%m-%d') if data.get('fecha_nacimiento') else None,
                 estado_civil=data.get('estado_civil'),
                 email=data['email'],
-                telefono=data.get('telefono'),
+                telefono=data['telefono'],
                 titulo_propiedad=titulo_propiedad,
                 destacado=destacado,
                 tipo_inmueble=tipo_inmueble,
@@ -803,6 +803,7 @@ def crear_comercio():
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_comercio'))
+            galpon = data.get('galpon')
             nuevo_comercio = Comercio(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -863,7 +864,8 @@ def crear_comercio():
                 rrss_activas=data.get('rrss_activas') == 'on',
                 sistema_fiscal=data.get('sistema_fiscal') == 'on',
                 pag_web_activa=data.get('pag_web_activa') == 'on',
-                contabilidad=data.get('contabilidad') == 'on'
+                contabilidad=data.get('contabilidad') == 'on',
+                galpon=galpon,
             )
             db.session.add(nuevo_comercio)
             db.session.commit()
@@ -2430,9 +2432,9 @@ def editar_local(id):
         # Servicios
         local.areas_internas = ','.join(request.form.getlist('areas_internas'))
         local.comodidades = ','.join(request.form.getlist('comodidades'))
-        local.telefonia = ','.join(request.form.getlist('telefonia'))
-        local.cablevision = ','.join(request.form.getlist('cablevision'))
-        local.internet = ','.join(request.form.getlist('internet'))
+        local.servicio_telefonia_fija = ','.join(request.form.getlist('servicio_telefonia_fija'))
+        local.servicio_cable = ','.join(request.form.getlist('servicio_cable'))
+        local.servicio_internet = ','.join(request.form.getlist('servicio_internet'))
         
         # Precio y tipo de negocio
         local.precio = safe_float(data.get('precio'))
