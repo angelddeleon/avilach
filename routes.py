@@ -528,6 +528,12 @@ def crear_galpon():
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
                 return redirect(url_for('main.crear_galpon'))
             
+            ambientes = safe_int(data.get('ambientes'))
+            estacionamientos_cubiertos = safe_int(data.get('estacionamientos_cubiertos'))
+            estacionamientos_descubiertos = safe_int(data.get('estacionamientos_descubiertos'))
+            m_fondo = safe_float(data.get('m_fondo'))
+            vigilancia = data.get('vigilancia')
+
             nuevo_galpon = Galpon(
                 nombre=data['nombre'],
                 apellido=data['apellido'],
@@ -549,13 +555,13 @@ def crear_galpon():
                 medio_bano=safe_int(data.get('medio_bano')),
                 area_descanso=area_descanso,
                 puestos_estacionamiento=puestos_estacionamiento,
-                cubierto=data.get('cubierto'),
+                cubierto=data.get('estacionamientos_cubiertos') or data.get('cubierto'),
+                descubierto=data.get('estacionamientos_descubiertos') or data.get('descubierto'),
                 amoblado=amoblado,
                 kitchenette=kitchenette,
                 patio_trabajo=patio_trabajo,
                 m_frente=m_frente,
                 total_banos=total_banos,
-                descubierto=descubierto,
                 vigilancia=vigilancia,
                 m_fondo=m_fondo,
                 estacionamiento_visitantes=estacionamiento_visitantes,
@@ -2307,13 +2313,13 @@ def editar_galpon(id):
         galpon.medio_bano = safe_int(data.get('medio_bano'))
         galpon.area_descanso = data['area_descanso'] or None
         galpon.puestos_estacionamiento = safe_int(data.get('puestos_estacionamiento'))
-        galpon.cubierto = data.get('cubierto')
+        galpon.cubierto = data.get('estacionamientos_cubiertos') or data.get('cubierto')
+        galpon.descubierto = data.get('estacionamientos_descubiertos') or data.get('descubierto')
         galpon.amoblado = data['amoblado'] or None
         galpon.kitchenette = data['kitchenette'] or None
         galpon.patio_trabajo = data['patio_trabajo'] or None
         galpon.m_frente = safe_float(data.get('m_frente'))
         galpon.total_banos = safe_int(data.get('total_banos'))
-        galpon.descubierto = data['estacionamientos_descubiertos'] or None
         galpon.vigilancia = data['vigilancia'] or None
         galpon.m_fondo = safe_float(data.get('m_fondo'))
         galpon.estacionamiento_visitantes = data['estacionamiento_visitantes'] or None
