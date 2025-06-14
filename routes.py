@@ -63,10 +63,6 @@ def login():
 
 
 
-
-
-
-
 @main_routes.route('/dashboard')
 def dashboard():
     if 'user_id' not in session:
@@ -394,7 +390,12 @@ def crear_terreno():
             cerca_perimetral = data.get('cerca_perimetral')
             bienechurias = data.get('bienechurias')
             otros = data.get('otros')
-            materiales = ','.join(request.form.getlist('materiales'))
+            descripcion = data.get('datos_inmueble')
+            vias_acceso = ','.join(request.form.getlist('vias_acceso'))
+            formas_terreno = ','.join(request.form.getlist('formas_terreno'))
+            servicios_basicos = ','.join(request.form.getlist('servicios_basicos'))
+            zonificacion = ','.join(request.form.getlist('zonificacion'))
+            materiales = ','.join(request.form.getlist('materiales[]'))
             tipo_negocio = data.get('tipo_negocio')
 
             # Otros campos del formulario
@@ -428,6 +429,11 @@ def crear_terreno():
                 bienechurias=bienechurias,
                 otros=otros,
                 materiales=materiales,  # Almacena los materiales como texto separado por comas
+                descripcion=descripcion,
+                vias_acceso=vias_acceso,
+                formas_terreno=formas_terreno,
+                servicios_basicos=servicios_basicos,
+                zonificacion=zonificacion,
                 precio=precio,
                 comision=comision,
 
@@ -514,9 +520,9 @@ def crear_galpon():
             # Obtener las áreas internas, comodidades y servicios como listas
             areas_internas = ','.join(request.form.getlist('areas_internas'))
             comodidades = ','.join(request.form.getlist('comodidades'))
-            servicio_telefonia_fija = ','.join(request.form.getlist('servicio_telefonia_fija'))
-            servicio_cable = ','.join(request.form.getlist('servicio_cable'))
-            servicio_internet = ','.join(request.form.getlist('servicio_internet'))
+            servicio_telefonia_fija = ','.join(request.form.getlist('telefonia'))
+            servicio_cable = ','.join(request.form.getlist('cablevision'))
+            servicio_internet = ','.join(request.form.getlist('internet'))
 
             titulo_propiedad = data['titulo_propiedad']
             destacado = 'destacado' in data
@@ -2244,7 +2250,12 @@ def editar_terreno(id):
         terreno.cerca_perimetral = data.get('cerca_perimetral')
         terreno.bienechurias = data.get('bienechurias')
         terreno.otros = data.get('otros')
-        terreno.materiales = ','.join(request.form.getlist('materiales'))
+        terreno.descripcion = data.get('datos_inmueble')
+        terreno.vias_acceso = ','.join(request.form.getlist('vias_acceso'))
+        terreno.formas_terreno = ','.join(request.form.getlist('formas_terreno'))
+        terreno.servicios_basicos = ','.join(request.form.getlist('servicios_basicos'))
+        terreno.zonificacion = ','.join(request.form.getlist('zonificacion'))
+        terreno.materiales = ','.join(request.form.getlist('materiales[]'))
         terreno.precio = safe_float(data.get('precio'))
         terreno.comision = safe_float(data.get('comision'))
         db.session.commit()

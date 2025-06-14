@@ -83,11 +83,6 @@
                             <input type="number" class="form-control" name="oficinas" value="{{ galpon.oficinas if galpon else '' }}">
                         </div>
 
-                        <!-- Número de Ambientes -->
-                        <div class="col-md-4">
-                            <label># Ambientes</label>
-                            <input type="number" class="form-control" name="ambientes" value="{{ galpon.ambientes if galpon else '' }}">
-                        </div>
 
                         <!-- Número de Baños Completos -->
                         <div class="col-md-4">
@@ -104,7 +99,7 @@
                         <!-- Baño de Servicio -->
                         <div class="col-md-4">
                             <label>Baño de Servicio</label>
-                            <input type="number" class="form-control" name="bano_servicio" value="{{ galpon.bano_servicio if galpon else '' }}">
+                            <input type="number" class="form-control" name="bano_servicio" value="{{ galpon.banos_servicio if galpon else '' }}">
                         </div>
 
                          <!-- Total de Baños -->
@@ -123,8 +118,8 @@
 
                         <!-- Puestos de Estacionamiento -->
                         <div class="col-md-4"><label>Puestos de Estacionamiento</label><input type="number" class="form-control" name="puestos_estacionamiento" value="{{ galpon.puestos_estacionamiento if galpon else '' }}"></div>
-                        <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos" value="{{ galpon.estacionamientos_cubiertos if galpon else '' }}"></div>
-                        <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos" value="{{ galpon.estacionamientos_descubiertos if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>Techados</label><input type="number" class="form-control" name="estacionamientos_cubiertos" value="{{ galpon.cubierto if galpon else '' }}"></div>
+                        <div class="col-md-4"><label>No Techados</label><input type="number" class="form-control" name="estacionamientos_descubiertos" value="{{ galpon.descubierto if galpon else '' }}"></div>
                                 
 
                         <!-- Estacionamiento Visitantes -->
@@ -315,23 +310,23 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Sistema de Ventilación" {% if galpon and 'Sistema de Ventilación' in (galpon.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Sistema de Ventilación</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Cerco Eléctrico" {% if galpon and 'Cerco Eléctrico' in (galpon.areas_internas|split_and_strip) %}checked{% endif %} >
                                 <label class="form-check-label">Cerco Eléctrico</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Alarma" {% if galpon and 'Alarma' in (galpon.areas_internas|split_and_strip) %}checked{% endif %} >
                                 <label class="form-check-label">Alarma</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Circuito Cerrado" {% if galpon and 'Circuito Cerrado' in (galpon.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Circuito Cerrado</label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers">
+                                <input class="form-check-input" type="checkbox" name="areas_internas" value="Plataforma para Trailers" {% if galpon and 'Plataforma para Trailers' in (galpon.areas_internas|split_and_strip) %}checked{% endif %}>
                                 <label class="form-check-label">Plataforma para Trailers</label>
                             </div>
                         </div>

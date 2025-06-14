@@ -12,14 +12,14 @@
                                 <h5 class="card-title">Datos del Propietario</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required></div>
-                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required></div>
-                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required></div>
-                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif"></div>
-                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento"></div>
-                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil"></div>
-                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required></div>
-                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono"></div>
+                                    <div class="col-md-4"><label>Nombre</label><input type="text" class="form-control" name="nombre" required value="{{ terreno.nombre if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>Apellido</label><input type="text" class="form-control" name="apellido" required value="{{ terreno.apellido if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>CI</label><input type="text" class="form-control" name="ci" required value="{{ terreno.ci if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>RIF</label><input type="text" class="form-control" name="rif" value="{{ terreno.rif if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>Fecha de Nacimiento</label><input type="date" class="form-control" name="fecha_nacimiento" value="{{ terreno.fecha_nacimiento.strftime('%Y-%m-%d') if terreno and terreno.fecha_nacimiento else '' }}"></div>
+                                    <div class="col-md-4"><label>Estado Civil</label><input type="text" class="form-control" name="estado_civil" value="{{ terreno.estado_civil if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>Email</label><input type="email" class="form-control" name="email" required value="{{ terreno.email if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>Teléfono</label><input type="text" class="form-control" name="telefono" value="{{ terreno.telefono if terreno else '' }}"></div>
                                 </div>
 
                                 <!-- Título del Inmueble -->
@@ -28,71 +28,71 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <label>Título de Publicación</label>
-                                        <input type="text" class="form-control" name="titulo_publicacion" required>
+                                        <input type="text" class="form-control" name="titulo_publicacion" required value="{{ terreno.titulo_publicacion if terreno else '' }}">
                                     </div>
                                     
 
                                     <label for="tipo_negocio" class="form-label">Tipo de Negocio</label>
                                     <div class="col-md-6">
                                         <select class="form-select" name="tipo_negocio" required>
-                                            <option value="Venta">Venta</option>
-                                            <option value="Alquiler">Alquiler</option>
-                                            <option value="Venta y Alquiler">Venta y Alquiler</option>
+                                            <option value="Venta" {% if terreno and terreno.tipo_negocio == 'Venta' %}selected{% endif %}>Venta</option>
+                                            <option value="Alquiler" {% if terreno and terreno.tipo_negocio == 'Alquiler' %}selected{% endif %}>Alquiler</option>
+                                            <option value="Venta y Alquiler" {% if terreno and terreno.tipo_negocio == 'Venta y Alquiler' %}selected{% endif %}>Venta y Alquiler</option>
                                         </select>
                                     </div>
                                     
                                     <div class="col-md-6">
                                         <label>Tipo de Inmueble</label>
                                         <select class="form-select" name="tipo_inmueble">
-                                            <option value="Terreno">terreno</option>
+                                            <option value="Terreno" {% if terreno and terreno.tipo_inmueble == 'Terreno' %}selected{% endif %}>terreno</option>
                                         </select>
                                     </div>
 
                                     <h5 class="card-title mt-4">Datos del Terreno</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-3"><label>Estado</label><input type="text" class="form-control" name="estado" required></div>
-                                    <div class="col-md-3"><label>Municipio</label><input type="text" class="form-control" name="municipio" required></div>
-                                    <div class="col-md-3"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" required></div>
-                                    <div class="col-md-3"><label>Urbanización</label><input type="text" class="form-control" name="urbanizacion"></div>
+                                    <div class="col-md-3"><label>Estado</label><input type="text" class="form-control" name="estado" required value="{{ terreno.estado if terreno else '' }}"></div>
+                                    <div class="col-md-3"><label>Municipio</label><input type="text" class="form-control" name="municipio" required value="{{ terreno.municipio if terreno else '' }}"></div>
+                                    <div class="col-md-3"><label>Ciudad</label><input type="text" class="form-control" name="ciudad" required value="{{ terreno.ciudad if terreno else '' }}"></div>
+                                    <div class="col-md-3"><label>Urbanización</label><input type="text" class="form-control" name="urbanizacion" value="{{ terreno.urbanizacion if terreno else '' }}"></div>
                                     
-                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble"></textarea></div>
-                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia"></div>
+                                    <div class="col-md-6"><label>Descripcion</label><textarea class="form-control" name="datos_inmueble">{{ terreno.descripcion if terreno else '' }}</textarea></div>
+                                    <div class="col-md-6"><label>Referencia</label><input type="text" class="form-control" name="referencia" value="{{ terreno.referencia if terreno else '' }}"></div>
             
                                 </div>
 
 
                                     <div class="col-md-4">
                                         <label for="m2_terreno">m2 de Terreno</label>
-                                        <input type="number" class="form-control" name="m2_terreno" required>
+                                        <input type="number" class="form-control" name="m2_terreno" required value="{{ terreno.m2_terreno if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="m2_construccion">m2 de Construcción</label>
-                                        <input type="number" class="form-control" name="m2_construccion">
+                                        <input type="number" class="form-control" name="m2_construccion" value="{{ terreno.m2_construccion if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="m_frente">Frente</label>
-                                        <input type="number" class="form-control" name="m_frente">
+                                        <input type="number" class="form-control" name="m_frente" value="{{ terreno.m_frente if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="m_anch">Ancho</label>
-                                        <input type="number" class="form-control" name="m_anch">
+                                        <input type="number" class="form-control" name="m_anch" value="{{ terreno.m_anch if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="m_largo">Largo</label>
-                                        <input type="number" class="form-control" name="m_largo">
+                                        <input type="number" class="form-control" name="m_largo" value="{{ terreno.m_largo if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="cerca_perimetral">Cerca Perimetral</label>
-                                        <input type="text" class="form-control" name="cerca_perimetral">
+                                        <input type="text" class="form-control" name="cerca_perimetral" value="{{ terreno.cerca_perimetral if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="bienechurias">Bienechurias</label>
-                                        <input type="text" class="form-control" name="bienechurias">
+                                        <input type="text" class="form-control" name="bienechurias" value="{{ terreno.bienechurias if terreno else '' }}">
                                     </div>
                                     <div class="col-md-4">
                                         <label for="otros">Otros</label>
-                                        <input type="text" class="form-control" name="otros">
+                                        <input type="text" class="form-control" name="otros" value="{{ terreno.otros if terreno else '' }}">
                                     </div>
             
                                     <!-- Características adicionales (checkboxes) -->
@@ -101,15 +101,15 @@
                                     <div class="row g-3">
                                         <div class="col-md-4">
                                             <label for="bloques">Bloques</label>
-                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Bloques">
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Bloques" {% if terreno and terreno.materiales and 'Bloques' in terreno.materiales %}checked{% endif %}>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="alfajol">Alfajol</label>
-                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Alfajol">
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Alfajol" {% if terreno and terreno.materiales and 'Alfajol' in terreno.materiales %}checked{% endif %}>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="madera">Madera</label>
-                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Madera">
+                                            <input type="checkbox" class="form-check-input" name="materiales[]" value="Madera" {% if terreno and terreno.materiales and 'Madera' in terreno.materiales %}checked{% endif %}>
                                         </div>
                                     </div>
                                 </div>
@@ -122,23 +122,23 @@
                                     <div class="col-md-4">
                                         <label>Vías de Acceso</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Asfalto">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Asfalto" {% if terreno and terreno.vias_acceso and 'Asfalto' in terreno.vias_acceso %}checked{% endif %}>
                                             <label class="form-check-label">Asfalto</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Tierra">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Tierra" {% if terreno and terreno.vias_acceso and 'Tierra' in terreno.vias_acceso %}checked{% endif %}>
                                             <label class="form-check-label">Tierra</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Concreto">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Concreto" {% if terreno and terreno.vias_acceso and 'Concreto' in terreno.vias_acceso %}checked{% endif %}>
                                             <label class="form-check-label">Concreto</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Arena">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Arena" {% if terreno and terreno.vias_acceso and 'Arena' in terreno.vias_acceso %}checked{% endif %}>
                                             <label class="form-check-label">Arena</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Ripio">
+                                            <input class="form-check-input" type="checkbox" name="vias_acceso" value="Ripio" {% if terreno and terreno.vias_acceso and 'Ripio' in terreno.vias_acceso %}checked{% endif %}>
                                             <label class="form-check-label">Ripio</label>
                                         </div>
                                     </div>
@@ -146,22 +146,22 @@
                                     <div class="col-md-4">
                                         <label>Formas del Terreno</label>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Regular">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Regular" {% if terreno and terreno.formas_terreno and 'Regular' in terreno.formas_terreno %}checked{% endif %}>
                                             <label class="form-check-label">Regular</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Irregular">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Irregular" {% if terreno and terreno.formas_terreno and 'Irregular' in terreno.formas_terreno %}checked{% endif %}>
                                             <label class="form-check-label">Irregular</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Plano">
+                                            <input class="form-check-input" type="checkbox" name="formas_terreno" value="Plano" {% if terreno and terreno.formas_terreno and 'Plano' in terreno.formas_terreno %}checked{% endif %}>
                                             <label class="form-check-label">Plano</label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-4">
                                         <label>Otros</label>
-                                        <input type="text" class="form-control" name="otros_caracteristicas">
+                                        <input type="text" class="form-control" name="otros_caracteristicas" value="{{ terreno.otros_caracteristicas if terreno else '' }}">
                                     </div>
                                 </div>
 
@@ -171,25 +171,25 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Blancas">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Blancas" {% if terreno and terreno.servicios_basicos and 'Aguas Blancas' in terreno.servicios_basicos %}checked{% endif %}>
                                             <label class="form-check-label">Aguas Blancas</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Electricidad">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Electricidad" {% if terreno and terreno.servicios_basicos and 'Electricidad' in terreno.servicios_basicos %}checked{% endif %}>
                                             <label class="form-check-label">Electricidad</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Negras">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Aguas Negras" {% if terreno and terreno.servicios_basicos and 'Aguas Negras' in terreno.servicios_basicos %}checked{% endif %}>
                                             <label class="form-check-label">Aguas Negras</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Alta Tensión">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Alta Tensión" {% if terreno and terreno.servicios_basicos and 'Alta Tensión' in terreno.servicios_basicos %}checked{% endif %}>
                                             <label class="form-check-label">Alta Tensión</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Baja Tensión">
+                                            <input class="form-check-input" type="checkbox" name="servicios_basicos" value="Baja Tensión" {% if terreno and terreno.servicios_basicos and 'Baja Tensión' in terreno.servicios_basicos %}checked{% endif %}>
                                             <label class="form-check-label">Baja Tensión</label>
                                         </div>
                                     </div>
@@ -201,21 +201,21 @@
                                 <div class="row g-3">
                                     <div class="col-md-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Residencial">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Residencial" {% if terreno and terreno.zonificacion and 'Residencial' in terreno.zonificacion %}checked{% endif %}>
                                             <label class="form-check-label">Residencial</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Comercial">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Comercial" {% if terreno and terreno.zonificacion and 'Comercial' in terreno.zonificacion %}checked{% endif %}>
                                             <label class="form-check-label">Comercial</label>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Industrial">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Industrial" {% if terreno and terreno.zonificacion and 'Industrial' in terreno.zonificacion %}checked{% endif %}>
                                             <label class="form-check-label">Industrial</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Educativa">
+                                            <input class="form-check-input" type="checkbox" name="zonificacion" value="Educativa" {% if terreno and terreno.zonificacion and 'Educativa' in terreno.zonificacion %}checked{% endif %}>
                                             <label class="form-check-label">Educativa</label>
                                         </div>
                                     </div>
@@ -225,8 +225,8 @@
                                 <h5 class="card-title mt-4">Precio y Comisión</h5>
                                 <hr />
                                 <div class="row g-3">
-                                    <div class="col-md-4"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required></div>
-                                    <div class="col-md-4"><label>Comisión</label><input type="number" step="0.01" class="form-control" name="comision"></div>
+                                    <div class="col-md-4"><label>Precio</label><input type="number" step="0.01" class="form-control" name="precio" required value="{{ terreno.precio if terreno else '' }}"></div>
+                                    <div class="col-md-4"><label>Comisión</label><input type="number" step="0.01" class="form-control" name="comision" value="{{ terreno.comision if terreno else '' }}"></div>
                                 </div>
 
                                 <!-- Documentos -->
