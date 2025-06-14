@@ -182,6 +182,24 @@ def crear_casa():
             def safe_float(val):
                 return float(val) if val not in (None, '', 'None') else None
 
+            # Validación de campos obligatorios
+            if not data.get('titulo_propiedad'):
+                flash('El campo Título de Propiedad es obligatorio.', 'danger')
+                casa_temp = Casa(
+                    titulo_propiedad=data.get('titulo_propiedad'),
+                    precio=safe_float(data.get('precio')),
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-casa.html', casa=casa_temp, user=user)
+            if not data.get('precio'):
+                flash('El campo Precio es obligatorio.', 'danger')
+                casa_temp = Casa(
+                    titulo_propiedad=data.get('titulo_propiedad'),
+                    precio=None,
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-casa.html', casa=casa_temp, user=user)
+
             # Creación de la nueva casa con los datos obtenidos
             nueva_casa = Casa(
                 nombre=data['nombre'],
@@ -285,6 +303,24 @@ def crear_apartamento():
             return int(val) if val not in (None, '', 'None') else None
         def safe_float(val):
             return float(val) if val not in (None, '', 'None') else None
+        # Validación de campos obligatorios
+        if not data.get('titulo_propiedad'):
+            flash('El campo Título de Propiedad es obligatorio.', 'danger')
+            apartamento_temp = Apartamento(
+                titulo_propiedad=data.get('titulo_propiedad'),
+                precio=safe_float(data.get('precio')),
+                # ...otros campos relevantes...
+            )
+            return render_template('crear-inmueble-apartamento.html', apartamento=apartamento_temp, user=user)
+        if not data.get('precio'):
+            flash('El campo Precio es obligatorio.', 'danger')
+            apartamento_temp = Apartamento(
+                titulo_propiedad=data.get('titulo_propiedad'),
+                precio=None,
+                # ...otros campos relevantes...
+            )
+            return render_template('crear-inmueble-apartamento.html', apartamento=apartamento_temp, user=user)
+
         nuevo_apartamento = Apartamento(
             nombre=data['nombre'],
             apellido=data['apellido'],
@@ -454,6 +490,22 @@ def crear_terreno():
             db.session.rollback()
             flash(f'Error al crear el terreno: {str(e)}', 'danger')
             
+            if not data.get('titulo_publicacion'):
+                flash('El campo Título de Publicación es obligatorio.', 'danger')
+                terreno_temp = Terreno(
+                    titulo_publicacion=data.get('titulo_publicacion'),
+                    precio=safe_float(data.get('precio')),
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-terreno.html', terreno=terreno_temp, user=user)
+            if not data.get('precio'):
+                flash('El campo Precio es obligatorio.', 'danger')
+                terreno_temp = Terreno(
+                    titulo_publicacion=data.get('titulo_publicacion'),
+                    precio=None,
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-terreno.html', terreno=terreno_temp, user=user)
 
     return render_template('crear-inmueble-terreno.html', user=user, terreno=None)
 
@@ -532,7 +584,11 @@ def crear_galpon():
 
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
-                return redirect(url_for('main.crear_galpon'))
+                galpon_temp = Galpon(
+                    titulo_propiedad=titulo_propiedad,
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-galpon.html', galpon=galpon_temp, user=user)
             
             ambientes = safe_int(data.get('ambientes'))
             estacionamientos_cubiertos = safe_int(data.get('estacionamientos_cubiertos'))
@@ -684,7 +740,11 @@ def crear_local():
 
             if not titulo_propiedad:
                 flash('El campo Título de Propiedad es obligatorio.', 'danger')
-                return redirect(url_for('main.crear_local'))
+                local_temp = Local(
+                    titulo_propiedad=titulo_propiedad,
+                    # ...otros campos relevantes...
+                )
+                return render_template('crear-inmueble-local.html', local=local_temp, user=user)
             
             nuevo_local = Local(
                 nombre=data.get('nombre'),
