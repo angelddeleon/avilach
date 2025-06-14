@@ -23,7 +23,13 @@
                         {% if inmueble.estado_publicacion == 'Activo' %}
                         <tr>
                             <td>{{ inmueble.tipo_inmueble[:2]|capitalize }}-25-{{ inmueble.id }}</td>
-                            <td>{{ inmueble.titulo_propiedad }}</td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() == 'terreno' %}
+                                {{ inmueble.titulo_publicacion }}
+                              {% else %}
+                                {{ inmueble.titulo_propiedad }}
+                              {% endif %}
+                            </td>
                           
                             <td>
                                 {% if inmueble.imagen_principal %}
@@ -39,8 +45,20 @@
                             </td>
                             <td>{{ inmueble.ciudad }}</td>
                             <td>{{ inmueble.estado_departamento }}</td>
-                            <td>{{ inmueble.metros_construccion }}</td>
-                            <td>{{ inmueble.metros_terreno }}</td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() in ['local', 'galpon', 'terreno', 'comercio'] %}
+                                {{ inmueble.m2_construccion }}
+                              {% else %}
+                                {{ inmueble.metros_construccion }}
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() in ['local', 'galpon', 'terreno', 'comercio'] %}
+                                {{ inmueble.m2_terreno }}
+                              {% else %}
+                                {{ inmueble.metros_terreno }}
+                              {% endif %}
+                            </td>
                             <td>{{ inmueble.precio }}</td>
                             <td>{{ inmueble.estado_publicacion }}</td>
                             <td>{{ inmueble.tipo_negocio }}</td>
@@ -86,7 +104,13 @@
                         {% elif inmueble.estado_publicacion in ['negociacion', 'vendido', 'alquilado'] %}
                         <tr>
                             <td>{{ inmueble.tipo_inmueble[:2]|capitalize }}-25-{{ inmueble.id }}</td>
-                            <td>{{ inmueble.titulo_propiedad }}</td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() == 'terreno' %}
+                                {{ inmueble.titulo_publicacion }}
+                              {% else %}
+                                {{ inmueble.titulo_propiedad }}
+                              {% endif %}
+                            </td>
                             <td>
                                 {% if inmueble.imagen_principal %}
                                     {% set imagenes = inmueble.imagen_principal.split(',') %}
@@ -101,8 +125,20 @@
                             </td>
                             <td>{{ inmueble.ciudad }}</td>
                             <td>{{ inmueble.estado }}</td>
-                            <td>{{ inmueble.metros_construccion }}</td>
-                            <td>{{ inmueble.metros_terreno }}</td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() in ['local', 'galpon', 'terreno', 'comercio'] %}
+                                {{ inmueble.m2_construccion }}
+                              {% else %}
+                                {{ inmueble.metros_construccion }}
+                              {% endif %}
+                            </td>
+                            <td>
+                              {% if inmueble.tipo_inmueble.lower() in ['local', 'galpon', 'terreno', 'comercio'] %}
+                                {{ inmueble.m2_terreno }}
+                              {% else %}
+                                {{ inmueble.metros_terreno }}
+                              {% endif %}
+                            </td>
                             <td>{{ inmueble.precio }}</td>
                             <td>{{ inmueble.estado_publicacion }}</td>
                             <td>{{ inmueble.tipo_negocio }}</td>
